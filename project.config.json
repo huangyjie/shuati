@@ -51,7 +51,7 @@
   },
   "appid": "输入你的项目appid",
   "simulatorPluginLibVersion": {},
-  "projectname": "输入你的项目名称",
+  "projectname": "输入你的项目名称（英文）",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "cloudfunctionRoot": "cloudfunctions/"
 }
