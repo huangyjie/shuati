@@ -621,6 +621,16 @@ wx.cloud
 - 保持代码简洁，注释清晰
 - 组件化开发，避免重复代码
 
+### 开源题库
+
+- [tiku.json]
+- 使用微信云开发即可导入题目数据
+格式:
+```json
+      {"_id":"q1739008891733_00001","title":"十六进制400转换成十进制数是()","optionA":"4096","optionB":"1024","optionC":"2048","optionD":"8192","answer":"B"}
+      {"_id":"q1739008891733_00002","title":"在Windows7中,有两个对系统资源进行管理的程序组,它们是\"资源管理器\"和()","optionA":"\"回收站\"","optionB":"\"网络邻居\"","optionC":"\"计算机\"","optionD":"\"我的文档\"","answer":"C"}
+```
+
 ### 问题反馈
 
 如果你发现了Bug或有新功能建议，请在GitHub仓库提交Issue，或通过QQ群联系我们。
@@ -641,7 +651,7 @@ wx.cloud
 - QQ 交流群: 1029092798
 - 开发者: 小黄学长
 - 邮箱: huangyujei@gmali.com
-- 官方网站: https://www.hsbogk.icu
+- 官方网站: https://hsbogk.icu
 
 ---
 
