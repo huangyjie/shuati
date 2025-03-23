@@ -54,7 +54,7 @@ const getTierInfo = (points) => {
 const app = getApp();
 
 // 添加管理员手机号列表
-const ADMIN_PHONES = ['13797433906', '15927914073'];
+const ADMIN_PHONES = ['输入管理员手机号', '输入管理员手机号'];
 
 Page({
   data: {

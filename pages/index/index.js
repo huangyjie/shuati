@@ -678,7 +678,7 @@ Page({
     }
 
     // 检查是否是管理员账号
-    if (app.globalData.userInfo?.phoneNumber !== '13797433906') {
+    if (app.globalData.userInfo?.phoneNumber !== '输入管理员手机号') {
       wx.showModal({
         title: '提示',
         content: '在线对战功能正在开发中，敬请期待',
