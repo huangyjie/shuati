@@ -641,7 +641,7 @@ wx.cloud
 - QQ 交流群: 1029092798
 - 开发者: 小黄学长
 - 邮箱: huangyujei@gmali.com
-- 官方网站: https://www.hsbogk.icu
+- 官方网站: https://hsbogk.icu
 
 ---
 
