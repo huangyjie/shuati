@@ -1,4 +1,4 @@
-# 刷题宝 (shuati) - 计算机知识在线学习平台
+# 刷题小程序 (shuati) - 计算机知识在线学习平台
 
 ![Logo](https://api.hsbogk.icu/mini-programs/images/logo.png)
 
