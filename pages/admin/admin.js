@@ -62,7 +62,7 @@ Page({
         return
       }
 
-      if (app.globalData.userInfo.phoneNumber !== '输入你的手机号') {  // 仅允许特定用户访问
+      if (app.globalData.userInfo.phoneNumber !== '输入你的手机号') {  // 仅允许特定用户访问  //管理员手机号
         wx.showToast({
           title: '无访问权限',
           icon: 'error'

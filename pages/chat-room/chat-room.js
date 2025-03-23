@@ -54,7 +54,7 @@ const getTierInfo = (points) => {
 const app = getApp();
 
 // 添加管理员手机号列表
-const ADMIN_PHONES = ['输入管理员手机号', '输入管理员手机号'];
+const ADMIN_PHONES = ['输入管理员手机号'];
 
 Page({
   data: {
@@ -80,7 +80,7 @@ Page({
     isSending: false, // 添加发送状态控制
     isGrabbing: false, // 添加抢红包状态控制
     scrollToBottom: true, // 添加是否自动滚动到底部的标志
-    targetPhoneNumber: '', // 添加指定手机号字段
+    targetPhoneNumber: '添加管理员手机号', // 添加指定手机号字段
     wrongQuestions: [], // 添加错题本相关数据
   },
 
