@@ -86,7 +86,7 @@
   <!-- AI助手 -->
   <view class="ai-assistant {{showAIPanel ? 'show' : ''}}" bindtap="toggleAIPanel">
     <view class="ai-content">
-      <image class="float-icon" src="https://api.hsbogk.icu/mini-programs/images/ai.png" mode="aspectFit"></image>
+      <image class="float-icon" src="{{iconBaseUrl}}/ai.png" mode="aspectFit"></image>
       <text class="ai-text">AI</text>
     </view>
   </view>

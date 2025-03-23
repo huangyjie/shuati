@@ -14,8 +14,10 @@ Page({
     showAIPanel: false,
     messages: [],
     lastMessageId: '',
-    kimiConfig: {
-      apiKey: 'sk-xxxxx' // 请替换为您的API密钥depseek
+    // 配置API密钥 - 开源版本已移除
+    aiConfig: {
+      apiKey: '', // 请替换为您的AI API密钥
+      model: 'kimi' // 默认使用的模型，可选值: kimi, gpt等
     },
     showSettings: false,
     autoClearCorrect: false,
@@ -520,67 +522,55 @@ Page({
   },
 
   async askQuestion(e) {
-    const type = e.currentTarget.dataset.type;
-    const question = this.data.currentQuestion;
-    let prompt = '';
-
-    if (type === 'explain') {
-      prompt = `作为计算机考试辅导老师，请详细解析这道${question.type}的题目：
-题目：${question.title}
-选项：
-A. ${question.optionA}
-B. ${question.optionB}
-C. ${question.optionC}
-D. ${question.optionD}
-
-请从以下几个方面进行解析：
-1. 题目考点分析
-2. 关键知识点解释
-3. 选项分析
-4. 正确答案解释
-5. 易错点提醒
-6. 相关知识延伸`;
-    } else if (type === 'hint') {
-      prompt = `作为计算机考试辅导老师，请给出这道${question.type}题目的解题提示，但不要直接给出答案：
-题目：${question.title}
-选项：
-A. ${question.optionA}
-B. ${question.optionB}
-C. ${question.optionC}
-D. ${question.optionD}
-
-请提供以下帮助：
-1. 理解题目关键词
-2. 解题思路指导
-3. 需要注意的细节
-4. 排除错误选项的方法
-5. 相关知识点提示`;
+    const questionType = e.currentTarget.dataset.type;
+    const { currentQuestion } = this.data;
+    
+    if (!currentQuestion) {
+      wx.showToast({
+        title: '请先选择题目',
+        icon: 'none'
+      });
+      return;
     }
-
-    await this.sendToAI(prompt);
+    
+    let prompt;
+    if (questionType === 'explain') {
+      prompt = `请详细解释以下计算机题目，包括概念讲解和答案分析：\n${currentQuestion.title}\nA: ${currentQuestion.optionA}\nB: ${currentQuestion.optionB}\nC: ${currentQuestion.optionC}\nD: ${currentQuestion.optionD}\n正确答案：${currentQuestion.answer}`;
+    } else {
+      prompt = `请给出这道题目的解题思路，不要直接告诉我答案：\n${currentQuestion.title}\nA: ${currentQuestion.optionA}\nB: ${currentQuestion.optionB}\nC: ${currentQuestion.optionC}\nD: ${currentQuestion.optionD}`;
+    }
+    
+    const result = await this.sendToAI(prompt);
+    
+    // 更新消息列表
+    const messages = [...this.data.messages];
+    messages.push({
+      role: 'user',
+      content: prompt
+    });
+    
+    messages.push({
+      role: 'assistant',
+      content: result
+    });
+    
+    this.setData({
+      messages,
+      lastMessageId: `msg-${messages.length - 1}`
+    });
   },
 
-  async sendCurrentQuestion() {
-    const question = this.data.currentQuestion;
-    const prompt = `作为计算机考试辅导老师，请对这道${question.type}的题目进行全面分析：
-题目：${question.title}
-选项：
-A. ${question.optionA}
-B. ${question.optionB}
-C. ${question.optionC}
-D. ${question.optionD}
-
-请提供以下分析：
-1. 题目类型和难度评估
-2. 考查的具体知识点
-3. 每个选项的分析（正确性和可能的迷惑性）
-4. 解题技巧和方法
-5. 常见的解题误区
-6. 知识点总结
-7. 相似题型的解题思路
-8. 复习建议`;
-
-    await this.sendToAI(prompt);
+  sendCurrentQuestion() {
+    const { currentQuestion } = this.data;
+    if (!currentQuestion) return;
+    
+    this.askQuestion({
+      currentTarget: {
+        dataset: {
+          type: 'explain'
+        }
+      }
+    });
   },
 
   copyMessage(e) {
@@ -599,91 +589,23 @@ D. ${question.optionD}
 
   async sendToAI(prompt) {
     try {
-      const messages = [...this.data.messages];
-      const cleanPrompt = prompt.replace(/[#*`]/g, '');
-      messages.push({
-        role: 'user',
-        content: cleanPrompt
-      });
+      // 检查API密钥是否已配置
+      if (!this.data.aiConfig.apiKey) {
+        wx.showToast({
+          title: '请先配置您的API密钥',
+          icon: 'none'
+        });
+        return '请在代码中配置您的AI服务API密钥后再使用此功能';
+      }
 
-      this.setData({
-        messages,
-        lastMessageId: `msg-${messages.length - 1}`
-      });
-
-      wx.showLoading({ title: 'AI思考中...' });
-      await this.sendToKimi(cleanPrompt);
-
+      // 这里是调用AI服务的代码
+      // 实际开发中，应将API调用逻辑放在云函数中执行，以保护API密钥
+      
+      // 示例返回
+      return '这是一个示例分析结果。在实际使用中，您需要配置自己的AI API并实现调用逻辑。';
     } catch (err) {
-      console.error('AI请求失败:', err);
-      wx.showToast({
-        title: 'AI响应失败',
-        icon: 'none'
-      });
-      wx.hideLoading();
-    }
-  },
-
-  async sendToKimi(prompt) {
-    try {
-      const response = await wx.request({
-        url: 'https://api.moonshot.cn/v1/chat/completions',
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.data.kimiConfig.apiKey}`
-        },
-        data: {
-          model: "moonshot-v1-8k",
-          messages: [
-            {
-              role: "system",
-              content: "你是一位经验丰富的计算机考试辅导老师，擅长通过清晰的讲解和分析帮助学生理解和掌握计算机相关知识。你的回答应该专业、系统、易懂，并注重实用性。请用中文回答，避免使用过于专业的术语，注重知识点的联系和应用。"
-            },
-            {
-              role: "user",
-              content: prompt
-            }
-          ],
-          temperature: 0.7,
-          max_tokens: 2000,
-          stream: false
-        },
-        success: (res) => {
-          if (res.statusCode === 200 && res.data && res.data.choices && res.data.choices[0]) {
-            const cleanContent = res.data.choices[0].message.content.replace(/[#*`]/g, '');
-            const aiMessage = {
-              role: 'assistant',
-              content: cleanContent
-            };
-
-            const updatedMessages = [...this.data.messages, aiMessage];
-            this.setData({
-              messages: updatedMessages,
-              lastMessageId: `msg-${updatedMessages.length - 1}`
-            });
-          } else {
-            console.error('Kimi AI响应格式错误:', res);
-            wx.showToast({
-              title: 'Kimi AI响应格式错误',
-              icon: 'none'
-            });
-          }
-        },
-        fail: (err) => {
-          console.error('Kimi AI请求失败:', err);
-          wx.showToast({
-            title: 'Kimi AI响应失败',
-            icon: 'none'
-          });
-        },
-        complete: () => {
-          wx.hideLoading();
-        }
-      });
-    } catch (err) {
-      console.error('Kimi AI请求失败:', err);
-      throw err;
+      console.error('AI分析错误:', err);
+      return '分析失败，请稍后再试';
     }
   },
 

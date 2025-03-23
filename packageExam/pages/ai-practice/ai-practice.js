@@ -38,23 +38,24 @@ Page({
     lastMessageId: '',
     isSubmitting: false,
     examId: '',
-    apiKey: '输入你的API Key',  // 讯飞星火配置
+    // AI配置 - 使用前，请替换为您自己的API密钥
     // 讯飞星火配置
     xfConfig: {
-      appId: 'xxxx', // 替换为你的讯飞开放平台应用ID
-      apiSecret: 'xxxx', // 替换为你的讯飞开放平台API Secret
-      apiKey: 'xxxx', // 替换为你的讯飞开放平台API Key  
-      apiPassword: 'xxx:xxx', // 替换为你的讯飞开放平台API Password
-      currentModel: 'kimi'                      // 当前使用的模型,'xunfei'或'kimi'或'zhinao'
+      appId: '', // 替换为你的讯飞开放平台应用ID
+      apiSecret: '', // 替换为你的讯飞开放平台API Secret
+      apiKey: '', // 替换为你的讯飞开放平台API Key  
+      apiPassword: '', // 替换为你的讯飞开放平台API Password (格式通常为 "username:password")
+      currentModel: 'kimi'  // 当前使用的模型,'xunfei'或'kimi'或'zhinao'
     },
+    // 其他AI模型配置
     kimiConfig: {
-      apiKey: 'sk-xxx' // kimi配置
+      apiKey: '' // 替换为您的Kimi API密钥
     },
     zhinaoConfig: {
-      apiKey: 'xxx.xxx-xxxx-xxx' // 智脑配置
+      apiKey: '' // 替换为您的智脑API密钥
     },
     volcConfig: {
-      apiKey: 'xxx-xxx-xxx-xxx-xxx' // 火山引擎配置
+      apiKey: '' // 替换为您的火山引擎API密钥
     }
   },
 
@@ -796,6 +797,11 @@ D. ${question.optionD}
   // 讯飞星火API调用
   async sendToXunfei(prompt) {
     try {
+      // 检查API密钥是否已设置
+      if (!this.data.xfConfig.apiPassword) {
+        throw new Error('未设置讯飞API密钥，请先配置您的API凭据');
+      }
+      
       const { apiPassword } = this.data.xfConfig;
       const url = 'https://spark-api-open.xf-yun.com/v1/chat/completions';
 
@@ -807,7 +813,7 @@ D. ${question.optionD}
           'Authorization': `Bearer ${apiPassword}`
         },
         data: {
-          model: "generalv3.5",
+          model: "generalv3.5", // 讯飞大模型版本
           messages: [
             {
               role: "system",
@@ -863,6 +869,11 @@ D. ${question.optionD}
   // Kimi API调用
   async sendToKimi(prompt) {
     try {
+      // 检查API密钥是否已设置
+      if (!this.data.kimiConfig.apiKey) {
+        throw new Error('未设置Kimi API密钥，请先配置您的API凭据');
+      }
+      
       const response = await wx.request({
         url: 'https://api.moonshot.cn/v1/chat/completions',
         method: 'POST',
@@ -902,7 +913,7 @@ D. ${question.optionD}
           } else {
             console.error('Kimi 大模型响应格式错误:', res);
             wx.showToast({
-              title: 'Kimi 大模型响应格式错误',
+              title: res.data?.error?.message || 'Kimi 大模型响应格式错误',
               icon: 'none'
             });
           }
@@ -927,6 +938,11 @@ D. ${question.optionD}
   // 智脑API调用
   async sendToZhinao(prompt) {
     try {
+      // 检查API密钥是否已设置
+      if (!this.data.zhinaoConfig.apiKey) {
+        throw new Error('未设置智脑API密钥，请先配置您的API凭据');
+      }
+      
       const response = await wx.request({
         url: 'https://api.360.cn/v1/chat/completions',
         method: 'POST',
@@ -962,17 +978,17 @@ D. ${question.optionD}
               lastMessageId: `msg-${updatedMessages.length - 1}`
             });
           } else {
-            console.error('智脑 大模型响应格式错误:', res);
+            console.error('智脑大模型响应格式错误:', res);
             wx.showToast({
-              title: res.data?.error?.message || '智脑 大模型响应格式错误',
+              title: res.data?.error?.message || '智脑大模型响应格式错误',
               icon: 'none'
             });
           }
         },
         fail: (err) => {
-          console.error('智脑 大模型请求失败:', err);
+          console.error('智脑大模型请求失败:', err);
           wx.showToast({
-            title: '智脑 大模型响应失败',
+            title: '智脑大模型响应失败',
             icon: 'none'
           });
         },
@@ -981,7 +997,7 @@ D. ${question.optionD}
         }
       });
     } catch (err) {
-      console.error('智脑 大模型请求失败:', err);
+      console.error('智脑大模型请求失败:', err);
       throw err;
     }
   },

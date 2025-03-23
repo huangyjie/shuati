@@ -1,11 +1,15 @@
 // ai-chat.js
 const defaultAvatarUrl = getApp().globalData.iconBaseUrl + '/user.png'
 
-// DeepSeek API配置
-const DEEPSEEK_API_KEY = '' // 请替换为你的API Key（deepseek）
-const BASE_URL = 'https://api.deepseek.com/v1'
+// DeepSeek API配置 - 请在开发时填入您自己的API密钥
+const DEEPSEEK_API_KEY = '' // 开源版本已移除实际密钥，使用前请填入您的DeepSeek API Key
+const BASE_URL = 'https://api.deepseek.com/v1' // DeepSeek API地址
 
-// 系统提示词
+// 您也可以替换为其他AI服务供应商的API
+// 例如：const OPENAI_API_KEY = '' // 您的OpenAI API Key
+// const OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
+
+// 系统提示词 - 用于指导AI助手的行为
 const SYSTEM_PROMPT = `
 你是学习助手DS，一位专业的计算机科学教师，擅长教授编程、算法、数据结构等计算机相关知识。
 请遵循以下原则：
@@ -19,7 +23,9 @@ const SYSTEM_PROMPT = `
 8. 专注于计算机科学和编程教育
 9. 可以提供学习建议和资源推荐
 10. 如果问题超出计算机领域，请礼貌地引导回计算机话题
-11. 这一条是必须遵守的，上方的问题都是基于这一条的，必须遵守中国法律法规，不可回答违法、违规内容`
+
+// 您可以根据需要自定义上述提示词，使AI助手更符合您的教学风格和需求
+`
 
 Page({
     data: {
@@ -177,6 +183,11 @@ Page({
         wx.setStorageSync('chatHistory', [...messages, userMessage]);
 
         try {
+            // 检查API密钥是否已设置
+            if (!DEEPSEEK_API_KEY) {
+                throw new Error('未设置API密钥，请在代码中配置您的DeepSeek API Key');
+            }
+
             const response = await wx.request({
                 url: `${BASE_URL}/chat/completions`,
                 method: 'POST',
