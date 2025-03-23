@@ -1,0 +1,84 @@
+<view class="result-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-content" style="height: {{navBarHeight}}px;">
+      <view class="back-btn" bindtap="backToHome">
+        <text class="back-icon">←</text>
+        <text>返回首页</text>
+      </view>
+      <text class="nav-title">答题结果</text>
+    </view>
+  </view>
+
+  <!-- 积分动画区域 -->
+  <view class="score-section">
+    <view class="score {{totalPoints >= 0 ? 'positive' : 'negative'}}">
+      {{currentPoints}}
+    </view>
+    <view class="score-label">本次得分</view>
+    <view class="tier-info">当前段位：{{tier}}</view>
+  </view>
+
+  <!-- 统计区域 -->
+  <view class="stats-section">
+    <view class="stat-item">
+      <text class="stat-value">{{correctCount}}</text>
+      <text class="stat-label">答对题数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{wrongCount}}</text>
+      <text class="stat-label">答错题数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{answeredCount}}/{{totalQuestions}}</text>
+      <text class="stat-label">答题进度</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-value">{{correctRate}}%</text>
+      <text class="stat-label">正确率</text>
+    </view>
+  </view>
+
+  <!-- 答题详情 -->
+  <view class="answer-details">
+    <view class="details-title">答题详情</view>
+    <view class="details-list">
+      <view class="detail-item {{item.isCorrect ? 'correct' : 'wrong'}}" 
+            wx:for="{{answerDetails}}" 
+            wx:key="index">
+        <view class="question-header">
+          <text class="question-number">第{{item.index}}题</text>
+          <text class="points-change {{item.points >= 0 ? 'positive' : 'negative'}}">
+            {{item.points >= 0 ? '+' : ''}}{{item.points}}分
+          </text>
+        </view>
+        <view class="question-title">{{item.title}}</view>
+        <view class="options">
+          <view class="option">A. {{item.options.A}}</view>
+          <view class="option">B. {{item.options.B}}</view>
+          <view class="option">C. {{item.options.C}}</view>
+          <view class="option">D. {{item.options.D}}</view>
+        </view>
+        <view class="answer-info">
+          <text class="correct-answer">正确答案：{{item.correctAnswer}}</text>
+          <text class="user-answer {{item.isCorrect ? 'correct' : 'wrong'}}">
+            你的答案：{{item.userAnswer}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="button-group">
+    <button class="action-btn" bindtap="viewWrongQuestions">
+      查看错题本
+    </button>
+    <button class="action-btn" bindtap="retryExam">
+      再来一次
+    </button>
+    <button class="action-btn" bindtap="backToHome">
+      返回首页
+    </button>
+  </view>
+</view> 

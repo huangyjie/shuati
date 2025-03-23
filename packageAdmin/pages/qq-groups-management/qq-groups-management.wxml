@@ -1,0 +1,111 @@
+<view class="qq-groups-management {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">QQ群管理</text>
+    <button class="add-btn" bindtap="showAddModal">添加QQ群</button>
+  </view>
+
+  <!-- 群列表 -->
+  <view class="groups-list">
+    <view class="group-item" wx:for="{{groups}}" wx:key="_id">
+      <view class="group-info">
+        <view class="group-header">
+          <text class="group-name">{{item.name}}</text>
+          <text class="group-number">群号：{{item.number}}</text>
+        </view>
+        <text class="group-desc" wx:if="{{item.description}}">{{item.description}}</text>
+        <view class="group-qrcode" wx:if="{{item.qrcode}}">
+          <image class="qrcode-preview" src="{{item.qrcode}}" mode="aspectFit" bindtap="previewQRCode" data-url="{{item.qrcode}}"/>
+        </view>
+        <view class="group-order">显示顺序：{{item.order}}</view>
+      </view>
+      <view class="group-actions">
+        <button class="action-btn edit" bindtap="showEditModal" data-group="{{item}}">编辑</button>
+        <button class="action-btn delete" bindtap="deleteGroup" data-id="{{item._id}}">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加/编辑群弹窗 -->
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{editingGroup ? '编辑QQ群' : '添加QQ群'}}</text>
+        <view class="close-btn" bindtap="hideModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="input-item">
+          <text class="label">群名称</text>
+          <input class="user-input" 
+                 value="{{formData.name}}" 
+                 bindinput="handleInput" 
+                 data-field="name"
+                 placeholder="请输入群名称"/>
+        </view>
+        <view class="input-item">
+          <text class="label">群号码</text>
+          <input class="user-input" 
+                 value="{{formData.number}}" 
+                 bindinput="handleInput" 
+                 data-field="number"
+                 type="number" 
+                 placeholder="请输入群号码"/>
+        </view>
+        <view class="input-item">
+          <text class="label">群描述</text>
+          <textarea class="user-textarea" 
+                    value="{{formData.description}}" 
+                    bindinput="handleInput" 
+                    data-field="description"
+                    placeholder="请输入群描述"/>
+        </view>
+        <view class="input-item">
+          <text class="label">显示顺序</text>
+          <input class="user-input" 
+                 value="{{formData.order}}" 
+                 bindinput="handleInput" 
+                 data-field="order"
+                 type="number" 
+                 placeholder="数字越小越靠前"/>
+        </view>
+        <view class="input-item">
+          <text class="label">群二维码</text>
+          <view class="qrcode-options">
+            <view class="option {{qrcodeType === 'url' ? 'active' : ''}}" bindtap="switchQrcodeType" data-type="url">
+              <text>图片链接</text>
+            </view>
+            <view class="option {{qrcodeType === 'upload' ? 'active' : ''}}" bindtap="switchQrcodeType" data-type="upload">
+              <text>本地上传</text>
+            </view>
+          </view>
+          
+          <!-- 图片链接输入框 -->
+          <block wx:if="{{qrcodeType === 'url'}}">
+            <input class="user-input" 
+                   value="{{formData.qrcode}}"
+                   bindinput="handleInput"
+                   data-field="qrcode"
+                   placeholder="请输入二维码图片链接"
+                   type="text"/>
+            <text class="tips">支持网络图片链接</text>
+          </block>
+          
+          <!-- 本地上传按钮 -->
+          <block wx:else>
+            <button class="upload-btn" bindtap="chooseQRCode">{{formData.qrcode ? '更换二维码' : '上传二维码'}}</button>
+            <text class="tips">支持本地图片上传到云存储</text>
+          </block>
+          
+          <!-- 预览图 -->
+          <view class="preview-section" wx:if="{{formData.qrcode}}">
+            <image class="qrcode-preview" src="{{formData.qrcode}}" mode="aspectFit" bindtap="previewQRCode"/>
+            <text class="preview-tip">点击预览大图</text>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="hideModal">取消</button>
+        <button class="modal-btn confirm" bindtap="submitForm">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

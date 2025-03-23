@@ -1,0 +1,166 @@
+<view class="mock-exam-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="top-buttons">
+      <view class="icon-btn" bindtap="toggleSettings">
+        <text>设置</text>
+      </view>
+      <view class="icon-btn favorite {{isFavorite ? 'active' : ''}}" bindtap="toggleFavorite">
+        <text>★</text>
+      </view>
+    </view>
+    <view class="progress-text">{{currentIndex + 1}}/{{questions.length}}</view>
+  </view>
+
+  <!-- 题目内容 -->
+  <view class="question-content">
+    <text class="question-title">{{currentIndex + 1}}. {{currentQuestion.title}}</text>
+    <view class="options-list">
+      <view 
+        class="option-item {{selectedAnswers[currentIndex] === 'A' ? 'selected' : ''}} {{showAnswer ? (currentQuestion.answer === 'A' ? 'correct' : selectedAnswers[currentIndex] === 'A' ? 'wrong' : '') : ''}}"
+        data-option="A"
+        bindtap="handleOptionTap"
+      >
+        <text class="option-label">A</text>
+        <text class="option-content">{{currentQuestion.optionA}}</text>
+      </view>
+      <view 
+        class="option-item {{selectedAnswers[currentIndex] === 'B' ? 'selected' : ''}} {{showAnswer ? (currentQuestion.answer === 'B' ? 'correct' : selectedAnswers[currentIndex] === 'B' ? 'wrong' : '') : ''}}"
+        data-option="B"
+        bindtap="handleOptionTap"
+      >
+        <text class="option-label">B</text>
+        <text class="option-content">{{currentQuestion.optionB}}</text>
+      </view>
+      <view 
+        class="option-item {{selectedAnswers[currentIndex] === 'C' ? 'selected' : ''}} {{showAnswer ? (currentQuestion.answer === 'C' ? 'correct' : selectedAnswers[currentIndex] === 'C' ? 'wrong' : '') : ''}}"
+        data-option="C"
+        bindtap="handleOptionTap"
+      >
+        <text class="option-label">C</text>
+        <text class="option-content">{{currentQuestion.optionC}}</text>
+      </view>
+      <view 
+        class="option-item {{selectedAnswers[currentIndex] === 'D' ? 'selected' : ''}} {{showAnswer ? (currentQuestion.answer === 'D' ? 'correct' : selectedAnswers[currentIndex] === 'D' ? 'wrong' : '') : ''}}"
+        data-option="D"
+        bindtap="handleOptionTap"
+      >
+        <text class="option-label">D</text>
+        <text class="option-content">{{currentQuestion.optionD}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮区 -->
+  <view class="button-container">
+    <view class="nav-buttons">
+      <button class="nav-btn prev" bindtap="prevQuestion" disabled="{{currentIndex === 0}}">上一题</button>
+      <button class="nav-btn card" bindtap="toggleAnswerCard">答题卡</button>
+      <button class="nav-btn next" bindtap="nextQuestion" disabled="{{currentIndex === questions.length - 1}}">下一题</button>
+    </view>
+    <button class="submit-btn" bindtap="submitExam">交卷</button>
+  </view>
+
+  <!-- 答题卡浮层 -->
+  <view class="answer-card {{showAnswerCard ? 'show' : ''}}" catchtap="toggleAnswerCard">
+    <view class="card-content" catchtap="preventBubble">
+      <view class="card-header">
+        <view class="card-title">答题卡</view>
+        <view class="close-btn" bindtap="toggleAnswerCard">×</view>
+      </view>
+      <scroll-view class="card-scroll" scroll-y>
+        <view class="card-list">
+          <view 
+            class="card-item {{selectedAnswers[index] ? 'answered' : ''}} {{currentIndex === index ? 'current' : ''}} {{showAnswer && selectedAnswers[index] === questions[index].answer ? 'correct' : ''}} {{showAnswer && selectedAnswers[index] && selectedAnswers[index] !== questions[index].answer ? 'wrong' : ''}} {{!selectedAnswers[index] ? 'unanswered' : ''}} {{questions[index].isFavorite ? 'favorite' : ''}}"
+            wx:for="{{questions}}"
+            wx:key="index"
+            bindtap="jumpToQuestion"
+            data-index="{{index}}"
+          >
+            {{index + 1}}
+          </view>
+        </view>
+      </scroll-view>
+      <view class="card-legend">
+        <view class="legend-item">
+          <view class="legend-dot correct"></view>
+          <text>答对</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot wrong"></view>
+          <text>答错</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot unanswered"></view>
+          <text>未答</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot favorite"></view>
+          <text>收藏</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设置面板 -->
+  <view class="settings-panel {{showSettings ? 'show' : ''}}" catchtap="toggleSettings">
+    <view class="settings-content" catchtap="preventBubble">
+      <view class="settings-title">设置</view>
+      <view class="setting-item">
+        <text>自动下一题</text>
+        <switch checked="{{autoNext}}" bindchange="toggleAutoNext" color="#1aad19"/>
+      </view>
+      <view class="setting-item">
+        <text>深色模式</text>
+        <switch checked="{{darkMode}}" bindchange="toggleDarkMode" color="#1aad19"/>
+      </view>
+      <view class="setting-item">
+        <text>当前模型(点击切换)</text>
+        <view class="ai-model-switch {{xfConfig.currentModel}}" bindtap="toggleAIModel">
+          {{xfConfig.currentModel === 'xunfei' ? '讯飞星火' : xfConfig.currentModel === 'kimi' ? 'Kimi' : '智脑'}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI助手 -->
+  <view class="ai-assistant {{showAIPanel ? 'show' : ''}}" bindtap="toggleAIPanel">
+    <view class="ai-content">
+      <image class="float-icon" src="{{iconBaseUrl}}/ai.png" mode="aspectFit"></image>
+      <text class="ai-text">助手</text>
+    </view>
+  </view>
+
+  <!-- AI面板遮罩层 -->
+  <view class="ai-mask {{showAIPanel ? 'show' : ''}}" bindtap="toggleAIPanel"></view>
+
+  <view class="ai-panel {{showAIPanel ? 'show' : ''}}" catchtap="preventBubble">
+    <view class="ai-panel-header">
+      <view class="ai-header-left">
+        <view class="current-ai-model {{xfConfig.currentModel}}">
+          {{xfConfig.currentModel === 'xunfei' ? '讯飞星火' : xfConfig.currentModel === 'kimi' ? 'Kimi' : '智脑'}}
+        </view>
+        <text class="ai-title">助手</text>
+      </view>
+      <text class="close-btn" bindtap="toggleAIPanel">×</text>
+    </view>
+    <scroll-view class="ai-messages" scroll-y scroll-into-view="{{lastMessageId}}">
+      <view class="message-list">
+        <view 
+          wx:for="{{messages}}" 
+          wx:key="index"
+          class="message {{item.role === 'user' ? 'user' : 'ai'}}"
+          id="msg-{{index}}"
+        >
+          <text class="content">{{item.content}}</text>
+          <view class="copy-btn" wx:if="{{item.role === 'ai'}}" bindtap="copyMessage" data-content="{{item.content}}">复制</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="ai-input">
+      <button class="quick-ask" style="--index: 0" bindtap="askQuestion" data-type="explain">考点精讲</button>
+      <button class="quick-ask" style="--index: 1" bindtap="askQuestion" data-type="hint">解题引导</button>
+      <button class="send-current" style="--index: 2" bindtap="sendCurrentQuestion">教学诊断</button>
+    </view>
+  </view>
+</view> 

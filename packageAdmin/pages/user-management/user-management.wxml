@@ -1,0 +1,134 @@
+<view class="user-management-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">用户管理</text>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-section">
+    <view class="search-box">
+      <input class="search-input" 
+             type="text" 
+             placeholder="输入用户名或手机号搜索" 
+             value="{{searchKeyword}}"
+             bindinput="handleSearch"
+             confirm-type="search"
+             maxlength="20"
+             adjust-position="{{false}}"
+             always-embed="{{true}}"
+             />
+      <text class="clear-search" wx:if="{{searchKeyword}}" bindtap="clearSearch">×</text>
+    </view>
+  </view>
+
+  <!-- 用户列表 -->
+  <view class="user-list" wx:if="{{!loading}}">
+    <view class="user-item" wx:for="{{userList}}" wx:key="_id">
+      <view class="user-info">
+        <image class="avatar" src="{{iconBaseUrl}}/login.png" mode="aspectFill"/>
+        <view class="user-detail">
+          <view class="nickname-wrapper">
+            <text class="nickname">{{item.nickName || '微信用户'}}</text>
+            <text class="phone">{{item.phoneNumber || '未绑定'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="user-stats">
+        <view class="stat-item" bindtap="editUserStats" data-user="{{item}}" data-field="points">
+          <text class="label">积分</text>
+          <text class="value">{{item.points || 0}}</text>
+        </view>
+        <view class="stat-item" bindtap="editUserStats" data-user="{{item}}" data-field="signDays">
+          <text class="label">签到天数</text>
+          <text class="value">{{item.signDays || 0}}</text>
+        </view>
+        <view class="stat-item" bindtap="editUserStats" data-user="{{item}}" data-field="totalQuestions">
+          <text class="label">答题数</text>
+          <text class="value">{{item.totalQuestions || 0}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="label">正确率</text>
+          <text class="value">{{item.correctRate || 0}}%</text>
+        </view>
+      </view>
+      <view class="action-buttons">
+        <button class="action-btn edit" 
+                bindtap="editUserInfo" 
+                data-user="{{item}}">编辑</button>
+        <button class="action-btn reset" 
+                bindtap="resetUserData" 
+                data-id="{{item._id}}">重置</button>
+        <button class="action-btn delete" 
+                bindtap="deleteUser" 
+                data-id="{{item._id}}">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:elif="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-data" wx:if="{{!loading && userList.length === 0}}">
+    <text>暂无用户数据</text>
+  </view>
+
+  <!-- 编辑用户信息弹窗 -->
+  <view class="modal" wx:if="{{showUserEditModal}}" catchtap="closeModal">
+    <view class="modal-content" catchtap="preventBubble">
+      <view class="modal-header">
+        <text class="modal-title">编辑用户信息</text>
+        <text class="close-btn" bindtap="closeModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-item">
+          <text class="label">用户昵称</text>
+          <input class="user-input" 
+                 value="{{editingUser.nickName}}"
+                 data-field="nickName"
+                 bindinput="handleUserInput"
+                 placeholder="请输入用户昵称"/>
+        </view>
+        <view class="input-item">
+          <text class="label">手机号码</text>
+          <input class="user-input" 
+                 value="{{editingUser.phoneNumber}}"
+                 data-field="phoneNumber"
+                 bindinput="handleUserInput"
+                 type="number"
+                 maxlength="11"
+                 placeholder="请输入手机号码"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="closeModal">取消</button>
+        <button class="modal-btn confirm" bindtap="saveUserInfo">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 编辑用户统计弹窗 -->
+  <view class="modal" wx:if="{{showStatsEditModal}}" catchtap="closeModal">
+    <view class="modal-content" catchtap="preventBubble">
+      <view class="modal-header">
+        <text class="modal-title">编辑{{editingField === 'points' ? '积分' : 
+          editingField === 'signDays' ? '签到天数' : 
+          editingField === 'totalQuestions' ? '答题数' : ''}}</text>
+        <text class="close-btn" bindtap="closeModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-item">
+          <text class="label">当前数值</text>
+          <input class="stats-input" 
+                 type="number"
+                 value="{{editingStats[editingField]}}"
+                 bindinput="handleStatsInput"
+                 placeholder="请输入数值"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="closeModal">取消</button>
+        <button class="modal-btn confirm" bindtap="saveUserStats">保存</button>
+      </view>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,35 @@
+<view class="settings-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">系统设置</text>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <!-- 公告设置 -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">公告设置</text>
+        <text class="section-desc">编辑后将发布新的公告</text>
+      </view>
+      <view class="settings-list">
+        <view class="settings-item column">
+          <textarea class="settings-textarea" 
+                    value="{{settings.announcement}}"
+                    bindinput="handleInput"
+                    placeholder="请输入公告内容，最多500字"
+                    maxlength="500"
+                    auto-height/>
+          <view class="textarea-counter">{{settings.announcement.length}}/500</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <view class="save-section">
+      <button class="save-btn" bindtap="saveSettings">保存公告</button>
+    </view>
+  </block>
+
+  <view class="loading" wx:else>
+    <text>加载中...</text>
+  </view>
+</view> 

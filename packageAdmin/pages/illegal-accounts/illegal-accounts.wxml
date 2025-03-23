@@ -1,0 +1,36 @@
+<view class="illegal-accounts-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">违规账号管理</text>
+    <button class="batch-rename-btn" bindtap="batchRenameIllegalAccounts" wx:if="{{illegalAccounts.length > 0}}">
+      一键修改违规昵称
+    </button>
+  </view>
+
+  <scroll-view scroll-y="true" class="accounts-list" wx:if="{{!loading && illegalAccounts.length > 0}}">
+    <view class="account-item" wx:for="{{illegalAccounts}}" wx:key="_id">
+      <image 
+        class="avatar" 
+        src="{{item.avatarUrl}}" 
+        mode="aspectFill"
+        binderror="handleAvatarError"
+        data-index="{{index}}"
+      />
+      <view class="account-info">
+        <text class="nickname">{{item.nickName}}</text>
+        <text class="phone">{{item.phoneNumber}}</text>
+      </view>
+      <view class="stats">
+        <text class="points">积分: {{item.points || 0}}</text>
+        <text class="questions">答题: {{item.totalQuestions || 0}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="loading-container" wx:if="{{loading}}">
+    <text>正在加载违规账号...</text>
+  </view>
+
+  <view class="empty-container" wx:if="{{!loading && illegalAccounts.length === 0}}">
+    <text>暂无违规账号</text>
+  </view>
+</view> 

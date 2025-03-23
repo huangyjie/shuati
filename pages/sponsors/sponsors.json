@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "赞助者名单",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#4A90E2",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f7fa",
+  "backgroundTextStyle": "dark"
+} 

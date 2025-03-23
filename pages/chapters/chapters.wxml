@@ -1,0 +1,33 @@
+<view class="chapters-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <view class="header-content">
+      <view class="header-left">
+        <view class="header-title">章节练习</view>
+        <view class="header-desc">按知识点分类练习</view>
+      </view>
+      <view class="header-right">
+        <view class="stats">
+          <text class="stats-num">{{chapters.length}}</text>
+          <text class="stats-label">个章节</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="chapter-list">
+    <view class="chapter-card" wx:for="{{chapters}}" wx:key="id" bindtap="startChapterPractice" data-chapter-id="{{item.id}}">
+      <view class="chapter-info">
+        <view class="icon-wrapper">
+          <image class="chapter-icon" src="{{iconBaseUrl}}/{{item.id}}.png" mode="aspectFit"></image>
+        </view>
+        <view class="chapter-title">
+          {{item.title}}
+          <text class="new-badge" wx:if="{{item.isNew}}">新</text>
+        </view>
+        <view class="chapter-description">{{item.description}}</view>
+      </view>
+      <view class="chapter-arrow">
+        <image class="arrow-icon" src="{{iconBaseUrl}}/arrow-right.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+</view>

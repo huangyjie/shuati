@@ -1,0 +1,389 @@
+<view class="page-wrapper {{darkMode ? 'dark-mode' : ''}}" style="--status-bar-height: {{statusBarHeight}}px">
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar-inner">
+      <text class="nav-title"></text>
+    </view>
+  </view>
+  <!-- 用户信息区域 -->
+  <view class="user-section {{userInfo.tierClass}}">
+    <block wx:if="{{isLogin}}">
+      <view class="user-info">
+        <view class="user-basic">
+          <view class="avatar-container">
+            <image class="avatar" src="{{userInfo.avatarUrl || iconBaseUrl + '/default-avatar.png'}}" mode="aspectFill"></image>
+          </view>
+          <view class="user-detail">
+            <view class="name-sign">
+              <text class="nickname {{userInfo.tierClass ? userInfo.tierClass + '-name' : ''}}">
+                {{userInfo.nickName || '微信用户'}}
+              </text>
+              <view class="tier-info {{userInfo.tierClass}}" wx:if="{{userInfo.tier}}" style="position: relative; left: -28rpx; top: 22rpx">
+                
+                <text class="tier-name" style="position: relative; left: 0rpx; top: 0rpx">{{userInfo.tier}}</text>
+              </view>
+            </view>
+            <text class="sign-label">当前积分全服排名: {{myRanking || '暂无排名'}}</text>
+          </view>
+          <view class="edit-btn" bindtap="showEditProfile">
+            <text class="edit-icon">✎</text>
+          </view>
+        </view>
+        <view class="user-stats">
+          <view class="stat-item">
+            <text class="stat-value">{{points}}</text>
+            <text class="stat-label">积分</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{myRanking || '-'}}</text>
+            <text class="stat-label">排名</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item" bindtap="showSignInCalendar">
+            <text class="stat-value">{{signInDays || 0}}</text>
+            <text class="stat-label">签到天数</text>
+          </view>
+        </view>
+        <!-- 账号管理按钮 -->
+        <view class="account-management-section">
+          <button class="account-management-btn" bindtap="showAccountManagement" style="position: relative; left: -48rpx; top: 0rpx; width: 632rpx; display: flex; box-sizing: border-box">
+            <text class="account-management-text" style="position: relative; left: 0rpx; top: -4rpx">账号管理</text>
+            <text class="account-management-icon" style="width: 25rpx; display: block; box-sizing: border-box; position: relative; left: 2rpx; top: -3rpx">›</text>
+          </button>
+        </view>
+        <!-- 管理员按钮 -->
+        <view class="admin-section" wx:if="{{isAdmin}}">
+          <button class="admin-btn" bindtap="goToAdmin" style="position: ; left: 2rpx; top: 0rpx; width: 600rpx; display: flex; box-sizing: border-box">
+            <image class="admin-icon" src="{{iconBaseUrl}}/admin.png" mode="aspectFit"></image>
+            <text class="admin-text">管理员后台</text>
+          </button>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <button class="login-btn" bindtap="showLoginModal">
+        <text class="login-text">创建账号使用更多功能</text>
+        <text class="login-icon">›</text>
+      </button>
+    </block>
+  </view>
+  <!-- 积分答题卡片 -->
+  <view class="daily-goal-card">
+    <view class="goal-header">
+      <view class="goal-title">
+        <text class="title-text">积分答题</text>
+        <view class="rules-btn" bindtap="showRules">
+          <text class="rules-text">查看段位规则</text>
+          <text class="rules-icon">›</text>
+        </view>
+        <view class="reward-btn" bindtap="showRewardModal">
+          <view class="red-dot" wx:if="{{hasUnCollectedRewards}}"></view>
+          <text class="reward-text">奖励</text>
+          <text class="reward-icon">›</text>
+        </view>
+      </view>
+      <view class="goal-progress">
+        <text class="progress-text">
+          {{userInfo.tier}} ({{points || 0}}分)
+          <text class="next-tier">{{nextTierText}}</text>
+        </text>
+        <view class="progress-bar">
+          <view class="progress-inner {{userInfo.tierClass}}" style="width: {{tierProgress}}%"></view>
+        </view>
+      </view>
+    </view>
+    <button class="start-btn" bindtap="startDailyPractice" style="position: relative; left: -1rpx; top: -18rpx">
+      <text class="btn-text">{{!isLogin ? '登录后开始答题' : '开始答题'}}</text>
+      <text class="btn-desc" wx:if="{{isLogin}}">
+        当前段位: {{userInfo.tier}} ({{userInfo.points || 0}}分)
+      </text>
+    </button>
+  </view>
+  <!-- 排行榜卡片 -->
+  <view class="ranking-card" bindtap="goToRanking">
+    <view class="card-header">
+      <text class="card-title">积分排行</text>
+      <text class="ranking-info" wx:if="{{myRanking}}">我的排名: 第{{myRanking}}名</text>
+    </view>
+    <view class="ranking-preview">
+      <block wx:if="{{topUsers.length > 0}}">
+        <view class="top-three">
+          <view class="rank-item" wx:for="{{topUsers}}" wx:key="_id">
+            <view class="rank-number {{index === 0 ? 'first' : index === 1 ? 'second' : 'third'}}">
+              {{index + 1}}
+            </view>
+            <image class="rank-avatar" src="{{item.avatarUrl || iconBaseUrl + '/default-avatar.png'}}" mode="aspectFill" />
+            <view class="rank-info">
+              <view class="rank-name-tier" style="position: relative; left: -1rpx; top: -1rpx">
+                <text class="rank-name {{item.tierClass ? item.tierClass + '-name' : ''}}">
+                  {{item.nickName || '微信用户'}}
+                </text>
+                <view class="tier-tag {{item.tierClass}}" style="position: absolute; left: 128rpx; top: 60rpx; width: 74rpx; display: flex; box-sizing: border-box">{{item.tier}}</view>
+              </view>
+              <view class="rank-stats">
+                <text class="stat-item" style="width: 69rpx; display: flex; box-sizing: border-box">{{item.tier}}</text>
+                <text class="stat-item">{{item.points}}分</text>
+                <text class="stat-item">{{item.correctRate}}%</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="no-data-tip" wx:else>暂无排行数据，快去刷题吧~</view>
+      <view class="view-more">
+        <text>查看完整排行榜</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </view>
+  <!-- 账号管理弹窗 -->
+  <view class="account-modal {{showAccountModal ? 'show' : ''}}" bindtap="hideAccountManagement">
+    <view class="account-content" catchtap="stopPropagation">
+      <view class="account-header">
+        <text class="account-title">账号管理</text>
+        <text class="close-btn" bindtap="hideAccountManagement">×</text>
+      </view>
+      <view class="account-options">
+        <view class="account-option {{(!isAdmin && !isSecondAdmin && resetCount >= maxResetTimes) ? 'disabled' : ''}}" bindtap="resetAllData">
+          <view class="option-content">
+            <text class="option-title">重置所有数据</text>
+            <text class="option-desc" wx:if="{{!isAdmin && !isSecondAdmin}}">
+              剩余重置次数：{{maxResetTimes - resetCount}}次
+            </text>
+            <text class="option-desc" wx:else>管理员不限重置次数</text>
+          </view>
+          <view class="option-warning">
+            <image class="warning-icon" src="{{iconBaseUrl}}/warning.png" mode="aspectFit"></image>
+            <text>重置后无法恢复，请谨慎操作</text>
+          </view>
+        </view>
+
+        <view class="account-option" bindtap="clearCache">
+          <view class="option-content">
+            <text class="option-title">清理缓存</text>
+            <text class="option-desc">清理本地缓存数据</text>
+          </view>
+          <view class="option-warning">
+            <image class="warning-icon" src="{{iconBaseUrl}}/warning.png" mode="aspectFit"></image>
+            <text>清理后需要重新登录</text>
+          </view>
+        </view>
+
+        <view class="account-option logout" bindtap="showLogoutConfirm">
+          <view class="option-content">
+            <text class="option-title">注销账号</text>
+            <text class="option-desc">点击确认注销账号</text>
+          </view>
+          <view class="option-warning">
+            <image class="warning-icon" src="{{iconBaseUrl}}/warning.png" mode="aspectFit"></image>
+            <text>注销后账号将被永久删除且无法恢复</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 登录弹窗 -->
+  <view class="auth-modal" wx:if="{{showLoginModal}}">
+    <view class="auth-content">
+      <view class="auth-header">
+        <view class="auth-title">{{isRegister ? '注册账号' : '登录账号'}}</view>
+        <view class="close-btn" bindtap="hideLoginModal">×</view>
+      </view>
+      <view class="auth-form">
+        <view class="form-item">
+          <text class="label">手机号</text>
+          <input class="input" type="number" maxlength="11" placeholder="请输入手机号" value="{{tempUserInfo.phoneNumber}}" bindinput="handlePhoneInput" />
+          <view class="forget-username" bindtap="findUsername" wx:if="{{!isRegister}}">忘记用户名？</view>
+        </view>
+        <view class="form-item" wx:if="{{isRegister}}">
+          <text class="label">用户名</text>
+          <input class="input" type="text" placeholder="请输入2-8个中文字符" value="{{tempUserInfo.nickName}}" bindinput="handleNicknameInput" maxlength="8"/>
+        </view>
+        <view class="form-item" wx:if="{{isRegister}}">
+          <text class="label">头像</text>
+          <view class="avatar-wrapper">
+            <image class="avatar-preview" src="{{tempUserInfo.avatarUrl || iconBaseUrl + '/default-avatar.png'}}" mode="aspectFill" />
+            <button class="upload-btn" bindtap="chooseAvatar">选择头像</button>
+          </view>
+        </view>
+      </view>
+      <view class="auth-btns">
+        <button class="confirm-btn" bindtap="{{isRegister ? 'handleRegister' : 'doLogin'}}">
+          {{isRegister ? '注册' : '登录'}}
+        </button>
+        <view class="switch-mode" bindtap="switchAuthMode">
+          {{isRegister ? '已有账号？去登录' : '没有账号？去注册'}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 查找用户名弹窗 -->
+  <view class="auth-modal" wx:if="{{showFindUsername}}">
+    <view class="auth-content">
+      <view class="auth-header">
+        <view class="auth-title">查找用户名</view>
+        <view class="close-btn" bindtap="hideFindUsername">×</view>
+      </view>
+      <view class="auth-form">
+        <view class="form-item">
+          <text class="label">手机号</text>
+          <input class="input" type="number" maxlength="11" placeholder="请输入手机号" value="{{findPhoneNumber}}" bindinput="handleFindPhoneInput" />
+        </view>
+        <view class="username-result" wx:if="{{foundUsername}}">
+          <text class="result-label">绑定的用户名：</text>
+          <text class="result-value">{{foundUsername}}</text>
+        </view>
+      </view>
+      <view class="auth-btns">
+        <button class="confirm-btn" bindtap="searchUsername">查找用户名</button>
+      </view>
+    </view>
+  </view>
+  <!-- 编辑资料弹窗 -->
+  <view class="edit-modal {{showEditModal ? 'show' : ''}}" bindtap="hideEditProfile">
+    <view class="edit-content" catchtap="stopPropagation">
+      <view class="edit-header">
+        <text class="edit-title">编辑资料</text>
+        <text class="close-btn" bindtap="hideEditProfile">×</text>
+      </view>
+      <view class="edit-form">
+        <view class="edit-item">
+          <view class="avatar-edit">
+            <image class="current-avatar" src="{{tempUserInfo.avatarUrl || userInfo.avatarUrl || iconBaseUrl + '/default-avatar.png'}}" mode="aspectFill"></image>
+            <button class="change-avatar-btn" bindtap="chooseAvatar">更换头像</button>
+          </view>
+        </view>
+        <view class="edit-item">
+          <text class="edit-label">用户名</text>
+          <input class="edit-input" value="{{tempUserInfo.nickName}}" placeholder="请输入2-8个中文字符" bindinput="onNicknameInput" maxlength="8"/>
+        </view>
+        <button class="save-btn" bindtap="saveProfile">保存修改</button>
+      </view>
+    </view>
+  </view>
+  <!-- 签到日历弹窗 -->
+  <view class="calendar-modal {{showCalendar ? 'show' : ''}}" bindtap="hideSignInCalendar">
+    <view class="calendar-content" catchtap="stopPropagation">
+      <view class="calendar-header">
+        <text class="calendar-title">每日签到</text>
+        <text class="close-btn" bindtap="hideSignInCalendar">×</text>
+      </view>
+      <view class="calendar-body">
+        <view class="month-header">
+          <text>{{currentYear}}年{{currentMonth}}月</text>
+        </view>
+        <view class="weekday-header">
+          <text wx:for="{{['日', '一', '二', '三', '四', '五', '六']}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="days-grid">
+          <view class="day-item {{item.isCurrentMonth ? '' : 'other-month'}} {{item.isToday ? 'today' : ''}} {{item.isSigned ? 'signed' : ''}}" wx:for="{{calendarDays}}" wx:key="date">
+            <text>{{item.day}}</text>
+            <view class="sign-mark" wx:if="{{item.isSigned}}"></view>
+          </view>
+        </view>
+      </view>
+      <view class="sign-in-footer">
+        <view class="sign-in-info">
+          <text>已连续签到 {{consecutiveDays || 0}} 天</text>
+        </view>
+        <button class="sign-in-btn {{todaySigned ? 'signed' : ''}}" bindtap="handleSignIn" disabled="{{todaySigned}}">
+          {{todaySigned ? '今日已签到' : '立即签到'}}
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 奖励弹窗 -->
+  <view class="reward-modal {{showRewardModal ? 'show' : ''}}" bindtap="hideRewardModal">
+    <view class="reward-content" catchtap="stopPropagation">
+      <view class="reward-header">
+        <text class="reward-title">可领取奖励</text>
+        <text class="close-btn" bindtap="hideRewardModal">×</text>
+      </view>
+      <view class="reward-list" wx:if="{{availableRewards && availableRewards.length > 0}}">
+        <view class="reward-item" wx:for="{{availableRewards}}" wx:key="_id">
+          <view class="reward-info">
+            <view class="reward-name-points">
+              <text class="reward-name">{{item.name}}</text>
+              <text class="reward-points">+{{item.points}}积分</text>
+            </view>
+            <view class="reward-conditions">
+              <text wx:if="{{item.minQuestions}}">答题数≥{{item.minQuestions}}题</text>
+              <text wx:if="{{item.minCorrectRate}}">正确率≥{{item.minCorrectRate}}%</text>
+              <text wx:if="{{item.minRanking}}">排名≤{{item.minRanking}}名</text>
+            </view>
+          </view>
+          <button class="collect-btn {{item.collected ? 'disabled' : (!item.canCollect ? 'disabled' : '')}}" bindtap="collectReward" data-reward="{{item}}" disabled="{{item.collected || !item.canCollect || isCollecting}}">
+            {{item.collected ? '已领取' : '领取'}}
+          </button>
+        </view>
+      </view>
+      <view class="no-reward" wx:else>
+        <text>暂无可领取的奖励</text>
+      </view>
+    </view>
+  </view>
+  <!-- 规则弹窗 -->
+  <view class="rules-modal {{showRulesModal ? 'show' : ''}}" bindtap="hideRules">
+    <view class="rules-content" catchtap="stopPropagation">
+      <view class="rules-header">
+        <text class="rules-title">段位规则说明</text>
+        <text class="close-btn" bindtap="hideRules">×</text>
+      </view>
+      <view class="tier-points-rules">
+        <view class="rule-item tier-supreme">
+          <text class="tier-name">至尊</text>
+          <text class="points-rule">5000分以上</text>
+        </view>
+        <view class="rule-item tier-king">
+          <text class="tier-name">王者</text>
+          <text class="points-rule">3000-4999分</text>
+        </view>
+        <view class="rule-item tier-master">
+          <text class="tier-name">大师</text>
+          <text class="points-rule">2000-2999分</text>
+        </view>
+        <view class="rule-item tier-diamond">
+          <text class="tier-name">钻石</text>
+          <text class="points-rule">1000-1999分</text>
+        </view>
+        <view class="rule-item tier-platinum">
+          <text class="tier-name">铂金</text>
+          <text class="points-rule">500-999分</text>
+        </view>
+        <view class="rule-item tier-gold">
+          <text class="tier-name">黄金</text>
+          <text class="points-rule">200-499分</text>
+        </view>
+        <view class="rule-item tier-silver">
+          <text class="tier-name">白银</text>
+          <text class="points-rule">50-199分</text>
+        </view>
+        <view class="rule-item tier-bronze">
+          <text class="tier-name">青铜</text>
+          <text class="points-rule">0-49分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 注销确认弹窗 -->
+  <view class="auth-modal" wx:if="{{showLogoutConfirm}}">
+    <view class="auth-content">
+      <view class="auth-header">
+        <view class="auth-title">确认注销</view>
+        <view class="close-btn" bindtap="hideLogoutConfirm">×</view>
+      </view>
+      <view class="auth-form">
+        <view class="form-item">
+          <text class="label">请输入"确认注销"以继续</text>
+          <input class="input" type="text" placeholder="请输入" value="{{logoutConfirmText}}" bindinput="handleLogoutConfirmInput" />
+        </view>
+      </view>
+      <view class="auth-btns">
+        <button class="confirm-btn" bindtap="executeLogout" disabled="{{logoutConfirmText !== '确认注销'}}">
+          确认注销
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

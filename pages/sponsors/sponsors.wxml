@@ -1,0 +1,53 @@
+<!--pages/sponsors/sponsors.wxml-->
+<view class="sponsors-page">
+  <view class="header">
+    <text class="title">感谢支持</text>
+    <text class="subtitle">最早支持的用户排在最前面</text>
+  </view>
+
+  <!-- 加载中状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 赞助者表格 -->
+  <view class="sponsors-table" wx:else>
+    <block wx:if="{{sponsors.length > 0}}">
+      <!-- 表头 -->
+      <view class="table-header">
+        <view class="header-cell header-no">序号</view>
+        <view class="header-cell header-name">微信昵称</view>
+        <view class="header-cell header-count">支持次数</view>
+        <view class="header-cell header-remark">备注</view>
+      </view>
+      <!-- 表格内容 -->
+      <view class="table-content">
+        <view class="table-row" 
+              wx:for="{{sponsors}}" 
+              wx:key="_id"
+              style="animation-delay: {{index * 0.05}}s">
+          <view class="row-content">
+            <text class="sponsor-index">{{index + 1}}</text>
+            <text class="sponsor-name">{{item.name || '匿名用户'}}</text>
+            <text class="sponsor-count">{{item.count || 1}}次</text>
+            <text class="sponsor-remark">{{item.remark || '无'}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <text>暂无赞助记录</text>
+      <text>期待您的支持</text>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer">
+    <text class="footer-text">您的每一份支持</text>
+    <text class="footer-text">都将用于小程序的维护和开发</text>
+    <text class="footer-text">感谢一路相伴！</text>
+  </view>
+</view> 

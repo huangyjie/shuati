@@ -1,0 +1,284 @@
+.result-container {
+  min-height: 100vh;
+  padding: 30rpx;
+  background: #f5f5f5;
+  padding-top: calc(44px + env(safe-area-inset-top));
+}
+
+/* 积分区域 */
+.score-section {
+  text-align: center;
+  padding: 40rpx 0;
+  margin-bottom: 30rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.score {
+  font-size: 80rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.score.positive {
+  color: #52c41a;
+}
+
+.score.negative {
+  color: #ff4d4f;
+}
+
+.score-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.tier-info {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+/* 统计区域 */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.stat-item {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.stat-value {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 答题详情 */
+.answer-details {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.details-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.detail-item {
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+}
+
+.detail-item.correct {
+  background: #f6ffed;
+  border: 1rpx solid #b7eb8f;
+}
+
+.detail-item.wrong {
+  background: #fff2f0;
+  border: 1rpx solid #ffccc7;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.question-number {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.points-change {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.points-change.positive {
+  color: #52c41a;
+}
+
+.points-change.negative {
+  color: #ff4d4f;
+}
+
+.question-title {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  line-height: 1.5;
+}
+
+.options {
+  margin-bottom: 20rpx;
+}
+
+.option {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  padding: 10rpx;
+}
+
+.answer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  font-size: 28rpx;
+}
+
+.correct-answer {
+  color: #52c41a;
+}
+
+.user-answer {
+  color: #666;
+}
+
+.user-answer.correct {
+  color: #52c41a;
+}
+
+.user-answer.wrong {
+  color: #ff4d4f;
+}
+
+/* 按钮组 */
+.button-group {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+  padding-bottom: 40rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* 暗黑模式 */
+.dark-mode {
+  background: #1f1f1f;
+}
+
+.dark-mode .score-section,
+.dark-mode .stat-item,
+.dark-mode .answer-details {
+  background: #2d2d2d;
+}
+
+.dark-mode .score-label,
+.dark-mode .stat-label {
+  color: #999;
+}
+
+.dark-mode .stat-value,
+.dark-mode .details-title,
+.dark-mode .question-number,
+.dark-mode .question-title {
+  color: #fff;
+}
+
+.dark-mode .detail-item {
+  background: #3d3d3d;
+}
+
+.dark-mode .detail-item.correct {
+  background: #162312;
+  border-color: #274916;
+}
+
+.dark-mode .detail-item.wrong {
+  background: #2a1215;
+  border-color: #5c1d1d;
+}
+
+.dark-mode .option {
+  color: #999;
+}
+
+/* 自定义导航栏样式 */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 100;
+}
+
+.nav-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.back-icon {
+  font-size: 40rpx;
+  margin-right: 4rpx;
+}
+
+.nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 暗黑模式导航栏样式 */
+.dark-mode .custom-nav {
+  background: #2d2d2d;
+}
+
+.dark-mode .back-btn,
+.dark-mode .nav-title {
+  color: #fff;
+} 

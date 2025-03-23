@@ -1,0 +1,1186 @@
+/* pages/wrong/wrong.wxss */
+.container {
+  padding: 30rpx;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content,
+.empty-state {
+  text-align: center;
+  padding: 60rpx;
+}
+
+.message {
+  display: block;
+  font-size: 36rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.sub-message {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.progress-bar {
+  padding: 20rpx;
+  text-align: center;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.capacity-text {
+  font-size: 28rpx;
+  color: #666;
+  margin-left: 20rpx;
+}
+
+/* 当剩余空间少于20题时显示警告色 */
+.capacity-text.warning {
+  color: #ff4d4f;
+}
+
+.content-scroll {
+  flex: 1;
+  padding: 20rpx;
+  height: calc(100vh - 400rpx);
+  box-sizing: border-box;
+}
+
+.question-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  min-height: calc(100vh - 500rpx);
+  box-sizing: border-box;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.question-title {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.copy-question {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 30rpx;
+  margin-left: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.copy-question:active {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.copy-icon {
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+
+.copy-text {
+  font-size: 24rpx;
+  color: #4a90e2;
+}
+
+/* 深色模式适配 */
+.dark-mode .copy-question {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .copy-text {
+  color: #6ba6e5;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.option-item {
+  width: 100% !important;
+  padding: 20rpx !important;
+  font-size: 28rpx !important;
+  text-align: left !important;
+  background: #fff !important;
+  border: 2rpx solid #e0e0e0 !important;
+  border-radius: 8rpx !important;
+  min-height: unset !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.option-text {
+  word-break: break-all;
+  white-space: pre-wrap;
+  color: #333;
+}
+
+.answer-result {
+  margin-top: 30rpx;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.result-text {
+  font-size: 28rpx;
+}
+
+.correct-text {
+  color: #4caf50;
+}
+
+.wrong-text {
+  color: #ff4d4f;
+}
+
+.footer {
+  padding: 20rpx;
+  background: #fff;
+}
+
+.button-row {
+  display: flex;
+  gap: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.nav-btn {
+  flex: 1;
+  font-size: 26rpx !important;
+  padding: 0 !important;
+  height: 64rpx !important;
+  line-height: 64rpx !important;
+  background: #f5f5f5 !important;
+  color: #333 !important;
+  border: none !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.restart-btn {
+  width: 100% !important;
+  font-size: 26rpx !important;
+  height: 64rpx !important;
+  line-height: 64rpx !important;
+  background: linear-gradient(to right, #ff4d4f, #ff7875) !important;
+  color: #fff !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 32rpx !important;
+}
+
+.correct {
+  background: #e8f5e9 !important;
+  border-color: #4caf50 !important;
+  color: #2e7d32 !important;
+}
+
+.wrong {
+  background: #ffebee !important;
+  border-color: #ef5350 !important;
+  color: #c62828 !important;
+}
+
+/* 添加夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f !important;
+}
+
+.dark-mode .progress-bar {
+  background: #2d2d2d;
+}
+
+.dark-mode .progress-text {
+  color: #aaa;
+}
+
+.dark-mode .question-card {
+  background: #2d2d2d;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .question-title {
+  color: #fff;
+}
+
+.dark-mode .option-item {
+  background: #3d3d3d !important;
+  border-color: #4d4d4d !important;
+}
+
+.dark-mode .option-text {
+  color: #fff;
+}
+
+.dark-mode .option-item.correct {
+  background: #1b5e20 !important;
+  border-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+.dark-mode .option-item.wrong {
+  background: #b71c1c !important;
+  border-color: #f44336 !important;
+  color: #fff !important;
+}
+
+.dark-mode .footer {
+  background: #2d2d2d;
+}
+
+.dark-mode .nav-btn {
+  background: #3d3d3d !important;
+  color: #fff !important;
+}
+
+.dark-mode .restart-btn {
+  background: linear-gradient(to right, #cf222e, #d32f2f) !important;
+}
+
+.dark-mode .answer-result {
+  background: #3d3d3d;
+}
+
+.dark-mode .correct-text {
+  color: #81c784;
+}
+
+.dark-mode .wrong-text {
+  color: #e57373;
+}
+
+/* 空状态样式优化 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 60rpx;
+  background: #fff;
+}
+
+.empty-message {
+  font-size: 48rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.empty-sub-message {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 40rpx;
+}
+
+.empty-tips {
+  width: 100%;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  margin-bottom: 40rpx;
+}
+
+.tip-item {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 2;
+}
+
+/* 夜间模式下的空状态样式 */
+.dark-mode .empty-state {
+  background: #1f1f1f;
+}
+
+.dark-mode .empty-message {
+  color: #fff;
+}
+
+.dark-mode .empty-sub-message {
+  color: #aaa;
+}
+
+.dark-mode .empty-tips {
+  background: #2d2d2d;
+}
+
+.dark-mode .tip-item {
+  color: #999;
+}
+
+/* 上传按钮样式优化 */
+.upload-section {
+  width: 100%;
+  padding: 20rpx;
+}
+
+.upload-btn {
+  width: 100% !important;
+  height: 88rpx !important;
+  line-height: 88rpx !important;
+  background: linear-gradient(135deg, #4a90e2, #357ABD) !important;
+  color: #fff !important;
+  font-size: 32rpx !important;
+  font-weight: 500 !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.upload-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+/* 夜间模式下的上传按钮样式 */
+.dark-mode .upload-btn {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+  box-shadow: 0 4rpx 12rpx rgba(53, 122, 189, 0.2) !important;
+}
+
+/* 添加云端操作按钮样式 */
+.header-actions {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx;
+  background: #fff;
+  flex-wrap: nowrap;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx !important;
+  padding: 0 30rpx !important;
+  border: none !important;
+  border-radius: 40rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24rpx !important;
+  color: #fff !important;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  min-width: auto !important;
+}
+
+.action-btn.copy {
+  background: linear-gradient(135deg, #52c41a, #389e0d) !important;
+}
+
+.action-btn.delete {
+  background: linear-gradient(135deg, #ff4d4f, #cf1322) !important;
+}
+
+.action-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.btn-text {
+  font-size: 24rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 修改按钮组样式 */
+.button-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  padding: 20rpx;
+}
+
+.cloud-btn {
+  flex: 1;
+  min-width: 200rpx;
+  height: 88rpx !important;
+  padding: 0 30rpx !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.cloud-btn.restore {
+  background: linear-gradient(135deg, #13c2c2, #08979c) !important;
+  box-shadow: 0 4rpx 12rpx rgba(19, 194, 194, 0.2) !important;
+}
+
+.cloud-btn.delete {
+  background: linear-gradient(135deg, #ff4d4f, #cf1322) !important;
+  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.2) !important;
+}
+
+.cloud-btn.copy {
+  background: linear-gradient(135deg, #52c41a, #389e0d) !important;
+  box-shadow: 0 4rpx 12rpx rgba(82, 196, 26, 0.2) !important;
+}
+
+/* 夜间模式适配 */
+.dark-mode .header-actions {
+  background: #2d2d2d;
+}
+
+.dark-mode .action-btn {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2) !important;
+}
+
+/* AI助手相关样式 */
+.ai-assistant {
+  position: fixed;
+  right: 30rpx;
+  bottom: 280rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: float 3s ease-in-out infinite;
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15rpx) rotate(5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.ai-assistant.show {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) rotate(-15deg);
+  transition: all 0.3s ease;
+}
+
+.ai-assistant:active {
+  transform: scale(0.85) rotate(-25deg);
+}
+
+.ai-icon {
+  width: 60rpx;
+  height: 60rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ai-assistant.show .ai-icon {
+  transform: rotate(15deg);
+}
+
+.ai-icon path {
+  transition: all 0.3s ease;
+}
+
+.dark-mode .ai-icon path {
+  fill: rgba(255, 255, 255, 0.9);
+}
+
+.ai-panel {
+  position: fixed;
+  right: -100%;
+  bottom: 140rpx;
+  width: 85%;
+  height: 70vh;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  z-index: 99;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(100%) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dark-mode .ai-panel {
+  background: #2d2d2d;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.3);
+}
+
+.ai-panel.show {
+  right: 30rpx;
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.ai-panel.hide {
+  animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+  }
+}
+
+.ai-panel-header {
+  padding: 24rpx;
+  border-bottom: 2rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dark-mode .ai-panel-header {
+  border-bottom-color: #3d3d3d;
+}
+
+.ai-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #fff;
+  padding: 0 20rpx;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.close-btn:active {
+  opacity: 0.6;
+}
+
+.ai-messages {
+  flex: 1;
+  padding: 12rpx;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #f8f9fa;
+}
+
+.dark-mode .ai-messages {
+  background: #1f1f1f;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  padding: 16rpx;
+}
+
+.message {
+  max-width: 85%;
+  padding: 16rpx 24rpx;
+  padding-right: 60rpx;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.5;
+  position: relative;
+  animation: messageIn 0.3s ease;
+  overflow: hidden;
+  margin: 8rpx 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10rpx);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-bottom-right-radius: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.2);
+  margin-right: 12rpx;
+}
+
+.message.user::after {
+  content: '';
+  position: absolute;
+  right: -8rpx;
+  bottom: 0;
+  width: 16rpx;
+  height: 16rpx;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: rotate(45deg);
+}
+
+.message.ai {
+  align-self: flex-start;
+  background: #fff;
+  color: #333;
+  border: 1rpx solid #eee;
+  border-bottom-left-radius: 4rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  margin-left: 12rpx;
+  padding-bottom: 50rpx;
+  position: relative;
+}
+
+.message.ai::after {
+  content: '';
+  position: absolute;
+  left: -8rpx;
+  bottom: 0;
+  width: 16rpx;
+  height: 16rpx;
+  background: #fff;
+  border-left: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  transform: rotate(45deg);
+}
+
+.dark-mode .message.user {
+  background: linear-gradient(135deg, #4c5eaa 0%, #563b77 100%);
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.15);
+}
+
+.dark-mode .message.user::after {
+  background: linear-gradient(135deg, #563b77 0%, #4c5eaa 100%);
+}
+
+.dark-mode .message.ai {
+  background: #2d2d2d;
+  color: #fff;
+  border-color: #3d3d3d;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .message.ai::after {
+  background: #2d2d2d;
+  border-color: #3d3d3d;
+}
+
+.ai-input {
+  padding: 20rpx;
+  display: flex;
+  gap: 16rpx;
+  flex-wrap: wrap;
+  border-top: 2rpx solid #eee;
+  background: #fff;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-panel.show .ai-input {
+  transform: translateY(0);
+}
+
+.quick-ask {
+  flex: 1;
+  min-width: 180rpx;
+  height: 72rpx !important;
+  line-height: 72rpx !important;
+  font-size: 26rpx !important;
+  padding: 0 24rpx !important;
+  background: #f5f7fa !important;
+  color: #666 !important;
+  border-radius: 36rpx !important;
+  border: none !important;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+  transform: scale(0.9);
+  opacity: 0;
+  animation: buttonIn 0.3s ease forwards;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+@keyframes buttonIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dark-mode .quick-ask {
+  background: #3d3d3d !important;
+  color: #aaa !important;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2) !important;
+}
+
+.quick-ask:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.send-current {
+  width: 100% !important;
+  height: 80rpx !important;
+  font-size: 28rpx !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 40rpx !important;
+  margin: 10rpx 0 0 0 !important;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3) !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dark-mode .send-current {
+  background: linear-gradient(135deg, #4c5eaa 0%, #563b77 100%) !important;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.2) !important;
+  opacity: 0.9;
+}
+
+.send-current:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.message.typing::after {
+  content: '';
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  width: 6rpx;
+  height: 24rpx;
+  background: currentColor;
+  opacity: 0.6;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.message.ai .content {
+  display: inline;
+  opacity: 0;
+  animation: fadeIn 0.1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.message.ai .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10rpx);
+  animation: charIn 0.2s ease forwards;
+}
+
+@keyframes charIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+}
+
+.ai-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .ai-text {
+  opacity: 0.9;
+}
+
+/* AI面板遮罩层 */
+.ai-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 98;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.ai-mask.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.copy-btn {
+  position: absolute;
+  left: 24rpx;
+  bottom: 12rpx;
+  font-size: 24rpx;
+  color: #666;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  opacity: 1;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.dark-mode .copy-btn {
+  background: rgba(45, 45, 45, 0.9);
+  color: #aaa;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+.message:hover .copy-btn {
+  opacity: 1;
+}
+
+.dark-mode .copy-btn {
+  background: rgba(45, 45, 45, 0.9);
+  color: #aaa;
+}
+
+/* AI模型切换按钮样式 */
+.ai-model-switch {
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 32rpx;
+  font-size: 28rpx;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.2);
+  text-align: center;
+  min-width: 160rpx;
+}
+
+.dark-mode .ai-model-switch {
+  background: linear-gradient(135deg, #4c5eaa 0%, #563b77 100%);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.3);
+}
+
+.ai-model-switch:active {
+  opacity: 0.8;
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.1);
+}
+
+.float-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 4rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ai-assistant.show .float-icon {
+  transform: rotate(15deg);
+}
+
+.dark-mode .float-icon {
+  opacity: 0.9;
+}
+
+.ai-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+}
+
+.ai-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .ai-text {
+  opacity: 0.9;
+}
+
+/* 添加导出按钮样式 */
+.action-btn.copy {
+  background: linear-gradient(135deg, #52c41a, #389e0d) !important;
+}
+
+.cloud-btn.copy {
+  background: linear-gradient(135deg, #52c41a, #389e0d) !important;
+  box-shadow: 0 4rpx 12rpx rgba(82, 196, 26, 0.2) !important;
+}
+
+/* 深色模式样式 */
+.dark-mode .action-btn.copy {
+  background: linear-gradient(135deg, #389e0d, #237804) !important;
+}
+
+.dark-mode .cloud-btn.copy {
+  background: linear-gradient(135deg, #389e0d, #237804) !important;
+  box-shadow: 0 4rpx 12rpx rgba(82, 196, 26, 0.15) !important;
+}
+
+/* 恢复上传按钮样式 */
+.action-btn.upload {
+  background: linear-gradient(135deg, #4a90e2, #357ABD) !important;
+}
+
+.cloud-btn.upload {
+  background: linear-gradient(135deg, #4a90e2, #357ABD) !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 深色模式下的上传按钮样式 */
+.dark-mode .action-btn.upload {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+}
+
+.dark-mode .cloud-btn.upload {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+  box-shadow: 0 4rpx 12rpx rgba(53, 122, 189, 0.2) !important;
+}
+
+/* 设置按钮样式 */
+.action-btn.settings {
+  background: linear-gradient(135deg, #722ed1, #531dab) !important;
+}
+
+/* 设置面板样式 */
+.settings-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.settings-panel.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.settings-header {
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.settings-header .close-btn {
+  font-size: 40rpx;
+  color: #666;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.settings-header .close-btn:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* 深色模式下的关闭按钮 */
+.dark-mode .settings-header .close-btn {
+  color: #999;
+}
+
+.dark-mode .settings-header .close-btn:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-body {
+  padding: 30rpx;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.settings-footer {
+  padding: 30rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+
+.settings-btn {
+  width: 100% !important;
+  background: #4A90E2 !important;
+  color: #fff !important;
+  font-size: 28rpx !important;
+  border-radius: 8rpx !important;
+}
+
+/* 深色模式样式 */
+.dark-mode .settings-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .settings-header {
+  border-bottom-color: #333;
+}
+
+.dark-mode .settings-title {
+  color: #fff;
+}
+
+.dark-mode .setting-label {
+  color: #fff;
+}
+
+.dark-mode .settings-footer {
+  border-top-color: #333;
+}
+
+.favorite {
+  background: linear-gradient(135deg, #ff4d4f, #cf1322);
+  color: #fff;
+  border: none;
+  border-radius: 8rpx;
+  padding: 10rpx 20rpx;
+  font-size: 28rpx;
+  transition: background 0.3s;
+}
+
+.favorite:hover {
+  background: linear-gradient(135deg, #cf1322, #ff4d4f);
+}

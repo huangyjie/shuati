@@ -1,0 +1,89 @@
+<!--pages/favorites-practice/favorites-practice.wxml-->
+<view class="page-container {{darkMode ? 'dark-mode' : ''}}">
+  <block wx:if="{{questions.length > 0}}">
+    <view class="header-actions">
+      <button class="action-btn upload" bindtap="uploadToCloud">
+        <text class="btn-text">上传到云端</text>
+      </button>
+      <button class="action-btn delete" bindtap="clearCloudFavorites">
+        <text class="btn-text">清空云端</text>
+      </button>
+    </view>
+
+    <view class="progress-bar">
+      <text class="progress-text">收藏题目 {{currentIndex + 1}}/{{questions.length}}</text>
+    </view>
+
+    <scroll-view class="content-scroll" scroll-y>
+      <view class="question-card" wx:if="{{currentQuestion}}">
+        <view class="question-title">
+          <text>{{currentQuestion.title}}</text>
+        </view>
+        
+        <view class="options-list">
+          <button 
+            class="option-item {{selectedAnswer === 'A' ? (showAnswer ? (isCorrect ? 'correct' : 'wrong') : 'selected') : ''}}"
+            data-option="A" 
+            bindtap="handleOptionSelect"
+            disabled="{{answered}}">
+            <text class="option-text">A. {{currentQuestion.optionA}}</text>
+          </button>
+          
+          <button 
+            class="option-item {{selectedAnswer === 'B' ? (showAnswer ? (isCorrect ? 'correct' : 'wrong') : 'selected') : ''}}"
+            data-option="B" 
+            bindtap="handleOptionSelect"
+            disabled="{{answered}}">
+            <text class="option-text">B. {{currentQuestion.optionB}}</text>
+          </button>
+          
+          <button 
+            class="option-item {{selectedAnswer === 'C' ? (showAnswer ? (isCorrect ? 'correct' : 'wrong') : 'selected') : ''}}"
+            data-option="C" 
+            bindtap="handleOptionSelect"
+            disabled="{{answered}}">
+            <text class="option-text">C. {{currentQuestion.optionC}}</text>
+          </button>
+          
+          <button 
+            class="option-item {{selectedAnswer === 'D' ? (showAnswer ? (isCorrect ? 'correct' : 'wrong') : 'selected') : ''}}"
+            data-option="D" 
+            bindtap="handleOptionSelect"
+            disabled="{{answered}}">
+            <text class="option-text">D. {{currentQuestion.optionD}}</text>
+          </button>
+        </view>
+
+        <view class="answer-result" wx:if="{{showAnswer}}">
+          <text class="result-text {{isCorrect ? 'correct-text' : 'wrong-text'}}">
+            {{isCorrect ? '回答正确！' : '回答错误！正确答案是：' + currentQuestion.answer}}
+          </text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="footer">
+      <view class="button-row">
+        <button class="nav-btn" bindtap="prevQuestion" disabled="{{currentIndex === 0}}">上一题</button>
+        <button class="nav-btn" bindtap="nextQuestion" disabled="{{currentIndex === questions.length - 1}}">下一题</button>
+      </view>
+      <button class="remove-btn" bindtap="toggleFavorite">取消收藏</button>
+    </view>
+  </block>
+
+  <view class="empty-state" wx:else>
+    <view class="empty-message">暂无收藏题目</view>
+    <view class="empty-sub-message">可以在答题时点击星标收藏题目</view>
+    <view class="button-group">
+      <button class="cloud-btn restore" bindtap="restoreFromCloud">
+        <text class="btn-text">从云端恢复</text>
+      </button>
+      <button class="cloud-btn delete" bindtap="clearCloudFavorites">
+        <text class="btn-text">清空云端</text>
+      </button>
+      <button class="cloud-btn upload" bindtap="uploadToCloud">
+        <text class="btn-text">上传到云端</text>
+      </button>
+    </view>
+  </view>
+</view>

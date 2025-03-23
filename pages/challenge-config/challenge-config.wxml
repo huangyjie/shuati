@@ -1,0 +1,71 @@
+<view class="config-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="config-card">
+    <view class="config-title">挑战设置</view>
+    
+    <!-- 题库选择 -->
+    <view class="config-row">
+      <view class="row-label">选择题库</view>
+      <view class="collection-selector" bindtap="showCollectionPicker">
+        <text>{{collections[selectedCollection]}}</text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+
+    <!-- 答题时间 -->
+    <view class="config-row">
+      <view class="row-label">答题时间（分钟）</view>
+      <input class="input-box" 
+        type="number" 
+        value="{{duration}}"
+        bindinput="onDurationInput"
+        placeholder="1-60分钟"/>
+    </view>
+
+    <!-- 题目数量 -->
+    <view class="config-row">
+      <view class="row-label">题目数量</view>
+      <input class="input-box" 
+        type="number" 
+        value="{{questionCount}}"
+        bindinput="onQuestionCountInput"
+        placeholder="5-150题"/>
+    </view>
+
+    <!-- 每题分值 -->
+    <view class="config-row">
+      <view class="row-label">每题分值</view>
+      <input class="input-box" 
+        type="number" 
+        value="{{scorePerQuestion}}"
+        bindinput="onScoreInput"
+        placeholder="1-10分"/>
+    </view>
+
+    <!-- 目标分数 -->
+    <view class="config-row">
+      <view class="row-label">目标分数</view>
+      <view class="target-score">{{targetScore}}分</view>
+    </view>
+
+    <!-- 开始按钮 -->
+    <button class="start-btn" bindtap="startChallenge">开始挑战</button>
+  </view>
+
+  <!-- 题库选择器浮层 -->
+  <view class="collection-picker {{showCollectionPicker ? 'show' : ''}}" bindtap="hideCollectionPicker">
+    <view class="picker-content" catchtap="preventBubble">
+      <view class="picker-title">选择题库</view>
+      <view class="collection-list">
+        <view class="collection-item {{selectedCollection === key ? 'selected' : ''}}"
+          wx:for="{{collections}}" 
+          wx:key="*this"
+          wx:for-index="key"
+          wx:for-item="value"
+          data-collection="{{key}}"
+          bindtap="selectCollection">
+          {{value}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

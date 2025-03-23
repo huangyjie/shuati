@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "QQ群管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#1f1f1f",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#1a1a1a"
+} 

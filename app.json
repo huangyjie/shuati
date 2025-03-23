@@ -1,0 +1,115 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/practice/practice",
+    "pages/mock/mock",
+    "pages/comprehensive/comprehensive",
+    "pages/profile/profile",
+    "pages/chapters/chapters",
+    "pages/ranking/ranking",
+    "pages/points-practice/points-practice",
+    "pages/wrong/wrong",
+    "pages/favorites-practice/favorites-practice",
+    "pages/admin/admin",
+    "pages/chat-room/chat-room",
+    "pages/wanwei/wanwei",
+    "pages/challenge-config/challenge-config",
+    "pages/challenge/challenge",
+    "pages/challenge-result/challenge-result",
+    "pages/developers/developers",
+    "pages/sponsors/sponsors",
+    "pages/qq-groups/qq-groups",
+    "pages/breakthrough/breakthrough",
+    "pages/resources/resources",
+    "pages/ai-chat/ai-chat",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "应知刷题",     
+    "navigationBarTextStyle": "black",
+    "restartStrategy": "homePageAndLatestPage",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "#8a8a8a",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/home.png",
+        "selectedIconPath": "images/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/practice/practice",
+        "text": "刷题",
+        "iconPath": "images/tabbar/practice.png",
+        "selectedIconPath": "images/tabbar/practice-active.png"
+      },
+      {
+        "pagePath": "pages/mock/mock",
+        "text": "模拟",
+        "iconPath": "images/tabbar/mock.png",
+        "selectedIconPath": "images/tabbar/mock-active.png"
+      },
+      {
+        "pagePath": "pages/comprehensive/comprehensive",
+        "text": "我的",
+        "iconPath": "images/tabbar/comprehensive.png",
+        "selectedIconPath": "images/tabbar/comprehensive-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "关于",
+        "iconPath": "images/tabbar/profile.png",
+        "selectedIconPath": "images/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "subpackages": [
+    {
+      "root": "packageExam",
+      "pages": [
+        "pages/answer/answer",
+        "pages/exam-result/exam-result",
+        "pages/mock-exam/mock-exam",
+        "pages/random-practice/random-practice",
+        "pages/wrong/wrong",
+        "pages/chapter-answer/chapter-answer",
+        "pages/gaokao-exam/gaokao-exam",
+        "pages/ai-practice/ai-practice",
+        "pages/daily-result/daily-result",
+        "pages/wanwei-answer/wanwei-answer",
+        "pages/wanwei-result/wanwei-result",
+        "pages/breakthrough-practice/breakthrough-practice",
+        "pages/breakthrough-result/breakthrough-result"
+      ],
+      "independent": true
+    },
+    {
+      "root": "packageAdmin",
+      "name": "admin",
+      "pages": [
+        "pages/statistics/statistics",
+        "pages/user-management/user-management",
+        "pages/developer-management/developer-management",
+        "pages/qq-groups-management/qq-groups-management",
+        "pages/sponsor-management/sponsor-management",
+        "pages/settings/settings",
+        "pages/illegal-accounts/illegal-accounts",
+        "pages/reward-management/reward-management",
+        "pages/logs-management/logs-management",
+        "pages/resource-management/resource-management"
+      ]
+    }
+  ],
+  "lazyCodeLoading": "requiredComponents",
+  "cloud": true
+}

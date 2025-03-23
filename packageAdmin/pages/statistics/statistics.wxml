@@ -1,0 +1,138 @@
+<view class="statistics-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">数据统计</text>
+  </view>
+
+  <!-- 数据统计卡片 -->
+  <view class="stats-section">
+    <!-- 用户统计 -->
+    <view class="section-title">用户统计</view>
+    <view class="stats-grid">
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.totalUsers}}</text>
+        <text class="stats-label">总用户数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.todayNewUsers}}</text>
+        <text class="stats-label">今日新增</text>
+      </view>
+    </view>
+
+    <!-- 刷题统计 -->
+    <view class="section-title">刷题统计</view>
+    <view class="stats-grid">
+      <view class="stats-card highlight">
+        <text class="stats-value">{{statistics.totalQuestions}}</text>
+        <text class="stats-label">总提交数</text>
+      </view>
+      <view class="stats-card highlight">
+        <text class="stats-value">{{statistics.todaySubmissions}}</text>
+        <text class="stats-label">今日提交</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.completedPapers.total}}</text>
+        <text class="stats-label">{{statistics.completedPapers.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.mockExams.total}}</text>
+        <text class="stats-label">{{statistics.mockExams.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.user_wrong_questions.total}}</text>
+        <text class="stats-label">{{statistics.user_wrong_questions.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.user_breakthrough.total}}</text>
+        <text class="stats-label">{{statistics.user_breakthrough.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.ser_breakthrough.total}}</text>
+        <text class="stats-label">{{statistics.ser_breakthrough.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.dailyRecords.total}}</text>
+        <text class="stats-label">{{statistics.dailyRecords.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.battle_records.total}}</text>
+        <text class="stats-label">{{statistics.battle_records.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.breakthrough_records.total}}</text>
+        <text class="stats-label">{{statistics.breakthrough_records.displayName}}</text>
+      </view>
+    </view>
+
+    <!-- 今日提交详情 -->
+    <view class="section-title">今日提交详情</view>
+    <view class="stats-grid">
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.completedPapers.today}}</text>
+        <text class="stats-label">今日{{statistics.completedPapers.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.mockExams.today}}</text>
+        <text class="stats-label">今日{{statistics.mockExams.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.user_wrong_questions.today}}</text>
+        <text class="stats-label">今日{{statistics.user_wrong_questions.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.user_breakthrough.today}}</text>
+        <text class="stats-label">今日{{statistics.user_breakthrough.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.ser_breakthrough.today}}</text>
+        <text class="stats-label">今日{{statistics.ser_breakthrough.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.dailyRecords.today}}</text>
+        <text class="stats-label">今日{{statistics.dailyRecords.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.battle_records.today}}</text>
+        <text class="stats-label">今日{{statistics.battle_records.displayName}}</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.breakthrough_records.today}}</text>
+        <text class="stats-label">今日{{statistics.breakthrough_records.displayName}}</text>
+      </view>
+    </view>
+
+    <!-- 系统统计 -->
+    <view class="section-title">系统统计</view>
+    <view class="stats-grid">
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.totalCollections}}</text>
+        <text class="stats-label">数据集合数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.totalDocuments}}</text>
+        <text class="stats-label">总文档数</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.totalStorage}}</text>
+        <text class="stats-label">存储空间</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">{{statistics.activeCollections}}</text>
+        <text class="stats-label">活跃集合</text>
+      </view>
+      <view class="stats-card">
+        <view class="stats-content">
+          <text class="stats-value">{{statistics.chatMessages}}</text>
+          <text class="stats-label">聊天记录</text>
+        </view>
+        <button class="clear-btn" bindtap="clearChatMessages" wx:if="{{statistics.chatMessages > 0}}">一键清理</button>
+      </view>
+      <view class="stats-card feedback-card">
+        <view class="stats-content">
+          <text class="stats-value">{{statistics.feedbackCount}}</text>
+          <text class="stats-label">题目反馈</text>
+        </view>
+        <text class="feedback-today">今日: {{statistics.todayFeedbackCount}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

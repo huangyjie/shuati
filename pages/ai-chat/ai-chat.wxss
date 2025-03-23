@@ -1,0 +1,381 @@
+/* ai-chat.wxss */
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.container.dark-mode {
+    background-color: #1f1f1f;
+}
+
+/* 背景装饰 - 移除渐变圆圈 */
+.background-decoration {
+    display: none;
+}
+
+.chat-list {
+    flex: 1;
+    padding: 0 32rpx 180rpx;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.dark-mode .chat-list {
+    background-color: #1f1f1f;
+}
+
+.message-list {
+    padding: 0;
+    margin: 0;
+}
+
+.message {
+    margin-top: 32rpx;
+}
+
+.message:first-child {
+    margin-top: 0;
+}
+
+.message-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.message.user .message-wrapper {
+    flex-direction: row-reverse;
+}
+
+.system-card,
+.system-icon,
+.dark-mode .system-card {
+    display: none;
+}
+
+.avatar {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0 24rpx;
+}
+
+.avatar image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8rpx;
+}
+
+.content-wrapper {
+    max-width: 60%;
+}
+
+.sender-name {
+    font-size: 24rpx;
+    color: #999;
+    margin-bottom: 6rpx;
+    padding: 0 16rpx;
+}
+
+.content {
+    display: inline-block;
+    padding: 20rpx 24rpx;
+    font-size: 34rpx;
+    line-height: 44rpx;
+    background: #fff;
+    border-radius: 8rpx;
+    position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.dark-mode .content {
+    background: #2d2d2d;
+    color: #fff;
+}
+
+/* 微信气泡尖角 */
+.content::before {
+    content: '';
+    position: absolute;
+    top: 26rpx;
+    width: 0;
+    height: 0;
+    border: 12rpx solid transparent;
+}
+
+.message.user .content::before {
+    right: -20rpx;
+    border-left-color: #95ec69;
+}
+
+.message:not(.user) .content::before {
+    left: -20rpx;
+    border-right-color: #fff;
+}
+
+.dark-mode .message:not(.user) .content::before {
+    border-right-color: #2d2d2d;
+}
+
+.message.user .content {
+    background: #95ec69;
+    color: #000;
+}
+
+.message-time {
+    display: none;
+}
+
+/* 输入区域 */
+.input-area {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 24rpx 32rpx;
+    z-index: 100;
+    box-shadow: 0 -2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .input-area {
+    background: #1f1f1f;
+}
+
+.input-box {
+    display: flex;
+    align-items: flex-end;
+    background: #f7f7f7;
+    border-radius: 36rpx;
+    padding: 20rpx 24rpx;
+    box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .input-box {
+    background: #2d2d2d;
+    box-shadow: 0 2rpx 4rpx rgba(255, 255, 255, 0.05);
+}
+
+.chat-input {
+    flex: 1;
+    height: 72rpx;
+    min-height: 72rpx;
+    max-height: 148rpx;
+    font-size: 32rpx;
+    line-height: 44rpx;
+    padding: 0 16rpx;
+    margin: 0;
+    background: transparent;
+    width: 100%;
+    color: #333;
+}
+
+.dark-mode .chat-input {
+    color: #fff;
+}
+
+.chat-input::placeholder {
+    color: #999;
+    font-size: 30rpx;
+}
+
+.send-btn {
+    width: 120rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    text-align: center;
+    margin-left: 16rpx;
+    font-size: 32rpx;
+    color: #fff;
+    background: #e0e0e0;
+    border-radius: 36rpx;
+    transition: all 0.3s ease;
+}
+
+.send-btn.active {
+    background: #07c160;
+    color: #fff;
+    transform: scale(1.02);
+}
+
+.btn-hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+}
+
+.dark-mode .send-btn {
+    background: #404040;
+}
+
+.dark-mode .send-btn.active {
+    background: #07c160;
+}
+
+/* 打字动画 */
+.thinking {
+    padding: 24rpx;
+    background: #fff;
+    border-radius: 8rpx;
+    display: inline-block;
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.dot {
+    width: 10rpx;
+    height: 10rpx;
+    margin: 0 6rpx;
+    background: #b2b2b2;
+    border-radius: 50%;
+    animation: typing 1s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-8rpx);
+    }
+}
+
+/* 移除顶部操作栏相关样式 */
+.top-bar,
+.clear-btn,
+.clear-icon {
+    display: none;
+}
+
+/* 设置按钮 */
+.settings-btn {
+    position: fixed;
+    top: 20rpx;
+    left: 20rpx;
+    width: 64rpx;
+    height: 64rpx;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .settings-btn {
+    background: rgba(45, 45, 45, 0.9);
+}
+
+.settings-btn image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+/* 设置面板 */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.settings-panel.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-content {
+    position: absolute;
+    top: 100rpx;
+    left: 30rpx;
+    width: 300rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.dark-mode .settings-content {
+    background: #2d2d2d;
+}
+
+.settings-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.dark-mode .settings-item {
+    border-bottom-color: #3d3d3d;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-item text {
+    font-size: 28rpx;
+    color: #333;
+}
+
+.dark-mode .settings-item text {
+    color: #fff;
+}
+
+/* 开关样式 */
+.switch {
+    width: 80rpx;
+    height: 40rpx;
+    background: #e0e0e0;
+    border-radius: 20rpx;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.switch.active {
+    background: #07c160;
+}
+
+.switch-handle {
+    width: 36rpx;
+    height: 36rpx;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2rpx;
+    left: 2rpx;
+    transition: all 0.3s ease;
+}
+
+.switch.active .switch-handle {
+    left: 42rpx;
+}

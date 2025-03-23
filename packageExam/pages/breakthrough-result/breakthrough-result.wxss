@@ -1,0 +1,285 @@
+.result-container {
+  min-height: 100vh;
+  padding: 30rpx;
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom)); /* 增加底部安全距离 */
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40rpx;
+}
+
+.dark-mode {
+  background: #1f1f1f;
+}
+
+/* 顶部成绩展示区 */
+.score-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30rpx;
+  padding: 40rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.score-circle {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1aad19, #2ecc71);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  box-shadow: 0 6rpx 20rpx rgba(26, 173, 25, 0.2);
+}
+
+.score-number {
+  font-size: 60rpx;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  opacity: 0.9;
+}
+
+.star-container {
+  display: flex;
+  gap: 20rpx;
+  margin: 20rpx 0;
+}
+
+.star-icon {
+  width: 80rpx;
+  height: 80rpx;
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.star-icon.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.evaluation-text {
+  font-size: 36rpx;
+  color: #333333;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 详细统计区 */
+.stats-section {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30rpx;
+}
+
+.stats-row:last-child {
+  margin-bottom: 0;
+}
+
+.stats-item {
+  flex: 1;
+  text-align: center;
+  padding: 0 10rpx;
+}
+
+.stats-value {
+  font-size: 40rpx;
+  color: #333333;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+/* 提示信息区 */
+.tips-section {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 16rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.tip-item:last-child {
+  margin-bottom: 0;
+}
+
+.tip-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 28rpx;
+  color: #333333;
+  flex: 1;
+}
+
+/* 按钮区域 */
+.button-group {
+  width: 100%;
+  display: flex;
+  gap: 12rpx;
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  border: none;
+  border-radius: 44rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  padding: 0;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn text {
+  font-size: 24rpx;
+  white-space: nowrap;
+}
+
+.retry {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.next {
+  background: linear-gradient(135deg, #1aad19, #2ecc71);
+}
+
+.back {
+  background: linear-gradient(135deg, #666666, #999999);
+}
+
+.share {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.action-btn.disabled {
+  background: linear-gradient(135deg, #cccccc, #999999);
+  opacity: 0.7;
+}
+
+.btn-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-bottom: 4rpx;
+}
+
+/* 确保图标在暗黑模式下显示正常 */
+.dark-mode .tip-icon,
+.dark-mode .btn-icon {
+  filter: brightness(0.9);
+}
+
+/* 禁用状态下的图标样式 */
+.action-btn.disabled .btn-icon {
+  opacity: 0.5;
+}
+
+/* 夜间模式样式 */
+.dark-mode .score-section,
+.dark-mode .stats-section,
+.dark-mode .tips-section {
+  background: #2d2d2d;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .evaluation-text {
+  color: #e0e0e0;
+}
+
+.dark-mode .stats-value {
+  color: #e0e0e0;
+}
+
+.dark-mode .stats-label {
+  color: #999999;
+}
+
+.dark-mode .tip-item {
+  background: #3d3d3d;
+}
+
+.dark-mode .tip-text {
+  color: #e0e0e0;
+}
+
+.dark-mode .action-btn.disabled {
+  background: linear-gradient(135deg, #3d3d3d, #2d2d2d);
+  opacity: 0.5;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.score-section,
+.stats-section,
+.tips-section,
+.button-group {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.stats-section {
+  animation-delay: 0.2s;
+}
+
+.tips-section {
+  animation-delay: 0.4s;
+}
+
+.button-group {
+  animation-delay: 0.6s;
+} 

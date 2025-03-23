@@ -1,0 +1,252 @@
+.config-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  padding: 40rpx 30rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120rpx;
+}
+
+.dark-mode {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.config-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .config-card {
+  background: rgba(45, 45, 45, 0.95);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.2);
+}
+
+.config-title {
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 40rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}
+
+.dark-mode .config-title {
+  color: #ecf0f1;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .config-row {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.config-row:last-child {
+  border-bottom: none;
+}
+
+.row-label {
+  font-size: 30rpx;
+  color: #34495e;
+  font-weight: 500;
+}
+
+.dark-mode .row-label {
+  color: #bdc3c7;
+}
+
+.input-box {
+  width: 200rpx;
+  height: 72rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 32rpx;
+  color: #2c3e50;
+  border: 2rpx solid #e0e0e0;
+  text-align: right;
+  transition: all 0.3s ease;
+}
+
+.input-box:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .input-box {
+  background: #3d3d3d;
+  color: #ecf0f1;
+  border-color: #4d4d4d;
+}
+
+.dark-mode .input-box:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.3);
+}
+
+.target-score {
+  font-size: 36rpx;
+  color: #4A90E2;
+  font-weight: 600;
+}
+
+.dark-mode .target-score {
+  color: #5A9CF2;
+}
+
+.start-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-top: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2rpx;
+  box-shadow: 0 6rpx 20rpx rgba(74, 144, 226, 0.3);
+  transition: all 0.3s ease;
+}
+
+.start-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 10rpx rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .start-btn {
+  background: linear-gradient(135deg, #5A9CF2 0%, #4580C7 100%);
+  box-shadow: 0 6rpx 20rpx rgba(90, 156, 242, 0.3);
+}
+
+/* 题库选择器样式 */
+.collection-selector {
+  width: 200rpx;
+  height: 72rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2rpx solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .collection-selector {
+  background: #3d3d3d;
+  border-color: #4d4d4d;
+}
+
+.collection-selector text {
+  font-size: 32rpx;
+  color: #2c3e50;
+}
+
+.dark-mode .collection-selector text {
+  color: #ecf0f1;
+}
+
+.arrow {
+  color: #95a5a6;
+  font-size: 26rpx;
+  transition: transform 0.3s ease;
+}
+
+/* 题库选择器浮层 */
+.collection-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.collection-picker.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.picker-content {
+  width: 85%;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.collection-picker.show .picker-content {
+  transform: translate(-50%, -50%);
+}
+
+.dark-mode .picker-content {
+  background: #2d2d2d;
+}
+
+.picker-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 36rpx;
+  letter-spacing: 1rpx;
+}
+
+.dark-mode .picker-title {
+  color: #ecf0f1;
+}
+
+.collection-list {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.collection-item {
+  height: 96rpx;
+  line-height: 96rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #34495e;
+  border-bottom: 1rpx solid #eee;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .collection-item {
+  color: #ecf0f1;
+  border-bottom-color: #3d3d3d;
+}
+
+.collection-item:active {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.collection-item.selected {
+  color: #4A90E2;
+  background: rgba(74, 144, 226, 0.1);
+  font-weight: 500;
+}
+
+.dark-mode .collection-item.selected {
+  color: #5A9CF2;
+  background: rgba(90, 156, 242, 0.15);
+} 

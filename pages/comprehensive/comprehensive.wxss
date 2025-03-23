@@ -1,0 +1,2705 @@
+/* 页面容器 */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #4A90E2 0%, #D4E9FF 30%, #E8F4FF 100%);
+}
+
+/* 暗黑模式下的背景 */
+.dark-mode.page-wrapper {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1f1f1f 30%, #151515 100%);
+}
+
+/* 页面容器 */
+.page-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 20rpx;
+}
+
+/* 用户信息区域 - 默认样式 */
+.user-section {
+  margin: 0 20rpx;
+  margin-top: calc(var(--status-bar-height) + 44px + 20rpx);
+  border-radius: 24rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  box-shadow: 0 4rpx 20rpx rgba(74, 144, 226, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* 渐变边框效果 */
+.user-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 6rpx solid transparent;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, #4A90E2, #357ABD) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+/* 不同段位的边框样式 */
+.user-section.tier-supreme::before {
+  background: linear-gradient(135deg, #8a2be2, #ffd700) border-box;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.3);
+}
+
+.user-section.tier-king::before {
+  background: linear-gradient(135deg, #ff4d4f, #ffd700) border-box;
+  box-shadow: 0 0 20rpx rgba(255, 77, 79, 0.3);
+}
+
+.user-section.tier-master::before {
+  background: linear-gradient(135deg, #722ed1, #b07feb) border-box;
+  box-shadow: 0 0 20rpx rgba(114, 46, 209, 0.3);
+}
+
+.user-section.tier-diamond::before {
+  background: linear-gradient(135deg, #1890ff, #85f4ff) border-box;
+  box-shadow: 0 0 20rpx rgba(24, 144, 255, 0.3);
+}
+
+.user-section.tier-platinum::before {
+  background: linear-gradient(135deg, #13c2c2, #a8ffff) border-box;
+  box-shadow: 0 0 20rpx rgba(19, 194, 194, 0.3);
+}
+
+.user-section.tier-gold::before {
+  background: linear-gradient(135deg, #faad14, #ffea8a) border-box;
+  box-shadow: 0 0 20rpx rgba(250, 173, 20, 0.3);
+}
+
+.user-section.tier-silver::before {
+  background: linear-gradient(135deg, #8c8c8c, #d9d9d9) border-box;
+  box-shadow: 0 0 20rpx rgba(140, 140, 140, 0.3);
+}
+
+.user-section.tier-bronze::before {
+  background: linear-gradient(135deg, #a6754b, #d5b092) border-box;
+  box-shadow: 0 0 20rpx rgba(166, 117, 75, 0.3);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .user-section::before {
+  opacity: 0.8;
+}
+
+/* 用户信息内容样式 */
+.user-info {
+  padding: 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* 用户名和签名样式优化 */
+.nickname {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 段位标签样式优化 */
+.tier-info {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.15);
+  margin-left: 12rpx;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.tier-name {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 500;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .user-section {
+  background: linear-gradient(135deg, #357ABD, #2171c7);
+}
+
+/* 用户统计信息样式 */
+.user-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  padding: 20rpx 0;
+  margin-top: 20rpx;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-value {
+  font-size: 40rpx;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+/* 签到信息样式 */
+.sign-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-basic {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.user-detail {
+  margin-left: 24rpx;
+  flex: 1;
+}
+
+.name-sign {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.sign-badge {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 4rpx 12rpx;
+}
+
+.sign-days {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+
+.sign-text {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  height: 88rpx;
+  margin: 30rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 44rpx;
+  color: #fff;
+  font-size: 28rpx;
+  transition: all 0.3s ease;
+}
+
+.login-text {
+  font-weight: 500;
+}
+
+.login-icon {
+  font-size: 32rpx;
+  opacity: 0.9;
+}
+
+.login-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* 每日目标卡片 */
+.daily-goal-card {
+  margin: 20rpx;
+  padding: 40rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.goal-header {
+  margin-bottom: 30rpx;
+}
+
+.goal-title {
+  margin-bottom: 20rpx;
+}
+
+.title-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.goal-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.goal-progress {
+  margin-top: 20rpx;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next-tier {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.progress-bar {
+  height: 12rpx;
+  background: #f0f0f0;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.progress-inner {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* 不同段位的进度条颜色 */
+.progress-inner.tier-supreme {
+  background: linear-gradient(to right, #8a2be2, #ffd700);
+}
+
+.progress-inner.tier-king {
+  background: linear-gradient(to right, #ff4d4f, #ffd700);
+}
+
+.progress-inner.tier-master {
+  background: linear-gradient(to right, #722ed1, #b07feb);
+}
+
+.progress-inner.tier-diamond {
+  background: linear-gradient(to right, #1890ff, #85f4ff);
+}
+
+.progress-inner.tier-platinum {
+  background: linear-gradient(to right, #13c2c2, #a8ffff);
+}
+
+.progress-inner.tier-gold {
+  background: linear-gradient(to right, #faad14, #ffea8a);
+}
+
+.progress-inner.tier-silver {
+  background: linear-gradient(to right, #8c8c8c, #d9d9d9);
+}
+
+.progress-inner.tier-bronze {
+  background: linear-gradient(to right, #a6754b, #d5b092);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .progress-text {
+  color: #e0e0e0;
+}
+
+.dark-mode .next-tier {
+  color: #999;
+}
+
+.dark-mode .progress-bar {
+  background: #333;
+}
+
+.goal-rewards {
+  display: flex;
+  justify-content: space-between;
+  margin: 40rpx 0;
+}
+
+.reward-item {
+  margin-bottom: 16rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  padding: 16rpx;
+  gap: 16rpx;
+}
+
+.reward-item.achieved {
+  background: #e8f5e9;
+  opacity: 1;
+}
+
+.reward-count {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.reward-points {
+  font-size: 24rpx;
+  color: #4A90E2;
+}
+
+.start-btn {
+  width: 100% !important;
+  height: auto !important;
+  padding: 24rpx 0 !important;
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+  border: none !important;
+  border-radius: 16rpx !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  color: #fff !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.start-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.start-btn.completed {
+  background: #ccc !important;
+  box-shadow: none !important;
+}
+
+.btn-text {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 4rpx;
+}
+
+.btn-desc {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+/* 排行榜卡片 */
+.ranking-card {
+  margin: 20rpx;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.ranking-info {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.ranking-preview {
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.top-three {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.rank-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+
+.rank-item:active {
+  transform: scale(0.98);
+}
+
+.rank-number {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-right: 16rpx;
+  color: #fff;
+}
+
+.rank-number.first {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  box-shadow: 0 2rpx 8rpx rgba(255, 215, 0, 0.3);
+}
+
+.rank-number.second {
+  background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+  box-shadow: 0 2rpx 8rpx rgba(192, 192, 192, 0.3);
+}
+
+.rank-number.third {
+  background: linear-gradient(135deg, #CD7F32, #8B4513);
+  box-shadow: 0 2rpx 8rpx rgba(205, 127, 50, 0.3);
+}
+
+.rank-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.rank-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.rank-name-tier {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+  min-height: 40rpx;
+  position: relative; /* 添加相对定位 */
+}
+
+.rank-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  padding-right: 100rpx; /* 为段位标签预留空间 */
+}
+
+.tier-tag {
+  font-size: 22rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  min-width: 80rpx;
+  justify-content: center;
+  position: absolute; /* 改为绝对定位 */
+  right: 0; /* 固定在右侧 */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%); /* 确保完全居中 */
+}
+
+/* 不同段位的标签样式 */
+.tier-tag.tier-supreme {
+  background: linear-gradient(135deg, #8a2be2, #ffd700);
+  min-width: 90rpx;
+  right: 0;
+}
+
+.tier-tag.tier-king {
+  background: linear-gradient(135deg, #ff4d4f, #ffd700);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-master {
+  background: linear-gradient(135deg, #722ed1, #b07feb);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-diamond {
+  background: linear-gradient(135deg, #1890ff, #85f4ff);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-platinum {
+  background: linear-gradient(135deg, #13c2c2, #a8ffff);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-gold {
+  background: linear-gradient(135deg, #faad14, #ffea8a);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-silver {
+  background: linear-gradient(135deg, #8c8c8c, #d9d9d9);
+  min-width: 80rpx;
+  right: 0;
+}
+
+.tier-tag.tier-bronze {
+  background: linear-gradient(135deg, #a6754b, #d5b092);
+  min-width: 80rpx;
+  right: 0;
+}
+
+/* 不同段位的用户名颜色 */
+.rank-name.tier-supreme-name {
+  color: #8a2be2;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+}
+
+.rank-name.tier-king-name {
+  color: #ff4d4f;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+}
+
+.rank-name.tier-master-name {
+  color: #722ed1;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+}
+
+.rank-name.tier-diamond-name {
+  color: #1890ff;
+}
+
+.rank-name.tier-platinum-name {
+  color: #13c2c2;
+}
+
+.rank-name.tier-gold-name {
+  color: #faad14;
+}
+
+.rank-name.tier-silver-name {
+  color: #8c8c8c;
+}
+
+.rank-name.tier-bronze-name {
+  color: #a6754b;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .rank-name {
+  color: #fff;
+}
+
+.dark-mode .tier-tag {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.rank-stats {
+  display: flex;
+  gap: 12rpx;
+}
+
+.rank-stats .stat-item {
+  font-size: 24rpx;
+  color: #666;
+  background: rgba(74, 144, 226, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.rank-stats .stat-item:first-child {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(74, 144, 226, 0.1));
+  font-weight: 500;
+  color: #4A90E2;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .rank-stats .stat-item {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .rank-stats .stat-item:first-child {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  color: #fff;
+}
+
+.view-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #eee;
+  color: #4A90E2;
+  font-size: 26rpx;
+}
+
+.arrow {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+/* 功能卡片 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin: 20rpx;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-card:active {
+  transform: scale(0.98);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-icon {
+  font-size: 48rpx;
+  margin-bottom: 16rpx;
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.card-stats {
+  margin-bottom: 12rpx;
+}
+
+.stats-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4A90E2;
+  margin-right: 8rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.card-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 重置和清理按钮区域 */
+.action-buttons {
+  margin: 20rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+/* 重置按钮 */
+.reset-section {
+  margin: 0;
+}
+
+.reset-btn {
+  width: 100% !important;
+  background: #ff4d4f !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12rpx !important;
+  padding: 16rpx !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-shadow: 0 2rpx 8rpx rgba(255, 77, 79, 0.2) !important;
+  transition: all 0.3s ease !important;
+  height: auto !important;
+}
+
+.reset-btn.disabled {
+  background: #999 !important;
+  opacity: 0.7;
+  box-shadow: none !important;
+}
+
+.reset-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.reset-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 4rpx;
+}
+
+.reset-desc {
+  font-size: 22rpx;
+  opacity: 0.9;
+  margin-bottom: 4rpx;
+}
+
+.reset-warning {
+  font-size: 20rpx;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+}
+
+.warning-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+/* 清理缓存按钮 */
+.clear-section {
+  margin: 0;
+}
+
+.clear-btn {
+  width: 100% !important;
+  background: #faad14 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12rpx !important;
+  padding: 16rpx !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-shadow: 0 2rpx 8rpx rgba(250, 173, 20, 0.2) !important;
+  transition: all 0.3s ease !important;
+  height: auto !important;
+}
+
+.clear-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.clear-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 4rpx;
+}
+
+.clear-desc {
+  font-size: 22rpx;
+  opacity: 0.9;
+  margin-bottom: 4rpx;
+}
+
+.clear-warning {
+  font-size: 20rpx;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .clear-btn {
+  background: #d48806 !important;
+  box-shadow: 0 2rpx 8rpx rgba(212, 136, 6, 0.2) !important;
+}
+
+/* 弹窗样式 */
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+.auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.auth-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.close-btn:active {
+  transform: scale(0.9);
+}
+
+.auth-form {
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 24rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.input {
+  width: 100%;
+  height: 88rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.2);
+}
+
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.avatar-preview {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  border: 2rpx solid #eee;
+}
+
+.upload-btn {
+  flex: 1;
+  height: 88rpx !important;
+  background: #f5f5f5 !important;
+  color: #666 !important;
+  font-size: 28rpx !important;
+  border-radius: 12rpx !important;
+  transition: all 0.3s ease !important;
+}
+
+.upload-btn:active {
+  opacity: 0.8;
+}
+
+.auth-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.confirm-btn {
+  width: 100% !important;
+  height: 88rpx !important;
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+  border-radius: 44rpx !important;
+  color: #fff !important;
+  font-size: 32rpx !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.confirm-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.switch-mode {
+  text-align: center;
+  font-size: 28rpx;
+  color: #4A90E2;
+}
+
+.forget-username {
+  text-align: right;
+  font-size: 26rpx;
+  color: #4A90E2;
+  margin-top: 8rpx;
+}
+
+.username-result {
+  margin-top: 24rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 8rpx;
+}
+
+.result-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 夜间模式样式 */
+.dark-mode {
+  background: #1a1a1a;
+}
+
+.dark-mode .user-section {
+  background: linear-gradient(135deg, #357ABD, #2171c7);
+}
+
+.dark-mode .daily-goal-card,
+.dark-mode .ranking-card,
+.dark-mode .feature-card,
+.dark-mode .auth-content {
+  background: #2d2d2d;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .title-text,
+.dark-mode .card-title,
+.dark-mode .auth-title {
+  color: #fff;
+}
+
+.dark-mode .goal-desc,
+.dark-mode .card-desc,
+.dark-mode .ranking-info,
+.dark-mode .stats-label {
+  color: #aaa;
+}
+
+.dark-mode .progress-bar {
+  background: #3d3d3d;
+}
+
+.dark-mode .reward-item {
+  background: #3d3d3d;
+}
+
+.dark-mode .reward-item.achieved {
+  background: #1b5e20;
+}
+
+.dark-mode .reward-count {
+  color: #fff;
+}
+
+.dark-mode .ranking-preview {
+  background: #3d3d3d;
+}
+
+.dark-mode .rank-item {
+  background: #2d2d2d;
+}
+
+.dark-mode .rank-name {
+  color: #fff;
+}
+
+.dark-mode .rank-stats .stat-item {
+  background: rgba(74, 144, 226, 0.2);
+  color: #aaa;
+}
+
+.dark-mode .view-more {
+  border-top-color: #3d3d3d;
+  color: #4A90E2;
+}
+
+.dark-mode .stats-number {
+  color: #4A90E2;
+}
+
+.dark-mode .input {
+  background: #3d3d3d;
+  color: #fff;
+}
+
+.dark-mode .input:focus {
+  background: #4d4d4d;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.3);
+}
+
+.dark-mode .label {
+  color: #fff;
+}
+
+.dark-mode .upload-btn {
+  background: #3d3d3d !important;
+  color: #aaa !important;
+}
+
+.dark-mode .username-result {
+  background: #3d3d3d;
+}
+
+.dark-mode .result-label {
+  color: #aaa;
+}
+
+.dark-mode .result-value {
+  color: #fff;
+}
+
+/* 添加管理员按钮样式 */
+.admin-section {
+  margin-top: 20rpx;
+  padding: 0 30rpx;
+}
+
+.admin-btn {
+  width: 100% !important;
+  height: 88rpx !important;
+  background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  font-size: 32rpx !important;
+  font-weight: bold !important;
+  box-shadow: 0 4rpx 12rpx rgba(255, 215, 0, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.admin-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.admin-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+  display: block;
+}
+
+.admin-text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 夜间模式补充 */
+.dark-mode .admin-btn {
+  background: linear-gradient(135deg, #B8860B, #DAA520) !important;
+  box-shadow: 0 4rpx 12rpx rgba(184, 134, 11, 0.3) !important;
+}
+
+/* 用户名和段位样式 */
+.nickname {
+  font-size: 36rpx;
+  color: #fff !important;
+  font-weight: 500;
+  margin-right: 16rpx;
+}
+
+/* 段位图标和名称样式 */
+.tier-info {
+  display: flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.1);
+  margin-left: 12rpx;
+}
+
+.tier-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+.tier-name {
+  font-size: 24rpx;
+  font-weight: bold;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+/* 不同段位的用户名颜色 - 提高优先级 */
+.user-basic .nickname.tier-supreme-name {
+  color: #8a2be2 !important;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+  font-weight: bold;
+}
+
+.user-basic .nickname.tier-king-name {
+  color: #ff4d4f !important;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+  font-weight: bold;
+}
+
+.user-basic .nickname.tier-master-name {
+  color: #722ed1 !important;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+  font-weight: bold;
+}
+
+.user-basic .nickname.tier-diamond-name {
+  color: #1890ff !important;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.3);
+}
+
+.user-basic .nickname.tier-platinum-name {
+  color: #13c2c2 !important;
+}
+
+.user-basic .nickname.tier-gold-name {
+  color: #faad14 !important;
+}
+
+.user-basic .nickname.tier-silver-name {
+  color: #8c8c8c !important;
+}
+
+.user-basic .nickname.tier-bronze-name {
+  color: #a6754b !important;
+}
+
+/* 不同段位的头像边框样式 - 提高优先级 */
+.user-basic.tier-supreme .avatar {
+  border: 4rpx solid #8a2be2 !important;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.5);
+}
+
+.user-basic.tier-king .avatar {
+  border: 4rpx solid #ff4d4f !important;
+  box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.5);
+}
+
+.user-basic.tier-master .avatar {
+  border: 4rpx solid #722ed1 !important;
+  box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.5);
+}
+
+.user-basic.tier-diamond .avatar {
+  border: 4rpx solid #1890ff !important;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.5);
+}
+
+.user-basic.tier-platinum .avatar {
+  border: 4rpx solid #13c2c2 !important;
+  box-shadow: 0 0 10rpx rgba(19, 194, 194, 0.4);
+}
+
+.user-basic.tier-gold .avatar {
+  border: 4rpx solid #faad14 !important;
+  box-shadow: 0 0 10rpx rgba(250, 173, 20, 0.4);
+}
+
+.user-basic.tier-silver .avatar {
+  border: 4rpx solid #8c8c8c !important;
+  box-shadow: 0 0 8rpx rgba(140, 140, 140, 0.4);
+}
+
+.user-basic.tier-bronze .avatar {
+  border: 4rpx solid #a6754b !important;
+  box-shadow: 0 0 8rpx rgba(166, 117, 75, 0.4);
+}
+
+/* 暗黑模式下的头像边框发光效果 - 提高优先级 */
+.dark-mode .user-basic.tier-supreme .avatar,
+.dark-mode .user-basic.tier-king .avatar,
+.dark-mode .user-basic.tier-master .avatar,
+.dark-mode .user-basic.tier-diamond .avatar,
+.dark-mode .user-basic.tier-platinum .avatar,
+.dark-mode .user-basic.tier-gold .avatar,
+.dark-mode .user-basic.tier-silver .avatar,
+.dark-mode .user-basic.tier-bronze .avatar {
+  box-shadow: 0 0 20rpx currentColor;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .nickname {
+  color: #fff;
+}
+
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-supreme-name,
+.dark-mode .tier-king-name,
+.dark-mode .tier-master-name,
+.dark-mode .tier-diamond-name,
+.dark-mode .tier-platinum-name,
+.dark-mode .tier-gold-name,
+.dark-mode .tier-silver-name,
+.dark-mode .tier-bronze-name {
+  opacity: 0.9;
+  text-shadow: 0 0 8rpx currentColor;
+}
+
+/* 不同段位的头像边框样式 */
+.tier-supreme .avatar {
+  border: 4rpx solid #8a2be2;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.5);
+}
+
+.tier-king .avatar {
+  border: 4rpx solid #ff4d4f;
+  box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.5);
+}
+
+.tier-master .avatar {
+  border: 4rpx solid #722ed1;
+  box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.5);
+}
+
+.tier-diamond .avatar {
+  border: 4rpx solid #1890ff;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.5);
+}
+
+.tier-platinum .avatar {
+  border: 4rpx solid #13c2c2;
+  box-shadow: 0 0 10rpx rgba(19, 194, 194, 0.4);
+}
+
+.tier-gold .avatar {
+  border: 4rpx solid #faad14;
+  box-shadow: 0 0 10rpx rgba(250, 173, 20, 0.4);
+}
+
+.tier-silver .avatar {
+  border: 4rpx solid #8c8c8c;
+  box-shadow: 0 0 8rpx rgba(140, 140, 140, 0.4);
+}
+
+.tier-bronze .avatar {
+  border: 4rpx solid #a6754b;
+  box-shadow: 0 0 8rpx rgba(166, 117, 75, 0.4);
+}
+
+/* 暗黑模式下的头像边框样式 */
+.dark-mode .tier-supreme .avatar,
+.dark-mode .tier-king .avatar,
+.dark-mode .tier-master .avatar,
+.dark-mode .tier-diamond .avatar,
+.dark-mode .tier-platinum .avatar,
+.dark-mode .tier-gold .avatar,
+.dark-mode .tier-silver .avatar,
+.dark-mode .tier-bronze .avatar {
+  box-shadow: 0 0 20rpx currentColor;
+}
+
+/* 段位卡片样式 */
+.tier-info {
+  display: flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.1);
+  margin-left: 12rpx;
+}
+
+/* 不同段位的卡片样式 */
+.tier-supreme.tier-info {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 215, 0, 0.2));
+  border: 2rpx solid rgba(138, 43, 226, 0.5);
+  box-shadow: 0 0 10rpx rgba(138, 43, 226, 0.3);
+}
+
+.tier-king.tier-info {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 215, 0, 0.2));
+  border: 1rpx solid rgba(255, 77, 79, 0.3);
+  box-shadow: 0 0 8rpx rgba(255, 77, 79, 0.3);
+}
+
+.tier-master.tier-info {
+  background: linear-gradient(135deg, rgba(114, 46, 209, 0.2), rgba(176, 127, 235, 0.2));
+  border: 1rpx solid rgba(114, 46, 209, 0.3);
+  box-shadow: 0 0 8rpx rgba(114, 46, 209, 0.3);
+}
+
+.tier-diamond.tier-info {
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.2), rgba(133, 244, 255, 0.2));
+  border: 1rpx solid rgba(24, 144, 255, 0.3);
+  box-shadow: 0 0 8rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum.tier-info {
+  background: linear-gradient(135deg, rgba(19, 194, 194, 0.2), rgba(168, 255, 255, 0.2));
+  border: 1rpx solid rgba(19, 194, 194, 0.3);
+  box-shadow: 0 0 6rpx rgba(19, 194, 194, 0.3);
+}
+
+.tier-gold.tier-info {
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.2), rgba(255, 234, 138, 0.2));
+  border: 1rpx solid rgba(250, 173, 20, 0.3);
+  box-shadow: 0 0 6rpx rgba(250, 173, 20, 0.3);
+}
+
+.tier-silver.tier-info {
+  background: linear-gradient(135deg, rgba(140, 140, 140, 0.2), rgba(217, 217, 217, 0.2));
+  border: 1rpx solid rgba(140, 140, 140, 0.3);
+  box-shadow: 0 0 4rpx rgba(140, 140, 140, 0.3);
+}
+
+.tier-bronze.tier-info {
+  background: linear-gradient(135deg, rgba(166, 117, 75, 0.2), rgba(213, 176, 146, 0.2));
+  border: 1rpx solid rgba(166, 117, 75, 0.3);
+  box-shadow: 0 0 4rpx rgba(166, 117, 75, 0.3);
+}
+
+/* 段位名称样式 */
+.tier-supreme .tier-name {
+  color: #8a2be2;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.5);
+  font-weight: bold;
+}
+
+.tier-king .tier-name {
+  color: #ff4d4f;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.5);
+  font-weight: bold;
+}
+
+.tier-master .tier-name {
+  color: #722ed1;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.5);
+  font-weight: bold;
+}
+
+.tier-diamond .tier-name {
+  color: #1890ff;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.5);
+}
+
+.tier-platinum .tier-name {
+  color: #13c2c2;
+}
+
+.tier-gold .tier-name {
+  color: #faad14;
+}
+
+.tier-silver .tier-name {
+  color: #8c8c8c;
+}
+
+.tier-bronze .tier-name {
+  color: #a6754b;
+}
+
+/* 暗黑模式下的段位卡片样式 */
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-supreme.tier-info,
+.dark-mode .tier-king.tier-info,
+.dark-mode .tier-master.tier-info,
+.dark-mode .tier-diamond.tier-info,
+.dark-mode .tier-platinum.tier-info,
+.dark-mode .tier-gold.tier-info,
+.dark-mode .tier-silver.tier-info,
+.dark-mode .tier-bronze.tier-info {
+  box-shadow: 0 0 12rpx currentColor;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .tier-supreme .tier-name,
+.dark-mode .tier-king .tier-name,
+.dark-mode .tier-master .tier-name,
+.dark-mode .tier-diamond .tier-name,
+.dark-mode .tier-platinum .tier-name,
+.dark-mode .tier-gold .tier-name,
+.dark-mode .tier-silver .tier-name,
+.dark-mode .tier-bronze .tier-name {
+  text-shadow: 0 0 8rpx currentColor;
+  opacity: 0.9;
+}
+
+/* 积分规则样式 */
+.tier-points-rules {
+  margin: 30rpx 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.rule-item {
+  padding: 20rpx;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.rule-item .tier-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.rule-item .points-rule {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 不同段位的样式 */
+.rule-item.tier-supreme {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 215, 0, 0.1));
+  border: 1rpx solid rgba(138, 43, 226, 0.2);
+}
+
+.rule-item.tier-supreme .tier-name {
+  color: #8a2be2;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+}
+
+.rule-item.tier-king {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.1), rgba(255, 215, 0, 0.1));
+  border: 1rpx solid rgba(255, 77, 79, 0.2);
+}
+
+.rule-item.tier-king .tier-name {
+  color: #ff4d4f;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+}
+
+.rule-item.tier-master {
+  background: linear-gradient(135deg, rgba(114, 46, 209, 0.1), rgba(176, 127, 235, 0.1));
+  border: 1rpx solid rgba(114, 46, 209, 0.2);
+}
+
+.rule-item.tier-master .tier-name {
+  color: #722ed1;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+}
+
+.rule-item.tier-diamond {
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.1), rgba(133, 244, 255, 0.1));
+  border: 1rpx solid rgba(24, 144, 255, 0.2);
+}
+
+.rule-item.tier-diamond .tier-name {
+  color: #1890ff;
+}
+
+.rule-item.tier-platinum {
+  background: linear-gradient(135deg, rgba(19, 194, 194, 0.1), rgba(168, 255, 255, 0.1));
+  border: 1rpx solid rgba(19, 194, 194, 0.2);
+}
+
+.rule-item.tier-platinum .tier-name {
+  color: #13c2c2;
+}
+
+.rule-item.tier-gold {
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.1), rgba(255, 234, 138, 0.1));
+  border: 1rpx solid rgba(250, 173, 20, 0.2);
+}
+
+.rule-item.tier-gold .tier-name {
+  color: #faad14;
+}
+
+.rule-item.tier-silver {
+  background: linear-gradient(135deg, rgba(140, 140, 140, 0.1), rgba(217, 217, 217, 0.1));
+  border: 1rpx solid rgba(140, 140, 140, 0.2);
+}
+
+.rule-item.tier-silver .tier-name {
+  color: #8c8c8c;
+}
+
+.rule-item.tier-bronze {
+  background: linear-gradient(135deg, rgba(166, 117, 75, 0.1), rgba(213, 176, 146, 0.1));
+  border: 1rpx solid rgba(166, 117, 75, 0.2);
+}
+
+.rule-item.tier-bronze .tier-name {
+  color: #a6754b;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .rule-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .rule-item .points-rule {
+  color: #999;
+}
+
+.dark-mode .rule-item.tier-supreme,
+.dark-mode .rule-item.tier-king,
+.dark-mode .rule-item.tier-master,
+.dark-mode .rule-item.tier-diamond,
+.dark-mode .rule-item.tier-platinum,
+.dark-mode .rule-item.tier-gold,
+.dark-mode .rule-item.tier-silver,
+.dark-mode .rule-item.tier-bronze {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .rule-item .tier-name {
+  text-shadow: 0 0 8rpx currentColor;
+  opacity: 0.9;
+}
+
+/* 规则和奖励按钮样式 */
+.rules-btn,
+.reward-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  /* 增加内边距使按钮更大 */
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 30rpx;
+  margin-left: 16rpx;
+  cursor: pointer;
+  position: relative;
+  /* 添加相对定位以支持小红点定位 */
+}
+
+.rules-text,
+.reward-text {
+  font-size: 28rpx;
+  /* 增加字体大小 */
+  color: #4A90E2;
+}
+
+.rules-icon,
+.reward-icon {
+  font-size: 28rpx;
+  /* 增加图标大小 */
+  color: #4A90E2;
+  margin-left: 8rpx;
+  /* 增加间距 */
+  transition: transform 0.3s ease;
+}
+
+/* 添加小红点样式 */
+.red-dot {
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #ff4d4f;
+  border-radius: 50%;
+  border: 2rpx solid #fff;
+  box-shadow: 0 0 4rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 暗黑模式下小红点的边框颜色 */
+.dark-mode .red-dot {
+  border-color: #1a1a1a;
+}
+
+.rules-btn:active .rules-icon,
+.reward-btn:active .reward-icon {
+  transform: translateX(4rpx);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .rules-btn,
+.dark-mode .reward-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .rules-text,
+.dark-mode .rules-icon,
+.dark-mode .reward-text,
+.dark-mode .reward-icon {
+  color: #85a5ff;
+}
+
+/* 规则弹窗样式 */
+.rules-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.rules-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rules-content {
+  width: 90%;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  position: relative;
+  transform: translateY(30rpx);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.rules-modal.show .rules-content {
+  transform: translateY(0);
+}
+
+.rules-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.rules-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #999;
+  padding: 10rpx;
+  cursor: pointer;
+}
+
+/* 注销账号按钮样式 */
+.logout-section {
+  margin: 40rpx 20rpx 60rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.logout-btn {
+  position: relative;
+  width: 90%;
+  background: #2d2d2d;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.logout-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(255, 59, 48, 0.2);
+  transition: width 0.1s linear;
+}
+
+.logout-text {
+  position: relative;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff3b30;
+  margin-bottom: 8rpx;
+  z-index: 1;
+}
+
+.logout-warning {
+  position: relative;
+  font-size: 24rpx;
+  color: rgba(255, 59, 48, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  z-index: 1;
+}
+
+.logout-warning .warning-icon {
+  width: 28rpx;
+  height: 28rpx;
+  filter: invert(40%) sepia(89%) saturate(2674%) hue-rotate(338deg) brightness(100%) contrast(119%);
+}
+
+.logout-btn.pressing {
+  background: #3d3d3d;
+}
+
+/* 深色模式适配 */
+.dark-mode .logout-btn {
+  background: #1a1a1a;
+}
+
+.dark-mode .logout-btn.pressing {
+  background: #2a2a2a;
+}
+
+.dark-mode .logout-progress {
+  background: rgba(255, 59, 48, 0.15);
+}
+
+/* 自定义导航栏 */
+.nav-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10rpx;
+}
+
+.nav-bar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.nav-title {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 编辑按钮样式 */
+.edit-btn {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  margin-left: 20rpx;
+}
+
+.edit-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.edit-icon {
+  font-size: 36rpx;
+  color: #fff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 编辑弹窗样式 */
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.edit-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.edit-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  transform: translateY(20rpx);
+  transition: all 0.3s ease;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+.edit-modal.show .edit-content {
+  transform: translateY(0);
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.edit-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 48rpx;
+  color: #999;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.edit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.avatar-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.current-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  border: 4rpx solid #f0f0f0;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.change-avatar-btn {
+  font-size: 28rpx;
+  color: #4A90E2;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.change-avatar-btn::after {
+  display: none;
+}
+
+.edit-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.edit-input {
+  height: 80rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.save-btn {
+  height: 88rpx;
+  background: #4A90E2;
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.save-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .edit-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .edit-title {
+  color: #fff;
+}
+
+.dark-mode .edit-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .edit-input {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dark-mode .current-avatar {
+  border-color: #1a1a1a;
+}
+
+/* 签到日历样式 */
+.calendar-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.calendar-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.calendar-content {
+  width: 90%;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  transform: translateY(30rpx);
+  transition: transform 0.3s ease;
+}
+
+.calendar-modal.show .calendar-content {
+  transform: translateY(0);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.calendar-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.month-header {
+  text-align: center;
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.weekday-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8rpx;
+}
+
+.day-item {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 28rpx;
+  color: #333;
+  border-radius: 8rpx;
+}
+
+.day-item.other-month {
+  color: #ccc;
+}
+
+.day-item.today {
+  background: rgba(74, 144, 226, 0.1);
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.day-item.signed {
+  color: #fff;
+  background: #4A90E2;
+}
+
+.sign-mark {
+  position: absolute;
+  bottom: 6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.sign-in-footer {
+  margin-top: 30rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sign-in-info {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.sign-in-btn {
+  width: 200rpx !important;
+  height: 72rpx !important;
+  background: #4A90E2 !important;
+  color: #fff !important;
+  font-size: 28rpx !important;
+  border-radius: 36rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.sign-in-btn.signed {
+  background: #ccc !important;
+}
+
+.sign-in-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .calendar-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .calendar-header {
+  border-bottom-color: #444;
+}
+
+.dark-mode .calendar-title,
+.dark-mode .month-header {
+  color: #fff;
+}
+
+.dark-mode .weekday-header {
+  color: #999;
+}
+
+.dark-mode .day-item {
+  color: #fff;
+}
+
+.dark-mode .day-item.other-month {
+  color: #666;
+}
+
+.dark-mode .day-item.today {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .sign-in-footer {
+  border-top-color: #444;
+}
+
+.dark-mode .sign-in-info {
+  color: #999;
+}
+
+/* 分隔线样式 */
+.stat-divider {
+  width: 2rpx;
+  height: 40rpx;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 20rpx;
+}
+
+/* 奖励弹窗样式优化 */
+.reward-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.reward-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reward-content {
+  width: 85%;
+  max-height: 75vh;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.reward-modal.show .reward-content {
+  transform: scale(1);
+}
+
+.reward-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.reward-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  padding: 10rpx;
+  color: #999;
+  font-size: 40rpx;
+  line-height: 1;
+}
+
+.reward-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20rpx;
+}
+
+.reward-list::-webkit-scrollbar {
+  display: none;
+}
+
+.reward-item {
+  margin-bottom: 16rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  padding: 16rpx;
+  gap: 16rpx;
+}
+
+.reward-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.reward-name-points {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.reward-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400rpx;
+  flex: 1;
+}
+
+.reward-points {
+  font-size: 24rpx;
+  color: #4A90E2;
+  background: rgba(74, 144, 226, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.reward-conditions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8rpx;
+  flex-shrink: 0;
+}
+
+.reward-conditions text {
+  font-size: 22rpx;
+  color: #666;
+  background: #f8f9fa;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  white-space: nowrap;
+}
+
+.collect-btn {
+  width: 80rpx !important;
+  height: 44rpx !important;
+  background: #4A90E2;
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22rpx;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  padding: 0 12rpx;
+  white-space: nowrap;
+  /* 防止文字换行 */
+  overflow: hidden;
+  /* 超出部分隐藏 */
+  text-overflow: ellipsis;
+  /* 超出显示省略号 */
+}
+
+.collect-btn.disabled {
+  background: #cccccc !important;
+  color: #ffffff !important;
+  opacity: 0.8;
+}
+
+/* 已领取状态 */
+.collect-btn.collected {
+  background: #52c41a;
+  color: #fff;
+  opacity: 0.8;
+}
+
+/* 条件未满足状态 */
+.collect-btn.disabled {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.collect-btn:active {
+  opacity: 0.8;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .collect-btn.collected {
+  background: #389e0d;
+  opacity: 0.8;
+}
+
+.dark-mode .collect-btn.disabled {
+  background: #2d2d2d;
+  color: #666;
+}
+
+.no-reward {
+  padding: 60rpx 40rpx;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .reward-content {
+  background: #1a1a1a;
+}
+
+.dark-mode .reward-header {
+  background: #1a1a1a;
+  border-bottom-color: #333;
+}
+
+.dark-mode .reward-title {
+  color: #fff;
+}
+
+.dark-mode .reward-item {
+  background: #2d2d2d;
+  border-color: #333;
+}
+
+.dark-mode .reward-name {
+  color: #fff;
+}
+
+.dark-mode .reward-points {
+  background: rgba(74, 144, 226, 0.15);
+}
+
+.dark-mode .reward-conditions text {
+  background: rgba(255, 255, 255, 0.05);
+  color: #999;
+}
+
+.dark-mode .collect-btn.disabled {
+  background: #2d2d2d;
+  color: #666;
+}
+
+.dark-mode .collect-btn.collected {
+  background: #389e0d;
+}
+
+.dark-mode .no-reward {
+  color: #666;
+}
+
+/* 账号管理按钮样式 */
+.account-management-section {
+  margin: 30rpx;
+  padding: 0 20rpx;
+}
+
+.account-management-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #ff6b6b, #ff4757);
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 107, 0.3);
+}
+
+.account-management-text {
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.account-management-icon {
+  color: #ffffff;
+  font-size: 36rpx;
+}
+
+/* 账号管理弹窗样式 */
+.account-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.account-content {
+  width: 80%;
+  max-width: 600rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.account-modal.show .account-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+.account-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #999999;
+  padding: 10rpx;
+}
+
+.account-options {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.account-option {
+  padding: 30rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.account-option:active {
+  background: #f0f0f0;
+}
+
+.account-option.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.option-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.option-desc {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.option-warning {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #eeeeee;
+}
+
+.warning-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.option-warning text {
+  font-size: 24rpx;
+  color: #ff6b6b;
+}
+
+.account-option.logout {
+  background: #fff5f5;
+}
+
+.account-option.logout .option-title {
+  color: #ff4757;
+}
+
+.account-option.logout .option-warning {
+  border-top-color: #ffe0e0;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .account-content {
+  background: #1a1a1a;
+}
+
+.dark-mode .account-header {
+  border-bottom-color: #333;
+}
+
+.dark-mode .account-title {
+  color: #ffffff;
+}
+
+.dark-mode .close-btn {
+  color: #666666;
+}
+
+.dark-mode .account-option {
+  background: #2d2d2d;
+}
+
+.dark-mode .account-option:active {
+  background: #333333;
+}
+
+.dark-mode .option-title {
+  color: #ffffff;
+}
+
+.dark-mode .option-desc {
+  color: #999999;
+}
+
+.dark-mode .option-warning {
+  border-top-color: #333;
+}
+
+.dark-mode .option-warning text {
+  color: #ff6b6b;
+}
+
+.dark-mode .account-option.logout {
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.dark-mode .account-option.logout .option-warning {
+  border-top-color: rgba(255, 71, 87, 0.2);
+}

@@ -1,0 +1,68 @@
+<!-- ai-chat.wxml -->
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+    <!-- 设置按钮 -->
+    <view class="settings-btn" bindtap="showSettings">
+        <image src="{{darkMode ? iconBaseUrl + '/settings-light.png' : iconBaseUrl + '/settings-dark.png'}}" mode="aspectFit"></image>
+    </view>
+    <!-- 设置面板 -->
+    <view class="settings-panel {{showSettings ? 'show' : ''}}" catchtap="hideSettings">
+        <view class="settings-content" catchtap="stopPropagation">
+            <view class="settings-item" bindtap="toggleDarkMode">
+                <text>夜间模式</text>
+                <view class="switch {{darkMode ? 'active' : ''}}">
+                    <view class="switch-handle"></view>
+                </view>
+            </view>
+            <view class="settings-item" bindtap="clearHistory">
+                <text>清除聊天记录</text>
+            </view>
+        </view>
+    </view>
+    <!-- 聊天消息列表 -->
+    <scroll-view class="chat-list" scroll-y scroll-into-view="{{scrollToMessage}}" enhanced show-scrollbar="{{false}}">
+        <view class="message-list">
+            <!-- 消息列表 -->
+            <view wx:for="{{messages}}" wx:key="id" class="message {{item.type}}" id="msg-{{item.id}}">
+                <view class="message-wrapper">
+                    <view class="avatar">
+                        <image src="{{item.type === 'user' ? userAvatar : aiAvatar}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="content-wrapper">
+                        <view class="sender-name">{{item.type === 'user' ? '我' : aiName}}</view>
+                        <view class="content">
+                            <text user-select>{{item.content}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 加载中动画 -->
+            <view class="message ai" wx:if="{{loading}}">
+                <view class="message-wrapper">
+                    <view class="avatar">
+                        <image src="{{aiAvatar}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="content-wrapper">
+                        <view class="sender-name">{{aiName}}</view>
+                        <view class="content thinking">
+                            <view class="typing-indicator">
+                                <view class="dot"></view>
+                                <view class="dot"></view>
+                                <view class="dot"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <!-- 输入区域 -->
+    <view class="input-area {{darkMode ? 'dark' : ''}}">
+        <view class="input-box">
+            <textarea class="chat-input" value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMessage" bindkeyboardheightchange="onKeyboardHeightChange" confirm-type="send" confirm-hold="{{false}}" cursor-spacing="20" placeholder="输入您的问题..." placeholder-class="placeholder" auto-height maxlength="500" disabled="{{loading}}" show-confirm-bar="{{false}}" adjust-position="{{false}}"></textarea>
+            <view class="send-btn {{inputValue ? 'active' : ''}}" hover-class="{{inputValue ? 'btn-hover' : ''}}" bindtap="{{inputValue ? 'sendMessage' : ''}}">
+                <text>发送</text>
+            </view>
+        </view>
+        <view class="safe-area"></view>
+    </view>
+</view>

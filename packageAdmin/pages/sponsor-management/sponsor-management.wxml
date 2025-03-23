@@ -1,0 +1,77 @@
+<view class="sponsor-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部操作栏 -->
+  <view class="header">
+    <text class="title">赞助者管理</text>
+    <view class="add-btn" bindtap="showAddModal">
+      <text>添加赞助者</text>
+    </view>
+  </view>
+
+  <!-- 赞助者列表 -->
+  <view class="sponsor-list" wx:if="{{sponsors.length > 0}}">
+    <view class="sponsor-item" wx:for="{{sponsors}}" wx:key="_id">
+      <view class="sponsor-info">
+        <text class="sponsor-name">{{item.name || '匿名用户'}}</text>
+        <text class="sponsor-count">支持{{item.count || 1}}次</text>
+        <text class="sponsor-remark" wx:if="{{item.remark}}">备注：{{item.remark}}</text>
+        <text class="sponsor-time">{{item._createTime}}</text>
+      </view>
+      <view class="sponsor-actions">
+        <view class="action-btn edit" bindtap="showEditModal" 
+              data-id="{{item._id}}" 
+              data-name="{{item.name}}"
+              data-count="{{item.count}}"
+              data-remark="{{item.remark}}">
+          <text>编辑</text>
+        </view>
+        <view class="action-btn delete" bindtap="deleteSponsor" data-id="{{item._id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="no-data" wx:else>
+    <text>暂无赞助者数据</text>
+  </view>
+
+  <!-- 添加/编辑弹窗 -->
+  <view class="modal" wx:if="{{showModal}}" bindtap="hideModal">
+    <view class="modal-content" catchtap="preventBubble">
+      <view class="modal-header">
+        <text class="modal-title">{{isEdit ? '编辑赞助者' : '添加赞助者'}}</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-item">
+          <text class="label">微信昵称</text>
+          <input class="user-input" 
+                 type="text" 
+                 placeholder="请输入微信昵称" 
+                 value="{{currentSponsor.name}}"
+                 bindinput="onNameInput"/>
+        </view>
+        <view class="input-item">
+          <text class="label">支持次数</text>
+          <input class="user-input" 
+                 type="number" 
+                 placeholder="请输入支持次数" 
+                 value="{{currentSponsor.count}}"
+                 bindinput="onCountInput"/>
+        </view>
+        <view class="input-item">
+          <text class="label">备注信息</text>
+          <input class="user-input" 
+                 type="text" 
+                 placeholder="请输入备注信息（选填）" 
+                 value="{{currentSponsor.remark}}"
+                 bindinput="onRemarkInput"/>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="hideModal">取消</button>
+        <button class="modal-btn confirm" bindtap="confirmSponsor">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

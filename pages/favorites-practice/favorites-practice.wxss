@@ -1,0 +1,299 @@
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 220rpx;
+}
+
+.progress-bar {
+  padding: 20rpx;
+  text-align: center;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.content-scroll {
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.question-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.question-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+  line-height: 1.6;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.option-item {
+  width: 100% !important;
+  padding: 20rpx !important;
+  font-size: 28rpx !important;
+  text-align: left !important;
+  background: #fff !important;
+  border: 2rpx solid #e0e0e0 !important;
+  border-radius: 8rpx !important;
+  min-height: unset !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.option-text {
+  word-break: break-all;
+  white-space: pre-wrap;
+  color: #333;
+}
+
+.answer-result {
+  margin-top: 30rpx;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.result-text {
+  font-size: 28rpx;
+}
+
+.correct-text {
+  color: #4caf50;
+}
+
+.wrong-text {
+  color: #ff4d4f;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 20rpx 60rpx;
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.button-row {
+  display: flex;
+  gap: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.nav-btn {
+  flex: 1;
+  font-size: 26rpx !important;
+  padding: 0 !important;
+  height: 64rpx !important;
+  line-height: 64rpx !important;
+  background: #f5f5f5 !important;
+  color: #333 !important;
+  border: none !important;
+}
+
+.remove-btn {
+  width: 100% !important;
+  font-size: 26rpx !important;
+  height: 64rpx !important;
+  line-height: 64rpx !important;
+  background: linear-gradient(to right, #ff4d4f, #ff7875) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 32rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+.remove-btn::after {
+  content: '点击可取消收藏此题';
+  position: absolute;
+  bottom: -40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22rpx;
+  color: #999;
+  width: 100%;
+  text-align: center;
+}
+
+/* 夜间模式下的提示文字颜色 */
+.dark-mode .remove-btn::after {
+  color: #666;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 60rpx;
+  text-align: center;
+}
+
+.empty-message {
+  font-size: 36rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.empty-sub-message {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f;
+}
+
+.dark-mode .progress-bar,
+.dark-mode .question-card,
+.dark-mode .footer {
+  background: #2d2d2d;
+}
+
+.dark-mode .progress-text {
+  color: #aaa;
+}
+
+.dark-mode .question-title {
+  color: #fff;
+}
+
+.dark-mode .option-item {
+  background: #3d3d3d !important;
+  border-color: #4d4d4d !important;
+}
+
+.dark-mode .option-text {
+  color: #fff;
+}
+
+.dark-mode .nav-btn {
+  background: #3d3d3d !important;
+  color: #fff !important;
+}
+
+.dark-mode .empty-message {
+  color: #fff;
+}
+
+.dark-mode .empty-sub-message {
+  color: #aaa;
+}
+
+/* 添加云端操作按钮样式 */
+.header-actions {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx !important;
+  padding: 0 30rpx !important;
+  border: none !important;
+  border-radius: 40rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 28rpx !important;
+  color: #fff !important;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.action-btn.upload {
+  background: linear-gradient(135deg, #4a90e2, #357ABD) !important;
+}
+
+.action-btn.delete {
+  background: linear-gradient(135deg, #ff4d4f, #cf1322) !important;
+}
+
+.action-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.btn-text {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+/* 修改按钮组样式 */
+.button-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  padding: 20rpx;
+}
+
+.cloud-btn {
+  flex: 1;
+  min-width: 200rpx;
+  height: 88rpx !important;
+  padding: 0 30rpx !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.cloud-btn.restore {
+  background: linear-gradient(135deg, #13c2c2, #08979c) !important;
+  box-shadow: 0 4rpx 12rpx rgba(19, 194, 194, 0.2) !important;
+}
+
+.cloud-btn.delete {
+  background: linear-gradient(135deg, #ff4d4f, #cf1322) !important;
+  box-shadow: 0 4rpx 12rpx rgba(255, 77, 79, 0.2) !important;
+}
+
+.cloud-btn.upload {
+  background: linear-gradient(135deg, #4a90e2, #357ABD) !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 夜间模式适配 */
+.dark-mode .header-actions {
+  background: #2d2d2d;
+}
+
+.dark-mode .action-btn {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2) !important;
+} 

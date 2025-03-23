@@ -1,0 +1,64 @@
+<!--pages/qq-groups/qq-groups.wxml-->
+<view class="qq-groups-page">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav">
+    <view class="nav-content">
+      <view class="back-btn" bindtap="goBack">
+        <view class="back-arrow"></view>
+      </view>
+      <view class="nav-title">QQ交流群</view>
+    </view>
+  </view>
+
+  <!-- 加载中状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- QQ群列表 -->
+  <view class="groups-list" wx:else>
+    <view class="subtitle">加入QQ群与大家一起交流学习</view>
+    <block wx:if="{{groups.length > 0}}">
+      <view class="group-item" wx:for="{{groups}}" wx:key="_id">
+        <view class="group-header">
+          <text class="group-name">{{item.name}}</text>
+          <button class="copy-btn" bindtap="copyGroupNumber" data-number="{{item.number}}">复制群号</button>
+        </view>
+        
+        <view class="group-content">
+          <view class="group-info">
+            <view class="group-number">
+              <text class="label">群号：</text>
+              <text class="number">{{item.number}}</text>
+            </view>
+            <text class="group-desc" wx:if="{{item.description}}">{{item.description}}</text>
+          </view>
+          
+          <view class="qrcode-container" wx:if="{{item.qrcode}}">
+            <image 
+              class="qrcode" 
+              src="{{item.qrcode}}" 
+              mode="aspectFit"
+              bindtap="previewQRCode"
+              bindlongpress="saveQRCode"
+              data-url="{{item.qrcode}}"
+            ></image>
+            <text class="qrcode-tip">点击查看大图</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <text>暂无QQ群信息</text>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer">
+    <text class="footer-text">进群请备注：小程序用户</text>
+    <text class="footer-text">遇到问题可以在群里交流讨论</text>
+  </view>
+</view> 

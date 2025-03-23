@@ -1,0 +1,69 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+/* 夜间模式全局样式 */
+page.dark-mode {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.dark-mode {
+  background-color: #1f1f1f !important;
+  color: #fff !important;
+}
+
+.dark-mode .section {
+  background: #2d2d2d !important;
+}
+
+.dark-mode .card,
+.dark-mode .paper-card,
+.dark-mode .question-card {
+  background: #2d2d2d !important;
+  color: #fff !important;
+}
+
+.dark-mode .title,
+.dark-mode .paper-title,
+.dark-mode .question-title {
+  color: #fff !important;
+}
+
+.dark-mode .subtitle,
+.dark-mode .paper-description,
+.dark-mode .option-text {
+  color: #aaa !important;
+}
+
+.dark-mode .stat-item {
+  background: #3d3d3d !important;
+  color: #aaa !important;
+}
+
+.dark-mode .option-item {
+  background: #2d2d2d !important;
+  border-color: #3d3d3d !important;
+  color: #fff !important;
+}
+
+.dark-mode .progress-bar,
+.dark-mode .footer {
+  background: #2d2d2d !important;
+}
+
+.dark-mode .progress-text {
+  color: #aaa !important;
+}
+
+.dark-mode .nav-btn {
+  background: #3d3d3d !important;
+  color: #fff !important;
+}

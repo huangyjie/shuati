@@ -1,0 +1,423 @@
+/* pages/practice/practice.wxss */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #4A90E2 0%, #D4E9FF 30%, #E8F4FF 100%);
+}
+
+/* 自定义导航栏 */
+.nav-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10rpx;
+}
+
+.nav-bar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.nav-title {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  padding: 240rpx 20rpx 0;
+  /* 合并 padding 设置，保持顶部内边距 */
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: transparent;
+}
+
+/* 深色模式下的背景 */
+.dark-mode.page-wrapper {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1f1f1f 30%, #151515 100%);
+}
+
+.login-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20rpx;
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: calc(100% - 40rpx);
+  transition: all 0.3s ease;
+}
+
+.tip-icon {
+  width: 32rpx;
+  height: 32rpx;
+  display: block;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.exam-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.exam-card.completed {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.exam-title {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.exam-badge {
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.badge-text {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.exam-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.stat-value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 40rpx;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.exam-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.info-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 16rpx;
+  display: block;
+  flex-shrink: 0;
+}
+
+.info-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.start-btn {
+  width: 100% !important;
+  height: 88rpx !important;
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  color: #fff !important;
+  font-size: 32rpx !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8rpx !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.start-btn.completed-btn {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+}
+
+.start-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.btn-text {
+  font-weight: 500;
+}
+
+.btn-icon {
+  width: 28rpx;
+  height: 28rpx;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.start-btn:active .btn-icon {
+  transform: translateX(4rpx);
+}
+
+/* 夜间模式样式 */
+.dark-mode .login-tip {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .tip-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode .exam-card {
+  background: rgba(45, 45, 45, 0.9);
+}
+
+.dark-mode .exam-card.completed {
+  background: rgba(45, 45, 45, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .exam-title {
+  color: #e0e0e0;
+}
+
+.dark-mode .exam-stats {
+  background: rgba(45, 45, 45, 0.5);
+}
+
+.dark-mode .stat-label {
+  color: #aaa;
+}
+
+.dark-mode .stat-value {
+  color: #e0e0e0;
+}
+
+.dark-mode .stat-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .exam-info {
+  background: rgba(45, 45, 45, 0.5);
+}
+
+.dark-mode .info-text {
+  color: #aaa;
+}
+
+.dark-mode .start-btn {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+  box-shadow: 0 4rpx 12rpx rgba(53, 122, 189, 0.3) !important;
+}
+
+.dark-mode .start-btn.completed-btn {
+  background: linear-gradient(135deg, #2171c7, #1a5c9e) !important;
+}
+
+/* 统计信息栏样式 */
+.stats-container {
+  width: 100%;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+  /* 减小上边距，因为container已经有足够空间 */
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.stats-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.stats-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4A90E2;
+  line-height: 1;
+}
+
+.stats-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.stats-divider {
+  width: 2rpx;
+  height: 100rpx;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0 30rpx;
+}
+
+.progress-bar {
+  width: 160rpx;
+  height: 8rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.remaining {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+/* 深色模式样式 */
+.dark-mode .stats-card {
+  background: rgba(45, 45, 45, 0.9);
+}
+
+.dark-mode .stats-number {
+  color: #4A90E2;
+}
+
+.dark-mode .stats-label {
+  color: #aaa;
+}
+
+.dark-mode .stats-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 悬浮定位按钮样式 */
+.float-locate-btn {
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  background: linear-gradient(135deg, #4A90E2, #357ABD);
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 16rpx rgba(74, 144, 226, 0.3);
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.float-locate-btn:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}
+
+.float-locate-btn .locate-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 8rpx;
+}
+
+.float-locate-btn .locate-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 深色模式下的悬浮定位按钮样式 */
+.dark-mode .float-locate-btn {
+  background: linear-gradient(135deg, #357ABD, #2171c7);
+  box-shadow: 0 4rpx 16rpx rgba(53, 122, 189, 0.4);
+}

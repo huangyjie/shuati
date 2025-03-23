@@ -1,0 +1,55 @@
+<view class="admin-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">管理员后台</text>
+  </view>
+
+  <!-- 功能导航按钮 -->
+  <view class="nav-grid">
+    <view class="nav-item" bindtap="navigateTo" data-page="statistics">
+      <image class="nav-icon" src="{{iconBaseUrl}}/statistics.png" mode="aspectFit"/>
+      <text class="nav-text">数据统计</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="users">
+      <image class="nav-icon" src="{{iconBaseUrl}}/users.png" mode="aspectFit"/>
+      <text class="nav-text">用户管理</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="developers">
+      <image class="nav-icon" src="{{iconBaseUrl}}/developers.png" mode="aspectFit"/>
+      <text class="nav-text">开发者管理</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="illegal_accounts">
+      <image class="nav-icon" src="{{iconBaseUrl}}/warning.png" mode="aspectFit"/>
+      <text class="nav-text">违规账号</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="qq_groups">
+      <image class="nav-icon" src="{{iconBaseUrl}}/qq.png" mode="aspectFit"/>
+      <text class="nav-text">QQ群管理</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="sponsors">
+      <image class="nav-icon" src="{{iconBaseUrl}}/sponsor.png" mode="aspectFit"/>
+      <text class="nav-text">赞助者管理</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="resources">
+      <image class="nav-icon" src="{{iconBaseUrl}}/resource.png" mode="aspectFit"/>
+      <text class="nav-text">资源管理</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="rewards">
+      <image class="nav-icon" src="{{iconBaseUrl}}/reward.png" mode="aspectFit"/>
+      <text class="nav-text">奖励发放</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="settings">
+      <image class="nav-icon" src="{{iconBaseUrl}}/settings.png" mode="aspectFit"/>
+      <text class="nav-text">系统设置</text>
+    </view>
+    <view class="nav-item" bindtap="navigateTo" data-page="logs">
+      <image class="nav-icon" src="{{iconBaseUrl}}/logs.png" mode="aspectFit"/>
+      <text class="nav-text">日志管理</text>
+    </view>
+  </view>
+
+  <!-- 欢迎信息 -->
+  <view class="welcome-card">
+    <text class="welcome-title">欢迎回来，管理员</text>
+    <text class="welcome-subtitle">请选择要管理的功能模块</text>
+  </view>
+</view> 

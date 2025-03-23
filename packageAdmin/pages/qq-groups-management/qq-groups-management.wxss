@@ -1,0 +1,401 @@
+/* packageAdmin/pages/qq-groups-management/qq-groups-management.wxss */
+.qq-groups-management {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 24rpx;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #fff;
+  font-size: 28rpx;
+  padding: 12rpx 32rpx;
+  border-radius: 30rpx;
+  border: none;
+  line-height: 1.5;
+  box-shadow: 0 2rpx 8rpx rgba(74, 144, 226, 0.3);
+}
+
+.add-btn::after {
+  display: none;
+}
+
+.groups-list {
+  margin-bottom: 32rpx;
+}
+
+.group-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.group-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.group-number {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.group-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+.group-qrcode {
+  text-align: center;
+  margin: 16rpx 0;
+}
+
+.qrcode-preview {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+}
+
+.group-order {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+.group-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid #f0f2f5;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  border: none;
+  line-height: 1.5;
+}
+
+.action-btn::after {
+  display: none;
+}
+
+.action-btn.edit {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #fff;
+}
+
+.action-btn.delete {
+  background: linear-gradient(135deg, #ff4d4f 0%, #cf1322 100%);
+  color: #fff;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 85%;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 24rpx;
+  border-bottom: 2rpx solid #f0f2f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 40rpx;
+  color: #999;
+  padding: 0 20rpx;
+}
+
+.modal-body {
+  padding: 24rpx;
+  max-height: calc(80vh - 200rpx);
+  overflow-y: auto;
+}
+
+.input-item {
+  margin-bottom: 24rpx;
+}
+
+.input-item .label {
+  display: block;
+  margin-bottom: 12rpx;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.user-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid #e8e8e8;
+}
+
+.user-textarea {
+  width: 100%;
+  height: 160rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.4;
+  border: 2rpx solid #e8e8e8;
+}
+
+.upload-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #4A90E2;
+  border: 2rpx dashed #e8e8e8;
+  margin-bottom: 16rpx;
+}
+
+.modal-footer {
+  padding: 24rpx;
+  border-top: 2rpx solid #f0f2f5;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+}
+
+.modal-btn {
+  font-size: 28rpx;
+  padding: 12rpx 40rpx;
+  border-radius: 30rpx;
+  border: none;
+  line-height: 1.5;
+}
+
+.modal-btn::after {
+  display: none;
+}
+
+.modal-btn.cancel {
+  background: #f0f2f5;
+  color: #666;
+}
+
+.modal-btn.confirm {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #fff;
+}
+
+/* 深色模式样式 */
+.dark-mode {
+  background: #1a1a1a;
+}
+
+.dark-mode .title {
+  color: #fff;
+}
+
+.dark-mode .add-btn {
+  background: linear-gradient(135deg, #357ABD 0%, #1a4a85 100%);
+}
+
+.dark-mode .group-item {
+  background: #2d2d2d;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .group-name {
+  color: #fff;
+}
+
+.dark-mode .group-number,
+.dark-mode .group-desc {
+  color: #999;
+}
+
+.dark-mode .group-order {
+  color: #666;
+}
+
+.dark-mode .group-actions {
+  border-color: #3d3d3d;
+}
+
+.dark-mode .action-btn.edit {
+  background: linear-gradient(135deg, #357ABD 0%, #1a4a85 100%);
+}
+
+.dark-mode .action-btn.delete {
+  background: linear-gradient(135deg, #cf1322 0%, #a8071a 100%);
+}
+
+.dark-mode .modal-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .modal-header {
+  border-color: #3d3d3d;
+}
+
+.dark-mode .modal-title {
+  color: #fff;
+}
+
+.dark-mode .close-btn {
+  color: #666;
+}
+
+.dark-mode .input-item .label {
+  color: #fff;
+}
+
+.dark-mode .user-input,
+.dark-mode .user-textarea {
+  background: #1f1f1f;
+  border-color: #3d3d3d;
+  color: #fff;
+}
+
+.dark-mode .upload-btn {
+  background: #1f1f1f;
+  border-color: #3d3d3d;
+  color: #4A90E2;
+}
+
+.dark-mode .modal-footer {
+  border-color: #3d3d3d;
+}
+
+.dark-mode .modal-btn.cancel {
+  background: #1f1f1f;
+  color: #999;
+}
+
+.dark-mode .modal-btn.confirm {
+  background: linear-gradient(135deg, #357ABD 0%, #1a4a85 100%);
+}
+
+.qrcode-options {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.qrcode-options .option {
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.qrcode-options .option.active {
+  background: #4A90E2;
+  color: #fff;
+}
+
+.tips {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  text-align: center;
+}
+
+.preview-section {
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+.qrcode-preview {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+  margin: 10rpx auto;
+}
+
+.preview-tip {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 深色模式样式 */
+.dark-mode .qrcode-options .option {
+  background: #2d2d2d;
+  color: #999;
+}
+
+.dark-mode .qrcode-options .option.active {
+  background: #4A90E2;
+  color: #fff;
+}
+
+.dark-mode .tips,
+.dark-mode .preview-tip {
+  color: #666;
+} 

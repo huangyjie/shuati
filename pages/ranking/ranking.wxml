@@ -1,0 +1,279 @@
+<view class="ranking-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="ranking-header">
+    <view class="title-wrapper">
+      <text class="subtitle">{{rankType === 'score' ? '考试排行' : rankType === 'count' ? '刷题数量' : rankType === 'points' ? '积分榜' : '答题质量'}}</text>
+    </view>
+    
+    <view class="rank-type-buttons">
+      <text class="type-btn {{rankType === 'comprehensive' ? 'active' : ''}}" 
+            data-type="comprehensive" bindtap="changeRankType">综合榜</text>
+      <text class="type-btn {{rankType === 'points' ? 'active' : ''}}" 
+            data-type="points" bindtap="changeRankType">积分榜</text>
+      <text class="type-btn {{rankType === 'score' ? 'active' : ''}}" 
+            data-type="score" bindtap="changeRankType">考试榜</text>
+      <text class="type-btn {{rankType === 'count' ? 'active' : ''}}" 
+            data-type="count" bindtap="changeRankType">刷题数量</text>
+      <text class="type-btn {{rankType === 'quality' ? 'active' : ''}}" 
+            data-type="quality" bindtap="changeRankType">答题质量</text>
+      <text class="type-btn {{rankType === 'signIn' ? 'active' : ''}}" 
+            data-type="signIn" bindtap="changeRankType">签到榜</text>
+    </view>
+  </view>
+
+  <view class="ranking-list">
+    <block wx:if="{{rankingList.length > 0}}">
+      <view class="ranking-item {{item._openid === myOpenId ? 'my-rank' : ''}}" 
+            wx:for="{{rankingList}}" 
+            wx:key="_id"
+            bindtap="showRankDetail"
+            data-index="{{index}}">
+        <view class="rank-info">
+          <view class="rank-number {{item.rank <= 3 ? 'top-' + item.rank : ''}}">{{item.rank}}</view>
+          <view class="avatar-wrapper {{item.rank <= 3 ? 'top-' + item.rank : ''}}">
+            <block wx:if="{{item.rank === 1}}">
+              <view class="crown-effect">
+                <view class="crown"></view>
+              </view>
+              <view class="first-place-halo"></view>
+            </block>
+            <block wx:elif="{{item.rank === 2}}">
+              <view class="second-place-effect"></view>
+            </block>
+            <block wx:elif="{{item.rank === 3}}">
+              <view class="third-place-effect"></view>
+            </block>
+            <image class="user-avatar {{item.rank <= 3 ? 'top-' + item.rank : ''}}" 
+                   src="{{item.avatarUrl}}" 
+                   mode="aspectFill"></image>
+          </view>
+        </view>
+        
+        <view class="user-info">
+          <text class="user-name {{item.tierClass ? item.tierClass + '-name' : ''}}">{{item.nickName}}</text>
+          <view class="user-stats">
+            <block wx:if="{{rankType === 'score'}}">
+              <view class="score-info">
+                <text class="score-value">{{item.score}}</text>
+                <text class="score-max">/150分</text>
+                <text class="exam-time">{{item.submitTime}}</text>
+              </view>
+              <view class="exam-rate">
+                <view class="rate-progress">
+                  <view class="rate-bar" style="width: {{item.correctRate}}%"></view>
+                </view>
+                <text class="rate-text">{{item.correctRate}}%</text>
+              </view>
+            </block>
+            <block wx:elif="{{rankType === 'count'}}">
+              <view class="stats-wrapper">
+                <text class="stat-item questions">{{item.totalQuestions}}<text class="stat-label">题</text></text>
+                <view class="accuracy-wrapper">
+                  <view class="accuracy-info">
+                    <text class="accuracy-level {{utils.getRateClass(item.correctRate)}}">{{utils.getRateLevel(item.correctRate)}}</text>
+                    <text class="accuracy-rate {{utils.getRateClass(item.correctRate)}}">
+                      正确率 {{item.correctRate}}%
+                    </text>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <block wx:elif="{{rankType === 'points'}}">
+              <view class="stats-wrapper">
+                <view class="tier-info {{item.tierClass}}">
+
+                  <text class="tier-name">{{item.tier}}</text>
+                </view>
+                <text class="stat-item points">{{item.points}}<text class="stat-label">积分</text></text>
+              </view>
+            </block>
+            <block wx:elif="{{rankType === 'signIn'}}">
+              <view class="stats-wrapper">
+                <view class="sign-in-info">
+                  <text class="stat-item sign-in">{{item.signInDays || 0}}<text class="stat-label">天</text></text>
+                  <text class="consecutive-days">连续{{item.consecutiveDays || 0}}天</text>
+                  <text class="sign-points">{{(item.signInDays || 0) * 5}}积分</text>
+                </view>
+              </view>
+            </block>
+            <block wx:elif="{{rankType === 'comprehensive'}}">
+              <view class="stats-wrapper">
+                <view class="tier-info {{item.tierClass}}">
+                  
+                  <text class="tier-name">{{item.tier}}</text>
+                </view>
+                <view class="comprehensive-score">
+                  <text class="score-value">{{item.comprehensiveScore}}</text>
+                  <text class="score-label">综合分</text>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="quality-info">
+                <text class="stat-item quality">{{item.correctRate}}<text class="stat-label">%</text></text>
+                <text class="total-count">共答题{{item.totalQuestions}}道</text>
+              </view>
+            </block>
+          </view>
+        </view>
+        
+        <view class="detail-icon">
+          <text class="cuIcon-right"></text>
+        </view>
+      </view>
+    </block>
+    
+    <view class="empty-tip" wx:else>
+      <image class="empty-icon" src="{{iconBaseUrl}}/empty.png" mode="aspectFit"></image>
+      <text>暂无排行数据</text>
+    </view>
+  </view>
+
+  <view class="rank-detail-modal {{showRankDetails ? 'show' : ''}}" bindtap="closeRankDetail">
+    <view class="rank-detail-content" catchtap="preventBubble">
+      <view class="detail-header">
+        <image class="detail-avatar {{selectedRank.rank <= 3 ? 'top-' + selectedRank.rank : ''}}" 
+               src="{{selectedRank.avatarUrl}}" 
+               mode="aspectFill"></image>
+        <text class="detail-name">{{selectedRank.nickName}}</text>
+        <text class="detail-rank">第 {{selectedRank.rank}} 名</text>
+      </view>
+      
+      <view class="detail-stats">
+        <block wx:if="{{rankType === 'score'}}">
+          <view class="exam-detail-stats">
+            <view class="exam-stat-item">
+              <text class="stat-title">考试得分</text>
+              <view class="stat-value score">{{selectedRank.score}}/150</view>
+            </view>
+            <view class="exam-stat-item">
+              <text class="stat-title">正确率</text>
+              <view class="stat-value rate">{{selectedRank.correctRate}}%</view>
+            </view>
+            <view class="exam-stat-item">
+              <text class="stat-title">答题数</text>
+              <view class="stat-value">{{selectedRank.answeredCount}}题</view>
+            </view>
+            <view class="exam-stat-item">
+              <text class="stat-title">提交时间</text>
+              <view class="stat-value time">{{selectedRank.submitTime}}</view>
+            </view>
+          </view>
+        </block>
+        
+        <block wx:elif="{{rankType === 'count'}}">
+          <view class="detail-item">
+            <text class="detail-label">总刷题数</text>
+            <text class="detail-value questions">{{selectedRank.totalQuestions}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">正确题数</text>
+            <text class="detail-value">{{selectedRank.correctQuestions}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">正确率</text>
+            <text class="detail-value {{utils.getRateClass(selectedRank.correctRate)}}">
+              {{selectedRank.correctRate}}%
+            </text>
+          </view>
+        </block>
+        
+        <block wx:elif="{{rankType === 'points'}}">
+          <view class="detail-item">
+            <text class="detail-label">总积分</text>
+            <text class="detail-value points">{{selectedRank.points || 0}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">签到积分</text>
+            <text class="detail-value">{{selectedRank.signInPoints || 0}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">答题积分</text>
+            <text class="detail-value">{{selectedRank.examPoints || 0}}</text>
+          </view>
+        </block>
+        
+        <block wx:elif="{{rankType === 'signIn'}}">
+          <view class="detail-item">
+            <text class="detail-label">总签到天数</text>
+            <text class="detail-value sign-in">{{selectedRank.signInDays}}天</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">连续签到</text>
+            <text class="detail-value">{{selectedRank.consecutiveDays}}天</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">签到积分</text>
+            <text class="detail-value">{{selectedRank.signInDays * 5}}分</text>
+          </view>
+        </block>
+        
+        <block wx:elif="{{rankType === 'comprehensive'}}">
+          <view class="detail-item">
+            <text class="detail-label">综合得分</text>
+            <text class="detail-value comprehensive">{{selectedRank.comprehensiveScore}}分</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">积分评分</text>
+            <text class="detail-value">{{selectedRank.normalizedPoints}}分 (权重40%)</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">刷题评分</text>
+            <text class="detail-value">{{selectedRank.normalizedQuestions}}分 (权重30%)</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">正确率评分</text>
+            <text class="detail-value">{{selectedRank.correctRate}}分 (权重30%)</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">总积分</text>
+            <text class="detail-value points">{{selectedRank.points}}分</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">总刷题数</text>
+            <text class="detail-value">{{selectedRank.totalQuestions}}题</text>
+          </view>
+        </block>
+        
+        <block wx:else>
+          <view class="detail-item">
+            <text class="detail-label">正确率</text>
+            <text class="detail-value quality">{{selectedRank.correctRate}}%</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">总答题数</text>
+            <text class="detail-value">{{selectedRank.totalQuestions}}题</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">正确题数</text>
+            <text class="detail-value">{{selectedRank.correctQuestions}}题</text>
+          </view>
+        </block>
+      </view>
+      
+      <view class="close-btn" bindtap="closeRankDetail">关闭</view>
+    </view>
+  </view>
+</view>
+
+<wxs module="utils">
+  function getRateClass(rate) {
+    if (rate >= 90) return 'rate-excellent';
+    if (rate >= 80) return 'rate-great';
+    if (rate >= 70) return 'rate-good';
+    if (rate >= 60) return 'rate-normal';
+    return 'rate-low';
+  }
+
+  function getRateLevel(rate) {
+    if (rate >= 90) return '优秀';
+    if (rate >= 80) return '良好';
+    if (rate >= 70) return '中等';
+    if (rate >= 60) return '及格';
+    return '待提高';
+  }
+
+  module.exports = {
+    getRateClass: getRateClass,
+    getRateLevel: getRateLevel
+  };
+</wxs> 

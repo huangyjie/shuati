@@ -1,0 +1,101 @@
+<view class="chat-room {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 添加设置按钮 -->
+  <view class="settings-btn" wx:if="{{isAdmin}}" bindtap="showSettings">
+    <image class="settings-icon" src="https://api.hsbogk.icu/mini-programs/images/settings.png" mode="aspectFit"></image>
+  </view>
+  <!-- 消息列表容器 -->
+  <scroll-view class="message-list" scroll-y scroll-into-view="{{lastMessageId}}" bindscrolltoupper="loadMoreMessages" bindscroll="onScroll" enhanced show-scrollbar="{{false}}" scroll-anchoring="{{true}}" scroll-with-animation="{{true}}">
+    <!-- 加载更多提示 -->
+    <view class="loading-more" wx:if="{{isLoading}}">
+      <text>加载中...</text>
+    </view>
+    <!-- 消息内容 -->
+    <block wx:for="{{messages}}" wx:key="_id">
+      <view class="message-item {{item.userId === userInfo._id ? 'self' : ''}}" id="msg-{{item._id}}" bindlongpress="showMessageMenu" data-message="{{item}}" wx:if="{{!item.isRecalled}}">
+        <!-- 用户信息区域 -->
+        <view class="message-header">
+          <view class="user-info {{item.tierInfo.tierClass}}">
+            <text class="message-nickname {{item.tierInfo.tierClass}}-name">
+              {{item.userNickname}}
+            </text>
+            <view class="tier-info {{item.tierInfo.tierClass}}">
+              <text class="tier-name">{{item.tierInfo.tier}}</text>
+            </view>
+            <text class="message-time">{{item.createTime}}</text>
+          </view>
+        </view>
+        <!-- 消息主体 -->
+        <view class="message-body">
+          <view class="avatar-container {{item.tierInfo.tierClass}}">
+            <image class="avatar" src="{{item.userAvatar || defaultAvatar}}" mode="aspectFill"></image>
+          </view>
+          <view class="message-content">
+            <!-- 回复消息 -->
+            <view class="reply-content" wx:if="{{item.replyTo}}">
+              <text class="reply-nickname">回复 {{item.replyTo.userNickname}}</text>
+              <text class="reply-text">{{item.replyTo.content}}</text>
+            </view>
+            <!-- 普通消息气泡 -->
+            <view wx:if="{{!item.messageType || item.messageType === 'text'}}" class="message-bubble {{item.tierInfo.tierClass}} {{item.isRecalled ? 'recalled' : ''}}">
+              <text user-select>{{item.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 底部占位，确保最后一条消息不被输入框遮挡 -->
+    <view class="message-list-bottom-space"></view>
+  </scroll-view>
+  <!-- 回到底部按钮 -->
+  <view class="go-bottom-btn {{!scrollToBottom ? 'show' : ''}}" bindtap="goToBottom">
+    <text class="go-bottom-text">新消息</text>
+  </view>
+  <!-- 输入区域 -->
+  <view class="input-area-container">
+    <view class="input-area">
+      <!-- 回复提示 -->
+      <view class="reply-preview" wx:if="{{replyTo}}">
+        <view class="reply-info">
+          <text class="reply-label">回复</text>
+          <text class="reply-name">{{replyTo.userNickname}}</text>
+          <text class="reply-content">{{replyTo.content}}</text>
+        </view>
+        <view class="close-reply" bindtap="cancelReply">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="input-box">
+        <input class="message-input" value="{{inputMessage}}" bindinput="onInputChange" bindconfirm="sendMessage" placeholder="{{replyTo ? '回复消息...' : '说点什么吧...'}}" confirm-type="send" cursor-spacing="20" disabled="{{isSending}}" adjust-position="{{false}}" hold-keyboard="{{true}}" />
+        <view class="send-btn {{inputMessage.trim() ? 'active' : ''}} {{isSending ? 'disabled' : ''}}" bindtap="sendMessage">
+          <text>{{isSending ? '发送中...' : '发送'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 设置模态框 -->
+  <view class="settings-modal {{showSettingModal ? 'show' : ''}}" wx:if="{{showSettingModal}}">
+    <view class="settings-content">
+      <view class="settings-header">
+        <text class="title">聊天室设置</text>
+        <text class="close" bindtap="hideSettings">×</text>
+      </view>
+      <view class="settings-body">
+        <view class="settings-item">
+          <text class="settings-label">全体禁言</text>
+          <switch checked="{{isMuted}}" bindchange="toggleMute" color="#4A90E2" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 消息操作菜单 -->
+  <view class="message-menu" wx:if="{{showMenu}}" style="top: {{menuPosition.y}}px; left: {{menuPosition.x}}px">
+    <view class="menu-item reply" wx:if="{{selectedMessage.userId !== userInfo._id}}" bindtap="replyMessage">
+      <text>回复</text>
+    </view>
+    <view class="menu-item recall" wx:if="{{(selectedMessage.userId === userInfo._id || isAdmin) && !selectedMessage.isRecalled}}" bindtap="recallMessage">
+      <text>{{isAdmin && selectedMessage.userId !== userInfo._id ? '管理员撤回' : '撤回'}}</text>
+    </view>
+  </view>
+  <!-- 遮罩层 -->
+  <view class="mask" wx:if="{{showMenu || showRedPacketModal}}" bindtap="{{showMenu ? 'hideMessageMenu' : 'hideRedPacketDialog'}}"></view>
+</view>

@@ -1,0 +1,1342 @@
+/* pages/chat-room/chat-room.wxss */
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f5f5f5;
+  position: relative;
+}
+
+/* 消息列表容器 */
+.message-container {
+  flex: 1;
+  position: relative;
+  height: calc(100vh - 120rpx - env(safe-area-inset-bottom));
+  /* 减去输入框高度和安全区域 */
+  overflow: hidden;
+}
+
+/* 消息列表 */
+.message-list {
+  height: 100vh;
+  padding: 20rpx;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+  /* 为输入框预留空间 */
+  box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* 增加 iOS 滚动惯性 */
+}
+
+.loading-more {
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.loading-more text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.message-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24rpx;
+  padding: 0 10rpx;
+}
+
+.message-item .message-header {
+  margin-top: 16rpx;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 8rpx;
+}
+
+.message-item.self .message-header {
+  flex-direction: row-reverse;
+}
+
+.message-time {
+  display: none;
+}
+
+.self .message-time {
+  display: none;
+}
+
+.message-nickname {
+  font-size: 28rpx;
+  color: #666;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-body {
+  display: flex;
+  align-items: flex-start;
+  padding: 4rpx 20rpx;
+}
+
+.message-item .message-header+.message-body {
+  margin-top: 8rpx;
+}
+
+.message-item.self .message-body {
+  flex-direction: row-reverse;
+}
+
+.message-item.self .message-header+.message-body {
+  padding-right: 0;
+}
+
+.avatar-container {
+  width: 80rpx;
+  height: 80rpx;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #e0e0e0;
+}
+
+.message-content {
+  position: relative;
+  padding: 16rpx 24rpx;
+  border-radius: 18rpx;
+  max-width: 100%;
+  word-break: break-all;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.message-bubble {
+  position: relative;
+  padding: 16rpx 24rpx;
+  border-radius: 18rpx;
+  max-width: 100%;
+  word-break: break-all;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 其他人的消息气泡小角 */
+.message-bubble::before {
+  content: '';
+  position: absolute;
+  left: -8rpx;
+  top: 20rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: inherit;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* 自己发送的消息气泡小角 */
+.self .message-bubble::before {
+  left: auto;
+  right: -8rpx;
+  top: 20rpx;
+  background: inherit;
+}
+
+/* 移除默认的消息气泡样式 */
+.message-bubble:not(.self) {
+  background: none;
+  color: inherit;
+}
+
+.self .message-bubble {
+  background: none;
+  color: inherit;
+}
+
+.message-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.self .message-time {
+  text-align: right;
+}
+
+.input-area {
+  padding: 20rpx 24rpx;
+  background: #fff;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 8rpx 12rpx;
+  box-shadow: inset 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.input-box:focus-within {
+  background: #fff;
+  box-shadow: 0 2rpx 12rpx rgba(74, 144, 226, 0.15);
+  border: 2rpx solid rgba(74, 144, 226, 0.3);
+}
+
+.message-input {
+  flex: 1;
+  height: 76rpx;
+  font-size: 30rpx;
+  padding: 0 24rpx;
+  background: transparent;
+}
+
+.send-btn {
+  min-width: 120rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32rpx;
+  background: #e0e0e0;
+  margin-left: 16rpx;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  transform: scale(0.95);
+  padding: 0 24rpx;
+}
+
+.send-btn text {
+  font-size: 28rpx;
+  color: #999;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* 激活状态 - 有输入内容时 */
+.send-btn.active {
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.3);
+}
+
+.send-btn.active text {
+  color: #ffffff !important;
+}
+
+/* 点击效果 */
+.send-btn.active:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+  box-shadow: 0 2rpx 8rpx rgba(74, 144, 226, 0.2);
+}
+
+/* 深色模式适配 */
+.dark-mode .send-btn {
+  background: #3d3d3d;
+}
+
+.dark-mode .send-btn text {
+  color: #888;
+}
+
+.dark-mode .send-btn.active {
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+}
+
+.dark-mode .send-btn.active text {
+  color: #ffffff !important;
+}
+
+/* 消息菜单样式优化 */
+.message-menu {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1rpx solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 4rpx;
+}
+
+.menu-item {
+  min-width: 140rpx;
+  padding: 16rpx 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 12rpx;
+  margin: 4rpx;
+}
+
+.menu-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -4rpx;
+  top: 20%;
+  height: 60%;
+  width: 1rpx;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:active {
+  background: rgba(74, 144, 226, 0.1);
+  transform: scale(0.98);
+}
+
+/* 撤回按钮特殊样式 */
+.menu-item.recall {
+  color: #ff4d4f;
+}
+
+.menu-item.recall:active {
+  background: rgba(255, 77, 79, 0.1);
+}
+
+/* 回复按钮特殊样式 */
+.menu-item.reply {
+  color: #4A90E2;
+}
+
+.menu-item.reply:active {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+/* 遮罩层样式优化 */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* 深色模式适配 */
+.dark-mode .message-menu {
+  background: rgba(45, 45, 45, 0.98);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .menu-item {
+  color: #fff;
+}
+
+.dark-mode .menu-item:not(:last-child)::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .menu-item:active {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .menu-item.recall {
+  color: #ff7875;
+}
+
+.dark-mode .menu-item.recall:active {
+  background: rgba(255, 77, 79, 0.2);
+}
+
+.dark-mode .menu-item.reply {
+  color: #69c0ff;
+}
+
+.dark-mode .menu-item.reply:active {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+/* 撤回消息样式 */
+.message-bubble.recalled {
+  background: #f5f5f5 !important;
+}
+
+.message-bubble.recalled text {
+  color: #999 !important;
+  font-style: italic;
+}
+
+/* 深色模式样式 */
+.dark-mode .message-menu {
+  background: #2d2d2d;
+}
+
+.dark-mode .menu-item {
+  color: #fff;
+  border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .menu-item:active {
+  background: #3d3d3d;
+}
+
+.dark-mode .message-bubble.recalled {
+  background: #3d3d3d !important;
+}
+
+.dark-mode .message-bubble.recalled text {
+  color: #888 !important;
+}
+
+/* 回复消息样式 */
+.reply-content {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  font-size: 24rpx;
+}
+
+.reply-nickname {
+  color: #4A90E2;
+  margin-right: 10rpx;
+}
+
+.reply-text {
+  color: #666;
+  display: block;
+  margin-top: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+/* 回复预览样式 */
+.reply-preview {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 16rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.reply-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.reply-label {
+  color: #999;
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+
+.reply-name {
+  color: #4A90E2;
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+
+.reply-content {
+  color: #666;
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.close-reply {
+  padding: 0 10rpx;
+}
+
+.close-reply text {
+  color: #999;
+  font-size: 32rpx;
+}
+
+/* 深色模式样式 */
+.dark-mode .reply-content {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .reply-text {
+  color: #aaa;
+}
+
+.dark-mode .reply-preview {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .reply-label,
+.dark-mode .close-reply text {
+  color: #888;
+}
+
+.dark-mode .reply-content {
+  color: #aaa;
+}
+
+/* 修改菜单样式，支持多个选项 */
+.menu-item {
+  min-width: 160rpx;
+  text-align: center;
+}
+
+/* 深色模式样式 */
+.dark-mode .message-time {
+  color: #888;
+}
+
+.dark-mode .message-nickname {
+  color: #aaa;
+}
+
+/* 用户信息布局优化 */
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}
+
+.message-nickname {
+  font-size: 28rpx;
+  font-weight: 500;
+  margin-right: 8rpx;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: auto;
+}
+
+/* 消息气泡优化 */
+.message-bubble {
+  position: relative;
+  padding: 16rpx 24rpx;
+  border-radius: 18rpx;
+  max-width: 100%;
+  word-break: break-all;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.self .message-bubble {
+  background: #4A90E2;
+  color: #fff;
+}
+
+.message-bubble:not(.self) {
+  background: #fff;
+  color: #333;
+}
+
+/* 深色模式适配 */
+.dark-mode .message-bubble:not(.self) {
+  background: #2d2d2d;
+  color: #fff;
+}
+
+/* 连续消息样式 */
+.message-item:not(:first-child) {
+  margin-top: 4rpx;
+}
+
+/* 当有用户信息时的间距 */
+.message-item .message-header+.message-body {
+  margin-top: 8rpx;
+}
+
+/* 自己发送的消息样式 */
+.message-item.self .message-content {
+  margin: 0 12rpx;
+}
+
+.message-item.self .message-header {
+  flex-direction: row-reverse;
+}
+
+.message-item.self .message-body {
+  flex-direction: row-reverse;
+}
+
+.message-item.self .user-info {
+  flex-direction: row-reverse;
+}
+
+/* 添加段位样式 */
+/* 用户名和段位样式 */
+.message-nickname {
+  font-size: 28rpx;
+  font-weight: 500;
+  margin-right: 8rpx;
+}
+
+/* 不同段位的用户名颜色 */
+.tier-supreme-name {
+  color: #8a2be2 !important;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+  font-weight: bold;
+}
+
+.tier-king-name {
+  color: #ff4d4f !important;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+  font-weight: bold;
+}
+
+.tier-master-name {
+  color: #722ed1 !important;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+  font-weight: bold;
+}
+
+.tier-diamond-name {
+  color: #1890ff !important;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum-name {
+  color: #13c2c2 !important;
+}
+
+.tier-gold-name {
+  color: #faad14 !important;
+}
+
+.tier-silver-name {
+  color: #8c8c8c !important;
+}
+
+.tier-bronze-name {
+  color: #a6754b !important;
+}
+
+/* 段位图标和名称样式 */
+.tier-info {
+  display: flex;
+  align-items: center;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.1);
+  margin-left: 8rpx;
+}
+
+.tier-name {
+  font-size: 24rpx;
+  font-weight: bold;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+/* 不同段位的头像边框样式 */
+.avatar-container.tier-supreme .avatar {
+  border: 4rpx solid #8a2be2;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.5);
+}
+
+.avatar-container.tier-king .avatar {
+  border: 4rpx solid #ff4d4f;
+  box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.5);
+}
+
+.avatar-container.tier-master .avatar {
+  border: 4rpx solid #722ed1;
+  box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.5);
+}
+
+.avatar-container.tier-diamond .avatar {
+  border: 4rpx solid #1890ff;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.5);
+}
+
+.avatar-container.tier-platinum .avatar {
+  border: 4rpx solid #13c2c2;
+  box-shadow: 0 0 10rpx rgba(19, 194, 194, 0.4);
+}
+
+.avatar-container.tier-gold .avatar {
+  border: 4rpx solid #faad14;
+  box-shadow: 0 0 10rpx rgba(250, 173, 20, 0.4);
+}
+
+.avatar-container.tier-silver .avatar {
+  border: 4rpx solid #8c8c8c;
+  box-shadow: 0 0 8rpx rgba(140, 140, 140, 0.4);
+}
+
+.avatar-container.tier-bronze .avatar {
+  border: 4rpx solid #a6754b;
+  box-shadow: 0 0 8rpx rgba(166, 117, 75, 0.4);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-name {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode .avatar-container.tier-supreme .avatar,
+.dark-mode .avatar-container.tier-king .avatar,
+.dark-mode .avatar-container.tier-master .avatar,
+.dark-mode .avatar-container.tier-diamond .avatar,
+.dark-mode .avatar-container.tier-platinum .avatar,
+.dark-mode .avatar-container.tier-gold .avatar,
+.dark-mode .avatar-container.tier-silver .avatar,
+.dark-mode .avatar-container.tier-bronze .avatar {
+  box-shadow: 0 0 20rpx currentColor;
+}
+
+/* 不同段位的卡片样式 */
+.tier-supreme.tier-info {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 215, 0, 0.2));
+  border: 2rpx solid rgba(138, 43, 226, 0.5);
+  box-shadow: 0 0 10rpx rgba(138, 43, 226, 0.3);
+}
+
+.tier-king.tier-info {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 215, 0, 0.2));
+  border: 1rpx solid rgba(255, 77, 79, 0.3);
+  box-shadow: 0 0 8rpx rgba(255, 77, 79, 0.3);
+}
+
+.tier-master.tier-info {
+  background: linear-gradient(135deg, rgba(114, 46, 209, 0.2), rgba(176, 127, 235, 0.2));
+  border: 1rpx solid rgba(114, 46, 209, 0.3);
+  box-shadow: 0 0 8rpx rgba(114, 46, 209, 0.3);
+}
+
+.tier-diamond.tier-info {
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.2), rgba(133, 244, 255, 0.2));
+  border: 1rpx solid rgba(24, 144, 255, 0.3);
+  box-shadow: 0 0 8rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum.tier-info {
+  background: linear-gradient(135deg, rgba(19, 194, 194, 0.2), rgba(168, 255, 255, 0.2));
+  border: 1rpx solid rgba(19, 194, 194, 0.3);
+  box-shadow: 0 0 6rpx rgba(19, 194, 194, 0.3);
+}
+
+.tier-gold.tier-info {
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.2), rgba(255, 234, 138, 0.2));
+  border: 1rpx solid rgba(250, 173, 20, 0.3);
+  box-shadow: 0 0 6rpx rgba(250, 173, 20, 0.3);
+}
+
+.tier-silver.tier-info {
+  background: linear-gradient(135deg, rgba(140, 140, 140, 0.2), rgba(217, 217, 217, 0.2));
+  border: 1rpx solid rgba(140, 140, 140, 0.3);
+  box-shadow: 0 0 4rpx rgba(140, 140, 140, 0.3);
+}
+
+.tier-bronze.tier-info {
+  background: linear-gradient(135deg, rgba(166, 117, 75, 0.2), rgba(213, 176, 146, 0.2));
+  border: 1rpx solid rgba(166, 117, 75, 0.3);
+  box-shadow: 0 0 4rpx rgba(166, 117, 75, 0.3);
+}
+
+/* 段位名称样式 */
+.tier-supreme .tier-name {
+  color: #8a2be2;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.5);
+  font-weight: bold;
+}
+
+.tier-king .tier-name {
+  color: #ff4d4f;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.5);
+  font-weight: bold;
+}
+
+.tier-master .tier-name {
+  color: #722ed1;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.5);
+  font-weight: bold;
+}
+
+.tier-diamond .tier-name {
+  color: #1890ff;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.5);
+}
+
+.tier-platinum .tier-name {
+  color: #13c2c2;
+}
+
+.tier-gold .tier-name {
+  color: #faad14;
+}
+
+.tier-silver .tier-name {
+  color: #8c8c8c;
+}
+
+.tier-bronze .tier-name {
+  color: #a6754b;
+}
+
+/* 不同段位的头像边框样式 */
+.avatar-container.tier-supreme .avatar {
+  border: 4rpx solid #8a2be2;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.5);
+}
+
+.avatar-container.tier-king .avatar {
+  border: 4rpx solid #ff4d4f;
+  box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.5);
+}
+
+.avatar-container.tier-master .avatar {
+  border: 4rpx solid #722ed1;
+  box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.5);
+}
+
+.avatar-container.tier-diamond .avatar {
+  border: 4rpx solid #1890ff;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.5);
+}
+
+.avatar-container.tier-platinum .avatar {
+  border: 4rpx solid #13c2c2;
+  box-shadow: 0 0 10rpx rgba(19, 194, 194, 0.4);
+}
+
+.avatar-container.tier-gold .avatar {
+  border: 4rpx solid #faad14;
+  box-shadow: 0 0 10rpx rgba(250, 173, 20, 0.4);
+}
+
+.avatar-container.tier-silver .avatar {
+  border: 4rpx solid #8c8c8c;
+  box-shadow: 0 0 8rpx rgba(140, 140, 140, 0.4);
+}
+
+.avatar-container.tier-bronze .avatar {
+  border: 4rpx solid #a6754b;
+  box-shadow: 0 0 8rpx rgba(166, 117, 75, 0.4);
+}
+
+/* 暗黑模式下的段位卡片样式 */
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-supreme.tier-info,
+.dark-mode .tier-king.tier-info,
+.dark-mode .tier-master.tier-info,
+.dark-mode .tier-diamond.tier-info,
+.dark-mode .tier-platinum.tier-info,
+.dark-mode .tier-gold.tier-info,
+.dark-mode .tier-silver.tier-info,
+.dark-mode .tier-bronze.tier-info {
+  box-shadow: 0 0 12rpx currentColor;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .tier-supreme .tier-name,
+.dark-mode .tier-king .tier-name,
+.dark-mode .tier-master .tier-name,
+.dark-mode .tier-diamond .tier-name,
+.dark-mode .tier-platinum .tier-name,
+.dark-mode .tier-gold .tier-name,
+.dark-mode .tier-silver .tier-name,
+.dark-mode .tier-bronze .tier-name {
+  text-shadow: 0 0 8rpx currentColor;
+  opacity: 0.9;
+}
+
+/* 不同段位的用户名颜色和特效 */
+.tier-supreme-name {
+  color: #8a2be2 !important;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+  font-weight: bold;
+}
+
+.tier-king-name {
+  color: #ff4d4f !important;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+  font-weight: bold;
+}
+
+.tier-master-name {
+  color: #722ed1 !important;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+  font-weight: bold;
+}
+
+.tier-diamond-name {
+  color: #1890ff !important;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum-name {
+  color: #13c2c2 !important;
+}
+
+.tier-gold-name {
+  color: #faad14 !important;
+}
+
+.tier-silver-name {
+  color: #8c8c8c !important;
+}
+
+.tier-bronze-name {
+  color: #a6754b !important;
+}
+
+/* 不同段位的消息气泡样式 */
+/* 至尊段位 */
+.tier-supreme .message-bubble {
+  background: linear-gradient(135deg, #8a2be2, #ffd700) !important;
+  border: 2rpx solid rgba(138, 43, 226, 0.5) !important;
+  box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.3) !important;
+  color: #fff !important;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3) !important;
+  animation: supreme-glow 2s infinite !important;
+}
+
+/* 王者段位 */
+.tier-king .message-bubble {
+  background: linear-gradient(135deg, #ff4d4f, #ffd700) !important;
+  border: 2rpx solid rgba(255, 77, 79, 0.5) !important;
+  box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.3) !important;
+  color: #fff !important;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3) !important;
+  animation: king-glow 2s infinite !important;
+}
+
+/* 大师段位 */
+.tier-master .message-bubble {
+  background: linear-gradient(135deg, #722ed1, #b07feb) !important;
+  border: 2rpx solid rgba(114, 46, 209, 0.5) !important;
+  box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.3) !important;
+  color: #fff !important;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3) !important;
+  animation: master-glow 2s infinite !important;
+}
+
+/* 钻石段位 */
+.tier-diamond .message-bubble {
+  background: linear-gradient(135deg, #1890ff, #69c0ff) !important;
+  border: 2rpx solid rgba(24, 144, 255, 0.5) !important;
+  box-shadow: 0 0 12rpx rgba(24, 144, 255, 0.3) !important;
+  color: #fff !important;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 铂金段位 */
+.tier-platinum .message-bubble {
+  background: linear-gradient(135deg, #13c2c2, #87e8de) !important;
+  border: 2rpx solid rgba(19, 194, 194, 0.5) !important;
+  box-shadow: 0 0 10rpx rgba(19, 194, 194, 0.3) !important;
+  color: #fff !important;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 黄金段位 */
+.tier-gold .message-bubble {
+  background: linear-gradient(135deg, #faad14, #ffd666) !important;
+  border: 2rpx solid rgba(250, 173, 20, 0.5) !important;
+  box-shadow: 0 0 8rpx rgba(250, 173, 20, 0.3) !important;
+  color: #333 !important;
+}
+
+/* 白银段位 */
+.tier-silver .message-bubble {
+  background: linear-gradient(135deg, #8c8c8c, #bfbfbf) !important;
+  border: 2rpx solid rgba(140, 140, 140, 0.5) !important;
+  box-shadow: 0 0 6rpx rgba(140, 140, 140, 0.3) !important;
+  color: #fff !important;
+}
+
+/* 青铜段位 */
+.tier-bronze .message-bubble {
+  background: linear-gradient(135deg, #a6754b, #d5b092) !important;
+  border: 2rpx solid rgba(166, 117, 75, 0.5) !important;
+  box-shadow: 0 0 4rpx rgba(166, 117, 75, 0.3) !important;
+  color: #fff !important;
+}
+
+/* 自己发送的消息气泡样式 - 反向渐变 */
+.message-item.self .tier-supreme .message-bubble {
+  background: linear-gradient(135deg, #ffd700, #8a2be2) !important;
+}
+
+.message-item.self .tier-king .message-bubble {
+  background: linear-gradient(135deg, #ffd700, #ff4d4f) !important;
+}
+
+.message-item.self .tier-master .message-bubble {
+  background: linear-gradient(135deg, #b07feb, #722ed1) !important;
+}
+
+.message-item.self .tier-diamond .message-bubble {
+  background: linear-gradient(135deg, #69c0ff, #1890ff) !important;
+}
+
+.message-item.self .tier-platinum .message-bubble {
+  background: linear-gradient(135deg, #87e8de, #13c2c2) !important;
+}
+
+.message-item.self .tier-gold .message-bubble {
+  background: linear-gradient(135deg, #ffd666, #faad14) !important;
+}
+
+.message-item.self .tier-silver .message-bubble {
+  background: linear-gradient(135deg, #bfbfbf, #8c8c8c) !important;
+}
+
+.message-item.self .tier-bronze .message-bubble {
+  background: linear-gradient(135deg, #d5b092, #a6754b) !important;
+}
+
+/* 消息内容文字样式 */
+.message-content {
+  max-width: 60%;
+  margin: 0 12rpx;
+  font-size: 30rpx;
+}
+
+/* 不同段位的消息内容样式 */
+.tier-supreme .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 8rpx rgba(138, 43, 226, 0.5) !important;
+  font-weight: 500 !important;
+}
+
+.tier-king .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.5) !important;
+  font-weight: 500 !important;
+}
+
+.tier-master .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 6rpx rgba(114, 46, 209, 0.5) !important;
+  font-weight: 500 !important;
+}
+
+.tier-diamond .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.5) !important;
+}
+
+.tier-platinum .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 4rpx rgba(19, 194, 194, 0.5) !important;
+}
+
+.tier-gold .message-content {
+  color: #333 !important;
+  text-shadow: 0 0 4rpx rgba(250, 173, 20, 0.3) !important;
+}
+
+.tier-silver .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 2rpx rgba(140, 140, 140, 0.5) !important;
+}
+
+.tier-bronze .message-content {
+  color: #fff !important;
+  text-shadow: 0 0 2rpx rgba(166, 117, 75, 0.5) !important;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .tier-gold .message-content {
+  color: #fff !important;
+}
+
+/* 消息气泡动画效果 */
+@keyframes supreme-glow {
+  0% {
+    box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 30rpx rgba(138, 43, 226, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 20rpx rgba(138, 43, 226, 0.3);
+  }
+}
+
+@keyframes king-glow {
+  0% {
+    box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 24rpx rgba(255, 77, 79, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 16rpx rgba(255, 77, 79, 0.3);
+  }
+}
+
+@keyframes master-glow {
+  0% {
+    box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 20rpx rgba(114, 46, 209, 0.5);
+  }
+
+  100% {
+    box-shadow: 0 0 14rpx rgba(114, 46, 209, 0.3);
+  }
+}
+
+/* 不同段位的消息气泡小角样式 */
+.tier-supreme .message-bubble::before {
+  box-shadow: -2rpx 2rpx 10rpx rgba(138, 43, 226, 0.3);
+}
+
+.tier-king .message-bubble::before {
+  box-shadow: -2rpx 2rpx 8rpx rgba(255, 77, 79, 0.3);
+}
+
+.tier-master .message-bubble::before {
+  box-shadow: -2rpx 2rpx 8rpx rgba(114, 46, 209, 0.3);
+}
+
+.tier-diamond .message-bubble::before {
+  box-shadow: -2rpx 2rpx 6rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum .message-bubble::before {
+  box-shadow: -2rpx 2rpx 6rpx rgba(19, 194, 194, 0.3);
+}
+
+.tier-gold .message-bubble::before {
+  box-shadow: -2rpx 2rpx 4rpx rgba(250, 173, 20, 0.3);
+}
+
+.tier-silver .message-bubble::before {
+  box-shadow: -2rpx 2rpx 4rpx rgba(140, 140, 140, 0.3);
+}
+
+.tier-bronze .message-bubble::before {
+  box-shadow: -2rpx 2rpx 4rpx rgba(166, 117, 75, 0.3);
+}
+
+/* 自己发送的消息气泡小角阴影 */
+.self .tier-supreme .message-bubble::before {
+  box-shadow: 2rpx 2rpx 10rpx rgba(138, 43, 226, 0.3);
+}
+
+.self .tier-king .message-bubble::before {
+  box-shadow: 2rpx 2rpx 8rpx rgba(255, 77, 79, 0.3);
+}
+
+.self .tier-master .message-bubble::before {
+  box-shadow: 2rpx 2rpx 8rpx rgba(114, 46, 209, 0.3);
+}
+
+.self .tier-diamond .message-bubble::before {
+  box-shadow: 2rpx 2rpx 6rpx rgba(24, 144, 255, 0.3);
+}
+
+.self .tier-platinum .message-bubble::before {
+  box-shadow: 2rpx 2rpx 6rpx rgba(19, 194, 194, 0.3);
+}
+
+.self .tier-gold .message-bubble::before {
+  box-shadow: 2rpx 2rpx 4rpx rgba(250, 173, 20, 0.3);
+}
+
+.self .tier-silver .message-bubble::before {
+  box-shadow: 2rpx 2rpx 4rpx rgba(140, 140, 140, 0.3);
+}
+
+.self .tier-bronze .message-bubble::before {
+  box-shadow: 2rpx 2rpx 4rpx rgba(166, 117, 75, 0.3);
+}
+
+/* 红包按钮样式 */
+.red-packet-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10rpx;
+  padding: 10rpx;
+  border-radius: 50%;
+  background: rgba(255, 77, 79, 0.1);
+  transition: all 0.3s ease;
+}
+
+.red-packet-btn:active {
+  transform: scale(0.9);
+  background: rgba(255, 77, 79, 0.2);
+}
+
+.red-packet-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 红包模态框样式 */
+.red-packet-modal {
+  display: none;
+}
+
+.red-packet-message {
+  display: none;
+}
+
+/* 回到底部按钮样式 */
+.go-bottom-btn {
+  position: fixed;
+  right: 30rpx;
+  bottom: calc(140rpx + env(safe-area-inset-bottom));
+  background: rgba(74, 144, 226, 0.9);
+  padding: 16rpx 24rpx;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.15);
+  z-index: 99;
+  opacity: 0;
+  transform: translateY(100rpx);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.go-bottom-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.go-bottom-text {
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+/* 输入区域容器样式 */
+.input-area-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 100;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transform: translateZ(0);
+  /* 开启硬件加速 */
+}
+
+.input-area {
+  padding: 20rpx 24rpx;
+  background: #fff;
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式适配 */
+.dark-mode .input-area-container,
+.dark-mode .input-area {
+  background: #2d2d2d;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .input-box {
+  background: #3d3d3d;
+}
+
+.dark-mode .message-input {
+  color: #fff;
+}
+
+.dark-mode .input-box:focus-within {
+  background: #4d4d4d;
+  border-color: rgba(74, 144, 226, 0.5);
+}
+
+.dark-mode .go-bottom-btn {
+  background: rgba(74, 144, 226, 0.8);
+}
+
+/* 底部占位 */
+.message-list-bottom-space {
+  height: calc(120rpx + env(safe-area-inset-bottom));
+  width: 100%;
+}
+
+/* 优化滚动体验 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* 红包消息样式 */
+.red-packet-message[data-target-user] {
+  background: linear-gradient(135deg, #722ed1, #b07feb);
+}
+
+.red-packet-message[data-target-user] .red-packet-title::before {
+  content: '专属';
+  font-size: 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+  margin-right: 8rpx;
+}
+
+/* 修改红包输入框样式 */
+.red-packet-input {
+  width: 100%;
+  height: 80rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+
+.red-packet-input:last-child {
+  margin-bottom: 0;
+}
+
+/* 深色模式适配 */
+.dark-mode .red-packet-input {
+  background: #3d3d3d;
+  color: #fff;
+}
+
+/* 移除设置按钮和模态框相关样式 */
+.settings-btn,
+.settings-icon,
+.settings-modal,
+.settings-content,
+.settings-header,
+.settings-body,
+.settings-item,
+.settings-label {
+  display: none;
+}

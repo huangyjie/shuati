@@ -1,0 +1,24 @@
+<!-- developers.wxml -->
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header" style="position: relative; left: 6rpx; top: -200rpx; height: 99rpx; display: block; box-sizing: border-box">
+    <view class="title" style="width: 214rpx; display: block; box-sizing: border-box; position: relative; left: 28rpx; top: -10rpx">开发者名单</view>
+    <view class="subtitle" style="position: relative; left: -1rpx; top: -19rpx">感谢以下开发者的贡献</view>
+  </view>
+
+  <view class="developers-list" style="position: relative; left: 0rpx; top: -432rpx; height: 329rpx; display: grid; box-sizing: border-box">
+    <view class="developer-card" wx:for="{{developers}}" wx:key="_id">
+      <view class="developer-avatar">
+        <image src="{{item.avatar || defaultAvatarUrl}}" mode="aspectFill"></image>
+      </view>
+      <view class="developer-info">
+        <view class="developer-name">{{item.name}}</view>
+        <view class="developer-role">{{item.role}}</view>
+        <view class="developer-desc">{{item.description}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">欢迎加入我们的开发团队</text>
+  </view>
+</view> 

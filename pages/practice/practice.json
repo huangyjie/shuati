@@ -1,0 +1,8 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "顺序刷题",
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#1f1f1f",
+  "backgroundTextStyle": "dark"
+}

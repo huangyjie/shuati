@@ -1,0 +1,142 @@
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部操作区 -->
+  <view class="header">
+    <!-- 搜索和筛选栏 -->
+    <view class="search-bar">
+      <view class="search-input-wrap">
+        <image class="search-icon" src="{{iconBaseUrl}}/search.png" mode="aspectFit"></image>
+        <input class="search-input" placeholder="搜索资源标题或描述" value="{{searchKeyword}}" bindconfirm="onSearch" placeholder-class="search-placeholder" />
+      </view>
+      <picker mode="selector" range="{{typeOptions}}" range-key="label" bindchange="onFilterType" class="type-picker">
+        <view class="picker-view">
+          <text>{{filterType || '全部类型'}}</text>
+          <image class="picker-arrow" src="{{iconBaseUrl}}/arrow-down.png" mode="aspectFit"></image>
+        </view>
+      </picker>
+      <view class="filter-actions">
+        <button class="filter-btn" bindtap="resetFilter" hover-class="btn-hover">重置</button>
+        <button class="add-btn" bindtap="showAddModal" hover-class="btn-hover">
+          <image class="add-icon" src="{{iconBaseUrl}}/add.png" mode="aspectFit"></image>
+          <text>添加</text>
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 加载中状态 -->
+  <view class="loading-container" wx:if="{{loading && currentPage === 1}}">
+    <view class="loading"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+  <!-- 资源列表 -->
+  <scroll-view class="resources-list" scroll-y enable-flex bindscrolltolower="onReachBottom" wx:else>
+    <block wx:if="{{resources.length > 0}}">
+      <view class="resource-item" wx:for="{{resources}}" wx:key="_id">
+        <view class="resource-card">
+          <!-- 资源信息 -->
+          <view class="resource-header">
+            <view class="resource-main">
+              <text class="resource-title">{{item.title}}</text>
+              <text class="resource-type">{{item.type}}</text>
+            </view>
+            <!-- 文件类型图标 -->
+            <view class="file-type-icon">
+              <image class="type-icon" src="{{iconBaseUrl}}/{{item.fileType || 'other'}}.png" mode="aspectFit"></image>
+            </view>
+          </view>
+          <text class="resource-desc">{{item.description}}</text>
+          <!-- 缩略图预览 -->
+          <image wx:if="{{item.thumbnail}}" class="resource-thumbnail" src="{{item.thumbnail}}" mode="aspectFill" bindtap="previewResource" data-link="{{item.thumbnail}}" data-type="image"></image>
+          <view class="resource-footer">
+            <!-- 创建时间 -->
+            <view class="resource-time">
+              <image class="time-icon" src="{{iconBaseUrl}}/time.png" mode="aspectFit"></image>
+              <text>{{item.createTime}}</text>
+            </view>
+            <!-- 操作按钮 -->
+            <view class="resource-actions">
+              <!-- 资源链接 -->
+              <button class="action-btn view" bindtap="previewResource" data-link="{{item.link}}" data-type="{{item.fileType}}" hover-class="btn-hover">
+                <image class="btn-icon" src="{{iconBaseUrl}}/view.png" mode="aspectFit"></image>
+                <text>查看</text>
+              </button>
+              <button class="action-btn edit" bindtap="showEditModal" data-resource="{{item}}" hover-class="btn-hover">
+                <image class="btn-icon" src="{{iconBaseUrl}}/edit.png" mode="aspectFit"></image>
+                <text>编辑</text>
+              </button>
+              <button class="action-btn delete" bindtap="deleteResource" data-id="{{item._id}}" hover-class="btn-hover">
+                <image class="btn-icon" src="{{iconBaseUrl}}/delete.png" mode="aspectFit"></image>
+                <text>删除</text>
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 加载更多提示 -->
+      <view class="loading-more" wx:if="{{loading}}">
+        <view class="loading"></view>
+        <text>加载更多...</text>
+      </view>
+      <view class="no-more" wx:if="{{!hasMore && resources.length > 0}}">
+        <text>没有更多了</text>
+      </view>
+    </block>
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <image class="empty-icon" src="{{iconBaseUrl}}/empty.png" mode="aspectFit"></image>
+      <text class="empty-text">暂无资源</text>
+      <button class="add-first-btn" bindtap="showAddModal" hover-class="btn-hover">添加第一个资源</button>
+    </view>
+  </scroll-view>
+  <!-- 添加/编辑资源弹窗 -->
+  <view class="modal {{showAddModal ? 'show' : ''}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{editingResource ? '编辑资源' : '添加资源'}}</text>
+        <view class="close-btn" bindtap="closeModal">×</view>
+      </view>
+      <view class="modal-body">
+        <!-- 表单内容 -->
+        <view class="form-item">
+          <text class="form-label required">标题</text>
+          <input class="form-input" placeholder="请输入资源标题" value="{{formData.title}}" bindinput="onInput" data-field="title" />
+        </view>
+        <view class="form-item">
+          <text class="form-label required">类型</text>
+          <picker mode="selector" range="{{typeOptions}}" range-key="label" bindchange="onTypeChange">
+            <view class="picker-view form-picker">
+              <text>{{formData.type || '请选择资源类型'}}</text>
+              <image class="picker-arrow" src="{{iconBaseUrl}}/arrow-down.png" mode="aspectFit"></image>
+            </view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="form-label required">描述</text>
+          <textarea class="form-textarea" placeholder="请输入资源描述" value="{{formData.description}}" bindinput="onInput" data-field="description" maxlength="200"></textarea>
+          <text class="textarea-counter">{{formData.description.length}}/200</text>
+        </view>
+        <view class="form-item">
+          <text class="form-label required">资源链接</text>
+          <input class="form-input" placeholder="请输入资源文件的网址链接" value="{{formData.link}}" bindinput="onInput" data-field="link" adjust-position="{{true}}" hold-keyboard="{{true}}" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">缩略图（可选）</text>
+          <view class="upload-section">
+            <image wx:if="{{formData.thumbnail}}" class="thumbnail-preview" src="{{formData.thumbnail}}" mode="aspectFill"></image>
+            <button class="upload-btn" bindtap="chooseThumbnail" hover-class="btn-hover">
+              {{formData.thumbnail ? '更换图片' : '选择图片'}}
+            </button>
+          </view>
+        </view>
+        <!-- 上传进度条 -->
+        <view class="progress-bar" wx:if="{{showProgress}}">
+          <view class="progress-inner" style="width: {{uploadProgress}}%"></view>
+          <text class="progress-text">{{uploadProgress}}%</text>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="closeModal" hover-class="btn-hover">取消</button>
+        <button class="modal-btn confirm" bindtap="submitForm" hover-class="btn-hover">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

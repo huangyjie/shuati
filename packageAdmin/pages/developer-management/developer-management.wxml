@@ -1,0 +1,124 @@
+<view class="developer-management-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">开发者管理</text>
+  </view>
+
+  <!-- 添加开发者按钮 -->
+  <view class="action-section">
+    <button class="add-btn" bindtap="showAddDeveloper">添加开发者</button>
+  </view>
+
+  <!-- 开发者列表 -->
+  <view class="developer-list" wx:if="{{!developerLoading}}">
+    <view class="developer-item" wx:for="{{developers}}" wx:key="_id">
+      <view class="developer-info">
+        <image class="developer-avatar" src="{{item.avatar || defaultAvatarUrl}}" mode="aspectFill"/>
+        <view class="developer-detail">
+          <text class="developer-name">{{item.name}}</text>
+          <text class="developer-role">{{item.role}}</text>
+          <text class="developer-desc">{{item.description}}</text>
+        </view>
+      </view>
+      <view class="developer-actions">
+        <button class="action-btn edit" bindtap="editDeveloper" data-developer="{{item}}">编辑</button>
+        <button class="action-btn delete" bindtap="deleteDeveloper" data-id="{{item._id}}">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:elif="{{developerLoading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-data" wx:if="{{!developerLoading && developers.length === 0}}">
+    <text>暂无开发者数据</text>
+  </view>
+
+  <!-- 开发者编辑弹窗 -->
+  <view class="modal developer-modal" wx:if="{{showDeveloperModal}}" catchtap="closeDeveloperModal">
+    <view class="modal-content" catchtap="preventBubble">
+      <view class="modal-header">
+        <text class="modal-title">{{editingDeveloper._id ? '编辑' : '添加'}}开发者</text>
+        <text class="close-btn" bindtap="closeDeveloperModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="form-grid">
+          <view class="input-group">
+            <view class="input-item">
+              <text class="label">姓名</text>
+              <input class="user-input" 
+                     value="{{editingDeveloper.name}}"
+                     data-field="name"
+                     bindinput="handleDeveloperInput"
+                     placeholder="请输入开发者姓名"/>
+            </view>
+            <view class="input-item">
+              <text class="label">角色</text>
+              <input class="user-input" 
+                     value="{{editingDeveloper.role}}"
+                     data-field="role"
+                     bindinput="handleDeveloperInput"
+                     placeholder="请输入开发者角色"/>
+            </view>
+          </view>
+          
+          <view class="input-group">
+            <view class="input-item">
+              <text class="label">QQ号</text>
+              <input class="user-input" 
+                     value="{{editingDeveloper.qq}}"
+                     data-field="qq"
+                     bindinput="handleDeveloperInput"
+                     type="number"
+                     placeholder="请输入QQ号"/>
+              <text class="tips">用于显示头像</text>
+            </view>
+            <view class="input-item">
+              <text class="label">排序</text>
+              <input class="user-input" 
+                     value="{{editingDeveloper.order}}"
+                     data-field="order"
+                     bindinput="handleDeveloperInput"
+                     type="number"
+                     placeholder="请输入排序号"/>
+              <text class="tips">数字越小越靠前</text>
+            </view>
+          </view>
+
+          <view class="input-item full-width">
+            <text class="label">描述</text>
+            <textarea class="user-textarea" 
+                      value="{{editingDeveloper.description}}"
+                      data-field="description"
+                      bindinput="handleDeveloperInput"
+                      placeholder="请输入开发者描述"
+                      maxlength="200"
+                      auto-height/>
+            <text class="tips">简要描述开发者的贡献和专长</text>
+          </view>
+
+          <!-- 预览区域 -->
+          <view class="preview-section">
+            <text class="preview-title">预览效果</text>
+            <view class="developer-item preview">
+              <view class="developer-info">
+                <image class="developer-avatar" 
+                       src="{{editingDeveloper.qq ? 'https://q1.qlogo.cn/g?b=qq&nk=' + editingDeveloper.qq + '&s=640' : defaultAvatarUrl}}" 
+                       mode="aspectFill"/>
+                <view class="developer-detail">
+                  <text class="developer-name">{{editingDeveloper.name || '开发者姓名'}}</text>
+                  <text class="developer-role">{{editingDeveloper.role || '开发者角色'}}</text>
+                  <text class="developer-desc">{{editingDeveloper.description || '开发者描述'}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="closeDeveloperModal">取消</button>
+        <button class="modal-btn confirm" bindtap="saveDeveloper">保存</button>
+      </view>
+    </view>
+  </view>
+</view> 

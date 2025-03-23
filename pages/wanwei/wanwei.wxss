@@ -1,0 +1,312 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #4a90e2 0%, #4a90e2 10%, #f5f5f5 35%);
+}
+
+.dark-mode {
+  background: linear-gradient(180deg, #1976d2 0%, #1976d2 10%, #1f1f1f 35%);
+}
+
+/* 自定义导航栏 */
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-top: 48rpx;
+  padding-bottom: 8rpx;
+  height: 88rpx;
+}
+
+.nav-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #4a90e2 0%, #4a90e2 85%, rgba(74, 144, 226, 0.95) 100%);
+  z-index: -1;
+  backdrop-filter: blur(10px);
+}
+
+.dark-mode .nav-bg {
+  background: linear-gradient(180deg, #1976d2 0%, #1976d2 85%, rgba(25, 118, 210, 0.95) 100%);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 30rpx;
+}
+
+.nav-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: absolute;
+  left: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.back-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 主要内容区域 */
+.content-area {
+  margin-top: 48rpx;
+  padding: 12rpx 30rpx;
+  min-height: calc(100vh - 48rpx);
+  position: relative;
+  z-index: 1;
+}
+
+/* 页面标题 */
+.page-header {
+  margin: 30rpx 0 40rpx;
+  padding: 0 10rpx;
+}
+
+.header-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .header-title,
+.dark-mode .header-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* 登录提示样式 */
+.login-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 24rpx;
+  background: rgba(255, 152, 0, 0.15);
+  border: 1px solid rgba(255, 152, 0, 0.2);
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2rpx 10rpx rgba(255, 152, 0, 0.1);
+}
+
+.tip-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #ff9800;
+  font-weight: 500;
+}
+
+.exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  padding-bottom: 40rpx;
+}
+
+.exam-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 0;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+}
+
+.dark-mode .exam-card {
+  background: rgba(45, 45, 45, 0.95);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exam-card:active {
+  transform: translateY(2rpx) scale(0.99);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.dark-mode .exam-card:active {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 试卷编号徽章 */
+.exam-badge {
+  width: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a90e2, #5c6bc0);
+  color: white;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 20rpx 0;
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+}
+
+.dark-mode .exam-badge {
+  background: linear-gradient(135deg, #1976d2, #303f9f);
+}
+
+.exam-content {
+  flex: 1;
+  padding: 20rpx;
+}
+
+/* 卡片箭头 */
+.card-arrow {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .card-arrow {
+  background: rgba(25, 118, 210, 0.2);
+}
+
+.arrow-icon {
+  width: 24rpx;
+  height: 24rpx;
+  opacity: 0.7;
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.exam-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.dark-mode .exam-title {
+  color: #fff;
+}
+
+.question-count {
+  background: rgba(74, 144, 226, 0.15);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  border: 1px solid rgba(74, 144, 226, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.dark-mode .question-count {
+  background: rgba(25, 118, 210, 0.2);
+  border: 1px solid rgba(25, 118, 210, 0.25);
+}
+
+.count-text {
+  font-size: 24rpx;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+.dark-mode .count-text {
+  color: #64b5f6;
+}
+
+/* 试卷信息区域 */
+.exam-info {
+  background: rgba(248, 249, 250, 0.8);
+  padding: 16rpx;
+  border-radius: 12rpx;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: flex-start;
+}
+
+.dark-mode .exam-info {
+  background: rgba(61, 61, 61, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+  margin-top: 4rpx;
+}
+
+.info-text {
+  font-size: 26rpx;
+  color: #666;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.dark-mode .info-text {
+  color: #aaa;
+}
+
+/* 卡片底部 */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.start-label {
+  font-size: 26rpx;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+.dark-mode .start-label {
+  color: #64b5f6;
+} 

@@ -1,0 +1,140 @@
+<view class="page-container {{darkMode ? 'dark-mode' : ''}}">
+  <block wx:if="{{wrongQuestions.length > 0}}">
+    <view class="header-actions">
+      <button class="action-btn settings" bindtap="showSettings">
+        <text class="btn-text">设置</text>
+      </button>
+      <button class="action-btn upload" bindtap="uploadToCloud">
+        <text class="btn-text">上传到云端</text>
+      </button>
+      <button class="action-btn copy" bindtap="copyWrongQuestions">
+        <text class="btn-text">复制整本</text>
+      </button>
+      <button class="action-btn delete" bindtap="clearCloudWrongBook">
+        <text class="btn-text">清空云端</text>
+      </button>
+      <button class="action-btn favorite {{isFavorited ? 'favorited' : ''}}" bindtap="toggleFavorite">
+        <text class="btn-text">{{isFavorited ? '已收藏' : '未收藏'}}</text>
+      </button>
+    </view>
+    <view class="progress-bar">
+      <text class="progress-text">错题 {{currentIndex + 1}}/{{wrongQuestions.length}}</text>
+    </view>
+    <scroll-view class="content-scroll" scroll-y enhanced show-scrollbar="{{false}}" bounces="{{false}}">
+      <view class="question-card" wx:if="{{currentQuestion}}">
+        <view class="question-header">
+          <view class="question-title">
+            <text>{{currentQuestion.title}}</text>
+          </view>
+          <view class="copy-question" bindtap="copyCurrentQuestion">
+            <text class="copy-icon">📋</text>
+            <text class="copy-text">复制</text>
+          </view>
+        </view>
+        <view class="options-list">
+          <button class="option-item {{userAnswers[currentIndex].userAnswer === 'A' ? (userAnswers[currentIndex].isCorrect ? 'correct' : 'wrong') : ''}}" data-option="A" bindtap="handleAnswer" disabled="{{disabled}}">
+            <text class="option-text">A. {{currentQuestion.optionA}}</text>
+          </button>
+          <button class="option-item {{userAnswers[currentIndex].userAnswer === 'B' ? (userAnswers[currentIndex].isCorrect ? 'correct' : 'wrong') : ''}}" data-option="B" bindtap="handleAnswer" disabled="{{disabled}}">
+            <text class="option-text">B. {{currentQuestion.optionB}}</text>
+          </button>
+          <button class="option-item {{userAnswers[currentIndex].userAnswer === 'C' ? (userAnswers[currentIndex].isCorrect ? 'correct' : 'wrong') : ''}}" data-option="C" bindtap="handleAnswer" disabled="{{disabled}}">
+            <text class="option-text">C. {{currentQuestion.optionC}}</text>
+          </button>
+          <button class="option-item {{userAnswers[currentIndex].userAnswer === 'D' ? (userAnswers[currentIndex].isCorrect ? 'correct' : 'wrong') : ''}}" data-option="D" bindtap="handleAnswer" disabled="{{disabled}}">
+            <text class="option-text">D. {{currentQuestion.optionD}}</text>
+          </button>
+        </view>
+        <view class="answer-result" wx:if="{{showResult}}">
+          <text class="result-text {{isCorrect ? 'correct-text' : 'wrong-text'}}">
+            {{isCorrect ? '回答正确！' : '回答错误！正确答案是：' + currentQuestion.answer}}
+          </text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="footer">
+      <view class="button-row">
+        <button class="nav-btn" bindtap="handlePrevious">上一题</button>
+        <button class="nav-btn" bindtap="handleNext">下一题</button>
+      </view>
+      <button class="restart-btn" bindtap="handleRestart">重新开始</button>
+    </view>
+  </block>
+  <view class="empty-state" wx:else>
+    <view class="empty-message">错题本</view>
+    <view class="empty-sub-message">目前还没有错题记录</view>
+    <view class="empty-tips">
+      <view class="tip-item">· 答错的题目会自动添加到错题本</view>
+      <view class="tip-item">· 重复的错题不会重复添加</view>
+      <view class="tip-item">· 最多可保存2000道错题</view>
+    </view>
+    <view class="button-group">
+      <button class="cloud-btn restore" bindtap="restoreFromCloud">
+        <text class="btn-text">从云端恢复</text>
+      </button>
+      <button class="cloud-btn copy" bindtap="copyWrongQuestions">
+        <text class="btn-text">复制整本</text>
+      </button>
+      <button class="cloud-btn delete" bindtap="clearCloudWrongBook">
+        <text class="btn-text">清空云端</text>
+      </button>
+      <button class="cloud-btn upload" bindtap="uploadToCloud">
+        <text class="btn-text">上传到云端</text>
+      </button>
+    </view>
+  </view>
+  <!-- AI助手 -->
+  <view class="ai-assistant {{showAIPanel ? 'show' : ''}}" bindtap="toggleAIPanel">
+    <view class="ai-content">
+      <image class="float-icon" src="https://api.hsbogk.icu/mini-programs/images/ai.png" mode="aspectFit"></image>
+      <text class="ai-text">AI</text>
+    </view>
+  </view>
+  <!-- AI面板遮罩层 -->
+  <view class="ai-mask {{showAIPanel ? 'show' : ''}}" bindtap="toggleAIPanel"></view>
+  <view class="ai-panel {{showAIPanel ? 'show' : ''}}" catchtap="preventBubble">
+    <view class="ai-panel-header">
+      <text class="ai-title">AI助手 (Kimi)</text>
+      <text class="close-btn" bindtap="toggleAIPanel">×</text>
+    </view>
+    <scroll-view class="ai-messages" scroll-y scroll-into-view="{{lastMessageId}}">
+      <view class="message-list">
+        <view wx:for="{{messages}}" wx:key="index" class="message {{item.role === 'user' ? 'user' : 'ai'}}" id="msg-{{index}}">
+          <text class="content">{{item.content}}</text>
+          <view class="copy-btn" wx:if="{{item.role === 'ai'}}" bindtap="copyMessage" data-content="{{item.content}}">
+            复制
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="ai-input">
+      <button class="quick-ask" style="--index: 0" bindtap="askQuestion" data-type="explain">
+        解释题目
+      </button>
+      <button class="quick-ask" style="--index: 1" bindtap="askQuestion" data-type="hint">
+        获取提示
+      </button>
+      <button class="send-current" style="--index: 2" bindtap="sendCurrentQuestion">分析当前题目</button>
+    </view>
+  </view>
+  <!-- 设置面板 -->
+  <view class="settings-panel {{showSettings ? 'show' : ''}}">
+    <view class="settings-content" catchtap="preventBubble">
+      <view class="settings-header">
+        <text class="settings-title">错题本设置</text>
+        <view class="close-btn" bindtap="hideSettings">×</view>
+      </view>
+      <view class="settings-body">
+        <view class="setting-item">
+          <text class="setting-label">自动清理已答对的题目</text>
+          <switch checked="{{autoClearCorrect}}" bindchange="toggleAutoClear" color="#4A90E2" />
+        </view>
+      </view>
+      <view class="settings-footer">
+        <button class="settings-btn" bindtap="clearCorrectQuestions" wx:if="{{!autoClearCorrect}}">
+          立即清理已答对题目
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,190 @@
+.statistics-container {
+  min-height: 100vh;
+  background-color: #f7f8fa;
+  padding-bottom: 40rpx;
+  transition: all 0.3s ease;
+}
+
+.header {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  padding: 40rpx 30rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.title {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 统计数据样式 */
+.stats-section {
+  margin: 24rpx;
+}
+
+/* 分类标题 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin: 32rpx 0 16rpx;
+  padding-left: 16rpx;
+  border-left: 8rpx solid #4A90E2;
+}
+
+.dark-mode .section-title {
+  color: #fff;
+  border-left-color: #64b5f6;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.stats-card {
+  background: #fff;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 160rpx;
+}
+
+/* 强调卡片样式 */
+.stats-card.highlight {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #fff;
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.3);
+}
+
+.stats-card.highlight .stats-value {
+  color: #fff;
+  font-size: 48rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.stats-card.highlight .stats-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stats-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-value {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #4A90E2;
+  margin-bottom: 12rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+}
+
+.stats-card .clear-btn {
+  width: 80%;
+  font-size: 22rpx;
+  padding: 8rpx 0;
+  background: linear-gradient(135deg, #ff4d4f 0%, #cf1322 100%);
+  color: #fff;
+  border-radius: 30rpx;
+  margin: 16rpx auto 0;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  box-shadow: 0 2rpx 8rpx rgba(207, 19, 34, 0.3);
+}
+
+.stats-card .clear-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 1rpx 4rpx rgba(207, 19, 34, 0.2);
+}
+
+/* 暗黑模式样式 */
+.dark-mode {
+  background-color: #121212;
+}
+
+.dark-mode .header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .stats-card {
+  background: #1f1f1f;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .stats-card.highlight {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  box-shadow: 0 8rpx 24rpx rgba(25, 118, 210, 0.3);
+}
+
+.dark-mode .stats-value {
+  color: #4A90E2;
+}
+
+.dark-mode .stats-label {
+  color: #999;
+}
+
+.dark-mode .clear-btn {
+  background: linear-gradient(135deg, #cf1322 0%, #a8071a 100%);
+  box-shadow: 0 2rpx 8rpx rgba(207, 19, 34, 0.2);
+}
+
+.dark-mode .clear-btn:active {
+  box-shadow: none;
+}
+
+/* 反馈卡片样式 */
+.feedback-card {
+  background: linear-gradient(135deg, #ff7875 0%, #ff4d4f 100%);
+  color: #fff;
+}
+
+.feedback-card .stats-value {
+  color: #fff;
+  font-size: 48rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+.feedback-card .stats-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feedback-today {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 12rpx;
+}
+
+/* 深色模式下的反馈卡片样式 */
+.dark-mode .feedback-card {
+  background: linear-gradient(135deg, #cf1322 0%, #a8071a 100%);
+} 

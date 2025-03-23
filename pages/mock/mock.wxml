@@ -1,0 +1,50 @@
+<view class="page-wrapper {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar-inner">
+      <text class="nav-title"></text>
+    </view>
+  </view>
+  <view class="container">
+    <view class="paper-list">
+      <view class="paper-card" wx:for="{{mockPapers}}" wx:key="id">
+        <view class="paper-header">
+          <view class="paper-title">{{item.title}}</view>
+          <view class="paper-badge">
+            <text class="badge-text">{{item.time}}分钟</text>
+          </view>
+        </view>
+        <view class="paper-stats">
+          <view class="stat-item">
+            <text class="stat-label">总分</text>
+            <text class="stat-value">{{item.totalScore}}分</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-label">题量</text>
+            <text class="stat-value">{{item.questionCount}}题</text>
+          </view>
+          <view class="stat-divider"></view>
+          <view class="stat-item">
+            <text class="stat-label">每题分值</text>
+            <text class="stat-value">{{item.scorePerQuestion}}分</text>
+          </view>
+        </view>
+        <view class="paper-info">
+          <image class="info-icon" src="{{iconBaseUrl}}/info.png" mode="aspectFit"></image>
+          <text class="info-text">{{item.description}}</text>
+        </view>
+        <button class="start-btn {{!isLogin ? 'disabled' : ''}}" catchtap="startMockExam" data-paper-id="{{item.id}}">
+          <text class="btn-text">{{isLogin ? '开始考试' : '请先登录'}}</text>
+          <image class="btn-icon" src="{{iconBaseUrl}}/arrow.png" mode="aspectFit" wx:if="{{isLogin}}"></image>
+        </button>
+      </view>
+    </view>
+    <view class="login-tip" wx:if="{{!isLogin}}">
+      <text class="tip-text">登录后即可参加模拟考试</text>
+      <navigator url="/pages/comprehensive/comprehensive" open-type="switchTab" class="login-btn">
+        去登录
+      </navigator>
+    </view>
+  </view>
+</view>

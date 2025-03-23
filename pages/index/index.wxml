@@ -1,0 +1,320 @@
+<!-- index.wxml -->
+<view class="page-wrapper {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar-inner">
+      <view class="settings-btn" bindtap="toggleSettings" hover-class="button-hover">
+        <image class="settings-icon" src="{{iconBaseUrl}}/settings.png" mode="aspectFit"></image>
+      </view>
+      <text class="nav-title"></text>
+    </view>
+  </view>
+  <view class="container {{darkMode ? 'dark-mode' : ''}}">
+    <!-- 用户信息栏 -->
+    <view class="user-info-section">
+      <image class="user-avatar {{userInfo.tierClass || 'tier-bronze'}}" src="{{userInfo.avatarUrl || defaultAvatarUrl}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <view class="user-stat">
+          <text class="stat-value">{{userAnswerCount || 0}}</text>
+          <text class="stat-label">刷题总数</text>
+        </view>
+        <view class="user-stat">
+          <text class="stat-value">{{wrongQuestionsCount || 0}}</text>
+          <text class="stat-label">错题数量</text>
+        </view>
+        <view class="user-stat">
+          <text class="stat-value">{{userInfo.points || 0}}</text>
+          <text class="stat-label">积分</text>
+        </view>
+        <view class="user-stat">
+          <text class="stat-value nickname" data-logged="{{isLogin}}">
+            {{userInfo.nickname || '未登录'}}
+          </text>
+          <text class="stat-label">昵称</text>
+        </view>
+      </view>
+    </view>
+    <!-- 答题统计卡片 -->
+    <view class="stats-section">
+      <view class="answer-stats-card">
+        <image class="stats-icon" src="{{iconBaseUrl}}/stats.png" mode="aspectFit"></image>
+        <view class="stats-info">
+          <text class="stats-label">累计答题</text>
+          <text class="stats-value">{{userAnswerCount || 0}}题</text>
+        </view>
+      </view>
+      <view class="announcement-btn" bindtap="showLatestAnnouncement">
+        <image class="announcement-icon" src="{{iconBaseUrl}}/announcement.png" mode="aspectFit"></image>
+        <text>公告</text>
+      </view>
+      <view class="countdown-btn" bindtap="showCountdownDetail">
+        <image class="countdown-icon" src="{{iconBaseUrl}}/countdown.png" mode="aspectFit"></image>
+        <text>{{countdown.days}}天</text>
+      </view>
+      <view class="chat-room-btn" bindtap="navigateToChatRoom">
+        <image class="chat-icon" src="{{iconBaseUrl}}/chat.png" mode="aspectFit"></image>
+        <text>交流室</text>
+      </view>
+    </view>
+    <!-- 功能按钮区域 -->
+    <view class="button-grid">
+      <view class="button-row">
+        <button class="btn primary" bind:tap="startPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/order.png" mode="aspectFit"></image>
+            <text class="btn-text">顺序刷题</text>
+          </view>
+        </button>
+        <button class="btn chapter" bind:tap="startChapterPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/module.png" mode="aspectFit"></image>
+            <text class="btn-text">章节训练</text>
+          </view>
+        </button>
+        <button class="btn exam" bind:tap="startExamPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/exam.png" mode="aspectFit"></image>
+            <text class="btn-text">高考抽题</text>
+          </view>
+        </button>
+      </view>
+      <view class="button-row">
+        <button class="btn random" bind:tap="startRandomPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/random.png" mode="aspectFit"></image>
+            <text class="btn-text">随机抽题</text>
+          </view>
+        </button>
+        <button class="btn points" bind:tap="startPointsPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/points.png" mode="aspectFit"></image>
+            <text class="btn-text">积分答题</text>
+          </view>
+        </button>
+        <button class="btn ai" bind:tap="startAIPractice">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/ai.png" mode="aspectFit"></image>
+            <text class="btn-text">辅助刷题</text>
+          </view>
+        </button>
+      </view>
+      <view class="button-row">
+        <button class="btn wanwei" bind:tap="navigateToWanwei">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/wanwei.png" mode="aspectFit"></image>
+            <text class="btn-text">万维调考</text>
+          </view>
+        </button>
+        <button class="btn challenge" bind:tap="startChallenge">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/challenge.png" mode="aspectFit"></image>
+            <text class="btn-text">自我挑战</text>
+          </view>
+        </button>
+        <button class="btn breakthrough" bind:tap="startBreakthrough">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/breakthrough.png" mode="aspectFit"></image>
+            <text class="btn-text">答题闯关</text>
+          </view>
+        </button>
+      </view>
+      <view class="button-row">
+        <button class="btn ai-chat" bind:tap="navigateToAIChat">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/ai-chat.png" mode="aspectFit"></image>
+            <text class="btn-text">学习助手</text>
+          </view>
+        </button>
+        <button class="btn wrong-book" bind:tap="goToWrongBook">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/wrong.png" mode="aspectFit"></image>
+            <text class="btn-text">错题本</text>
+          </view>
+        </button>
+        <button class="btn favorite" bind:tap="goToFavorites">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/favorite.png" mode="aspectFit"></image>
+            <text class="btn-text">收藏题目</text>
+          </view>
+        </button>
+      </view>
+      <view class="button-row">
+        <button class="btn search" bind:tap="navigateToSearch">
+          <view class="btn-content">
+            <image class="btn-icon" src="{{iconBaseUrl}}/search.png" mode="aspectFit"></image>
+            <text class="btn-text">题目搜索</text>
+          </view>
+        </button>
+      </view>
+    </view>
+    <!-- 更多按钮 -->
+    <view class="more-btn" bindtap="toggleMorePanel">
+      <image class="more-icon" src="{{iconBaseUrl}}/more.png" mode="aspectFit"></image>
+      <text>更多功能</text>
+    </view>
+  </view>
+  <!-- 更多功能面板 -->
+  <view class="more-panel {{showMorePanel ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" catchtap="toggleMorePanel">
+    <view class="more-content" catchtap="preventBubble">
+      <view class="more-header">
+        <view class="more-title">更多功能</view>
+        <view class="more-close" catchtap="toggleMorePanel">×</view>
+      </view>
+      <view class="more-grid">
+        <!-- 题库总数按钮 -->
+        <view class="more-item" bindtap="toggleCollectionDetail">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/question-bank.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">题库总数</text>
+            <text class="more-item-desc">{{totalQuestionBank}}题</text>
+          </view>
+        </view>
+        <!-- 赞助支持按钮 -->
+        <view class="more-item" bindtap="toggleSponsor">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/sponsor.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">赞助支持</text>
+            <text class="more-item-desc">感谢您的支持</text>
+          </view>
+        </view>
+        <!-- 加入QQ群按钮 -->
+        <view class="more-item" bindtap="copyGroupNumber">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/qq.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">加入QQ群</text>
+            <text class="more-item-desc">与大家交流</text>
+          </view>
+        </view>
+        <!-- 开发者名单按钮 -->
+        <view class="more-item" bindtap="navigateToDevelopers">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/developers.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">开发者名单</text>
+            <text class="more-item-desc">了解我们</text>
+          </view>
+        </view>
+        <!-- 赞助者列表按钮 -->
+        <view class="more-item" bindtap="navigateToSponsors">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/sponsors.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">赞助者列表</text>
+            <text class="more-item-desc">感谢支持</text>
+          </view>
+        </view>
+        <!-- 文综资源按钮 -->
+        <view class="more-item" bindtap="navigateToResources">
+          <image class="more-item-icon" src="{{iconBaseUrl}}/resources.png" mode="aspectFit"></image>
+          <view class="more-item-info">
+            <text class="more-item-title">文综资源</text>
+            <text class="more-item-desc">学习资料</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 题库分布弹窗 -->
+  <view class="collection-detail {{showCollectionDetail ? 'show' : ''}}" catchtap="toggleCollectionDetail">
+    <view class="detail-content" catchtap="preventBubble">
+      <view class="detail-header">
+        <view class="detail-title">题库分布</view>
+        <view class="detail-close" catchtap="toggleCollectionDetail">×</view>
+      </view>
+      <view class="detail-list">
+        <view class="detail-item main-bank" wx:if="{{collectionCounts.questions}}">
+          <text class="item-name">{{collectionCounts.questions.name}}</text>
+          <text class="item-count">{{collectionCounts.questions.count}}题</text>
+        </view>
+        <block wx:for="{{collectionCounts}}" wx:key="index">
+          <view class="detail-item" wx:if="{{index !== 'questions'}}">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-count">{{item.count}}题</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 设置面板 -->
+  <view class="settings-panel {{showSettings ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" catchtap="toggleSettings">
+    <view class="settings-content" catchtap="preventBubble">
+      <view class="settings-title">设置</view>
+      <view class="setting-item">
+        <text>夜间模式</text>
+        <switch checked="{{darkMode}}" bindchange="toggleDarkMode" color="#4A90E2" />
+      </view>
+    </view>
+  </view>
+  <!-- 赞助面板 -->
+  <view class="sponsor-panel {{showSponsor ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" catchtap="toggleSponsor">
+    <view class="sponsor-content" catchtap="preventBubble">
+      <view class="sponsor-title">赞助支持</view>
+      <view class="sponsor-desc">如果这个小程序对你有帮助，欢迎赞助支持！</view>
+      <image class="sponsor-qr" src="{{iconBaseUrl}}/sponsor-qr.png" mode="aspectFit" show-menu-by-longpress></image>
+      <view class="sponsor-tip">长按保存二维码</view>
+    </view>
+  </view>
+  <!-- 公告弹窗 -->
+  <view class="announcement-modal {{showAnnouncement ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" wx:if="{{announcement}}" catchtap="closeAnnouncement" data-notshow="false">
+    <view class="announcement-content" catchtap="preventBubble">
+      <view class="announcement-title">
+        <text>{{announcement.title || '公告'}}</text>
+      </view>
+      <scroll-view scroll-y class="announcement-text" enhanced show-scrollbar="{{false}}" bounces="{{false}}" fast-deceleration="{{true}}">
+        <text user-select decode>{{announcement.content}}</text>
+      </scroll-view>
+      <view class="announcement-buttons">
+        <button class="announcement-modal-btn" hover-class="button-hover" bindtap="closeAnnouncement" data-notshow="true">
+          <text>七天内不再提醒</text>
+        </button>
+        <button class="announcement-modal-btn primary" hover-class="button-hover" bindtap="closeAnnouncement" data-notshow="false">
+          <text>我知道了</text>
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 友情链接面板 -->
+  <view class="friend-links-panel {{showFriendLinks ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" catchtap="toggleFriendLinks">
+    <view class="friend-links-content" catchtap="preventBubble">
+      <view class="friend-links-title">友情链接</view>
+      <view class="links-list">
+        <view class="link-item" wx:for="{{friendLinks}}" wx:key="url" bindtap="copyFriendLink" data-url="{{item.url}}">
+          <view class="link-content">
+            <text class="link-name">{{item.name}}</text>
+            <text class="link-description">{{item.description}}</text>
+          </view>
+          <text class="copy-text">复制链接</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 添加倒计时详情弹窗 -->
+  <view class="countdown-detail-modal {{showCountdownDetail ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" catchtap="closeCountdownDetail">
+    <view class="countdown-detail-content" catchtap="preventBubble">
+      <view class="countdown-detail-header">
+        <text class="countdown-title">距离高考还有</text>
+        <text class="countdown-days">{{countdown.days}}天</text>
+        <text class="exam-date">{{countdown.examDate}}</text>
+      </view>
+      <view class="countdown-quote">
+        <text class="quote-text">{{countdown.motivationalQuote}}</text>
+      </view>
+      <view class="countdown-detail-footer">
+        <button class="countdown-detail-btn" hover-class="button-hover" bindtap="closeCountdownDetail">
+          <text>我知道了</text>
+        </button>
+      </view>
+    </view>
+  </view>
+  <!-- 添加系统条幅 -->
+  <view class="system-banner {{darkMode ? 'dark-mode' : ''}} {{showSystemBanner ? 'show' : 'hide'}}">
+    <view class="banner-content">
+      <image class="banner-icon" src="{{iconBaseUrl}}/system.png" mode="aspectFit"></image>
+      <view class="banner-text">
+        <text class="banner-title">系统公告</text>
+        <text class="banner-desc">{{systemMessage}}</text>
+      </view>
+      <view class="banner-close" bindtap="closeSystemBanner">
+        <text>×</text>
+      </view>
+    </view>
+  </view>
+</view>

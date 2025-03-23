@@ -1,0 +1,83 @@
+<view class="result-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部成绩展示区 -->
+  <view class="score-section">
+    <view class="score-circle">
+      <view class="score-number">{{score}}</view>
+      <view class="score-label">正确率</view>
+    </view>
+    <view class="star-container">
+      <image class="star-icon {{stars >= 1 ? 'active' : ''}}" src="https://api.hsbogk.icu/mini-programs/images/star{{stars >= 1 ? '_filled' : ''}}.png" mode="aspectFit"></image>
+      <image class="star-icon {{stars >= 2 ? 'active' : ''}}" src="https://api.hsbogk.icu/mini-programs/images/star{{stars >= 2 ? '_filled' : ''}}.png" mode="aspectFit"></image>
+      <image class="star-icon {{stars >= 3 ? 'active' : ''}}" src="https://api.hsbogk.icu/mini-programs/images/star{{stars >= 3 ? '_filled' : ''}}.png" mode="aspectFit"></image>
+    </view>
+    <view class="evaluation-text">{{evaluationText}}</view>
+  </view>
+
+  <!-- 详细统计区 -->
+  <view class="stats-section">
+    <view class="stats-row">
+      <view class="stats-item">
+        <view class="stats-value">{{correctCount || 0}}</view>
+        <view class="stats-label">答对题数</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-value">{{wrongCount || 0}}</view>
+        <view class="stats-label">答错题数</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-value">{{points || 0}}</view>
+        <view class="stats-label">获得积分</view>
+      </view>
+    </view>
+    <view class="stats-row">
+      <view class="stats-item">
+        <view class="stats-value">{{timeUsed || '0分钟'}}</view>
+        <view class="stats-label">用时</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-value">{{accuracy || 0}}</view>
+        <view class="stats-label">正确率</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-value">{{level || 1}}</view>
+        <view class="stats-label">当前关卡</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-section">
+    <view class="tip-item">
+      <image class="tip-icon" src="https://api.hsbogk.icu/mini-programs/images/time.png" mode="aspectFit"></image>
+      <text class="tip-text">{{stars >= 1 ? '已解锁下一关！' : '需要获得至少一颗星星才能解锁下一关'}}</text>
+    </view>
+    <view class="tip-item">
+      <image class="tip-icon" src="https://api.hsbogk.icu/mini-programs/images/accuracy.png" mode="aspectFit"></image>
+      <text class="tip-text">30%正确率获得1星，70%获得2星，100%获得3星</text>
+    </view>
+    <view class="tip-item">
+      <image class="tip-icon" src="https://api.hsbogk.icu/mini-programs/images/star_filled.png" mode="aspectFit"></image>
+      <text class="tip-text">继续努力，提升你的答题水平！</text>
+    </view>
+  </view>
+
+  <!-- 按钮区域 -->
+  <view class="button-group">
+    <button class="action-btn retry" bindtap="retryLevel">
+      <image class="btn-icon" src="https://api.hsbogk.icu/mini-programs/images/retry.png" mode="aspectFit"></image>
+      <text>重试</text>
+    </button>
+    <button class="action-btn next {{stars >= 1 ? '' : 'disabled'}}" bindtap="nextLevel">
+      <image class="btn-icon" src="https://api.hsbogk.icu/mini-programs/images/arrow_right.png" mode="aspectFit"></image>
+      <text>下一关</text>
+    </button>
+    <button class="action-btn back" bindtap="backToLevels">
+      <image class="btn-icon" src="https://api.hsbogk.icu/mini-programs/images/return.png" mode="aspectFit"></image>
+      <text>返回</text>
+    </button>
+    <button class="action-btn share" open-type="share">
+      <image class="btn-icon" src="https://api.hsbogk.icu/mini-programs/images/share.png" mode="aspectFit"></image>
+      <text>分享</text>
+    </button>
+  </view>
+</view> 

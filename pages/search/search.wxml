@@ -1,0 +1,89 @@
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <view class="search-input-wrap">
+      <image class="search-icon" src="{{iconBaseUrl}}/search.png" mode="aspectFit"></image>
+      <input 
+        class="search-input" 
+        placeholder="输入关键词搜索题目" 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+      <view class="clear-btn" bindtap="clearSearch" wx:if="{{searchKeyword}}">×</view>
+    </view>
+    <button class="search-btn" bindtap="onSearch">搜索</button>
+  </view>
+
+  <!-- 搜索历史 -->
+  <view class="history-section" wx:if="{{!searchKeyword && searchHistory.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="clear-history" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-list">
+      <view 
+        class="history-item" 
+        wx:for="{{searchHistory}}" 
+        wx:key="*this" 
+        bindtap="onHistoryTap" 
+        data-keyword="{{item}}"
+      >
+        <image class="history-icon" src="{{iconBaseUrl}}/history.png" mode="aspectFit"></image>
+        <text class="history-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-results" wx:if="{{searchKeyword}}">
+    <view class="result-stats" wx:if="{{questions.length > 0}}">
+      找到 {{questions.length}} 个相关题目
+    </view>
+    <view class="no-result" wx:if="{{searched && questions.length === 0}}">
+      <image class="no-result-icon" src="{{iconBaseUrl}}/no-result.png" mode="aspectFit"></image>
+      <text>未找到相关题目</text>
+    </view>
+    <view class="question-list">
+      <view class="question-item" wx:for="{{questions}}" wx:key="_id">
+        <view class="question-content">{{item.title}}</view>
+        <!-- 选项列表 -->
+        <view class="options-list">
+          <view class="option-item {{item.answer === 'A' ? 'correct' : ''}}">
+            <text class="option-label">A</text>
+            <text class="option-content">{{item.optionA}}</text>
+          </view>
+          <view class="option-item {{item.answer === 'B' ? 'correct' : ''}}">
+            <text class="option-label">B</text>
+            <text class="option-content">{{item.optionB}}</text>
+          </view>
+          <view class="option-item {{item.answer === 'C' ? 'correct' : ''}}">
+            <text class="option-label">C</text>
+            <text class="option-content">{{item.optionC}}</text>
+          </view>
+          <view class="option-item {{item.answer === 'D' ? 'correct' : ''}}">
+            <text class="option-label">D</text>
+            <text class="option-content">{{item.optionD}}</text>
+          </view>
+        </view>
+        <!-- 答案解析 -->
+        <view class="answer-section">
+          <view class="correct-answer">
+            <text class="label">正确答案：</text>
+            <text class="value">{{item.answer}}</text>
+          </view>
+          <view class="feedback-btn" bindtap="onFeedback" data-question="{{item}}">
+            <image class="feedback-icon" src="{{iconBaseUrl}}/feedback.png" mode="aspectFit"></image>
+            <text>反馈错题</text>
+          </view>
+        </view>
+        <!-- 题目元信息 -->
+        <view class="question-meta">
+          <text class="question-type">{{item.type}}</text>
+          <text class="question-source">{{item.source}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

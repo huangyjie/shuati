@@ -1,0 +1,108 @@
+<view class="reward-container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <text class="title">奖励设置</text>
+  </view>
+
+  <!-- 奖励设置卡片 -->
+  <view class="reward-card">
+    <view class="card-title">全服积分奖励</view>
+    <view class="card-content">
+      <view class="input-item">
+        <text class="label">奖励名称</text>
+        <input class="reward-input" 
+               type="text" 
+               placeholder="请输入奖励名称" 
+               value="{{rewardName}}"
+               bindinput="onNameInput"/>
+      </view>
+      <view class="input-item">
+        <text class="label">积分数量</text>
+        <input class="reward-input" 
+               type="number" 
+               placeholder="请输入要设置的积分数量" 
+               value="{{rewardPoints}}"
+               bindinput="onPointsInput"/>
+      </view>
+
+      <!-- 领取条件设置 -->
+      <view class="conditions-section">
+        <text class="section-label">领取条件（满足任意一个即可）</text>
+        <view class="condition-item">
+          <text class="condition-label">答题数量达到</text>
+          <input class="condition-input" 
+                 type="number" 
+                 placeholder="不限制请留空" 
+                 value="{{minQuestions}}"
+                 bindinput="onMinQuestionsInput"/>
+          <text class="condition-unit">题</text>
+        </view>
+        <view class="condition-item">
+          <text class="condition-label">正确率达到</text>
+          <input class="condition-input" 
+                 type="digit" 
+                 placeholder="不限制请留空" 
+                 value="{{minCorrectRate}}"
+                 bindinput="onMinCorrectRateInput"/>
+          <text class="condition-unit">%</text>
+        </view>
+        <view class="condition-item">
+          <text class="condition-label">排名在前</text>
+          <input class="condition-input" 
+                 type="number" 
+                 placeholder="不限制请留空" 
+                 value="{{minRanking}}"
+                 bindinput="onMinRankingInput"/>
+          <text class="condition-unit">名</text>
+        </view>
+      </view>
+
+      <view class="tips">设置后符合条件的用户可在首页领取对应数量的积分奖励</view>
+      <button class="reward-btn {{isLoading ? 'loading' : ''}}" 
+              bindtap="setReward" 
+              disabled="{{isLoading}}">
+        {{isLoading ? '设置中...' : '确认设置'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 设置记录 -->
+  <view class="history-section">
+    <view class="section-title">设置记录</view>
+    <view class="history-list" wx:if="{{history.length > 0}}">
+      <view class="history-item" wx:for="{{history}}" wx:key="_id">
+        <view class="history-info">
+          <view class="history-name-points">
+            <text class="history-name">{{item.name || '积分奖励'}}</text>
+            <text class="history-points">+{{item.points}}积分</text>
+          </view>
+          <view class="history-conditions">
+            <text wx:if="{{item.minQuestions}}">答题≥{{item.minQuestions}}题</text>
+            <text wx:if="{{item.minCorrectRate}}">正确率≥{{item.minCorrectRate}}%</text>
+            <text wx:if="{{item.minRanking}}">排名≤{{item.minRanking}}名</text>
+            <text wx:if="{{!item.minQuestions && !item.minCorrectRate && !item.minRanking}}">无条件限制</text>
+          </view>
+          <view class="history-status">
+            <text class="history-count">已领取人数：{{item.userCount || 0}}人</text>
+            <text class="history-time">{{item.time}}</text>
+          </view>
+        </view>
+        <view class="history-actions">
+          <button class="action-btn {{item.status === 'active' ? 'disable-btn' : 'enable-btn'}}"
+                  bindtap="toggleRewardStatus"
+                  data-id="{{item._id}}"
+                  data-status="{{item.status}}">
+            {{item.status === 'active' ? '停用' : '启用'}}
+          </button>
+          <button class="action-btn delete-btn"
+                  bindtap="deleteReward"
+                  data-id="{{item._id}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+    <view class="no-data" wx:else>
+      <text>暂无设置记录</text>
+    </view>
+  </view>
+</view> 

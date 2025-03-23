@@ -1,0 +1,102 @@
+<!-- pages/profile/profile.wxml -->
+<view class="profile-container {{darkMode ? 'dark-mode' : ''}}" style="--status-bar-height: {{statusBarHeight}}px">
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px">
+    <view class="nav-bar-inner">
+      <text class="nav-title"></text>
+    </view>
+  </view>
+  <!-- 头部信息 -->
+  <view class="header">
+    <view class="app-info">
+      <image class="app-logo" src="{{iconBaseUrl}}/logo.png" mode="aspectFit"></image>
+      <view class="app-title">
+        <view class="app-name">应知刷题</view>
+        <view class="version">v{{version}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 应用描述 -->
+  <view class="section description-section">
+    <view class="section-title">
+      <image class="title-icon" src="{{iconBaseUrl}}/desc.png" mode="aspectFit"></image>
+      <text>应用介绍</text>
+    </view>
+    <view class="description">{{description}}</view>
+  </view>
+  <!-- 功能特点 -->
+  <view class="section features-section">
+    <view class="section-title">
+      <image class="title-icon" src="{{iconBaseUrl}}/feature.png" mode="aspectFit"></image>
+      <text>功能特点</text>
+    </view>
+    <view class="features">
+      <view class="feature-item" wx:for="{{features}}" wx:key="title">
+        <view class="feature-header">
+          <text class="feature-title">{{item.title}}</text>
+        </view>
+        <text class="feature-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 更新日志 -->
+  <view class="section update-section">
+    <view class="section-title">
+      <image class="title-icon" src="{{iconBaseUrl}}/update.png" mode="aspectFit"></image>
+      <text>更新日志</text>
+    </view>
+    <view class="update-logs">
+      <view class="loading-container" wx:if="{{isLoading}}">
+        <view class="loading"></view>
+        <text class="loading-text">加载中...</text>
+      </view>
+      <block wx:else>
+        <view class="log-item" wx:for="{{updateLog}}" wx:key="version">
+          <view class="log-header">
+            <view class="version-tag">
+              <text class="log-version">v{{item.version}}</text>
+              <text class="log-label">最新</text>
+            </view>
+            <text class="log-date">{{item.date}}</text>
+          </view>
+          <view class="log-content">
+            <view class="log-category" wx:for="{{item.categoryContent}}" wx:key="category" wx:for-item="category">
+              <text class="category-title">{{category.title}}</text>
+              <view class="category-items">
+                <view class="log-detail" wx:for="{{category.items}}" wx:key="*this" wx:for-item="detail">
+                  <text class="log-dot">•</text>
+                  <text class="log-text">{{detail}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 免责声明 -->
+  <view class="section disclaimer-section">
+    <view class="section-title">
+      <image class="title-icon" src="{{iconBaseUrl}}/notice.png" mode="aspectFit"></image>
+      <text>免责声明</text>
+    </view>
+    <view class="disclaimer-content">
+      <text class="disclaimer-text">本小程序题库来源于网络及用户贡献，仅供学习交流使用。如有侵权请通过反馈按钮联系我们，我们将及时处理。</text>
+    </view>
+  </view>
+  <!-- 联系方式 -->
+  <view class="section contact-section">
+    <view class="contact-info" bindtap="copyContact">
+      <text class="contact-item">开发者：{{developer}}</text>
+      <text class="contact-item">{{contact}}</text>
+      <text class="copy-hint">(点击复制)</text>
+    </view>
+  </view>
+  <!-- 意见反馈按钮 -->
+  <view class="feedback-section">
+    <button class="feedback-btn" open-type="feedback">
+      <image class="btn-icon" src="{{iconBaseUrl}}/feedback.png" mode="aspectFit"></image>
+      <text class="btn-text">意见反馈</text>
+    </button>
+  </view>
+</view>

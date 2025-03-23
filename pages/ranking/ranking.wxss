@@ -1,0 +1,1264 @@
+/* 基础布局 */
+.ranking-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20rpx;
+}
+
+.ranking-header {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.title-wrapper {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 排行榜列表样式 */
+.ranking-list {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.ranking-item:active {
+  background: #f9f9f9;
+}
+
+.ranking-item:last-child {
+  border-bottom: none;
+}
+
+/* 排名和头像 */
+.rank-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.rank-number {
+  width: 48rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #999;
+  text-align: center;
+}
+
+.rank-number.top-1 {
+  color: #ff4d4f;
+}
+
+.rank-number.top-2 {
+  color: #ff7a45;
+}
+
+.rank-number.top-3 {
+  color: #ffa940;
+}
+
+/* 头像样式 */
+.avatar-wrapper {
+  position: relative;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+  border: 4rpx solid #eee;
+}
+
+/* 第一名样式 */
+.user-avatar.top-1 {
+  border: 4rpx solid #ffd700;
+  box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6);
+}
+
+.first-place-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0) 70%);
+  animation: halo-pulse 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+.crown-effect {
+  position: absolute;
+  top: -20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.crown {
+  width: 40rpx;
+  height: 30rpx;
+  background: linear-gradient(45deg, #ffd700, #ffeb3b);
+  clip-path: polygon(0% 100%, 100% 100%, 85% 50%, 70% 100%, 50% 50%, 30% 100%, 15% 50%);
+  animation: crown-shine 2s ease-in-out infinite;
+}
+
+/* 第二名样式 */
+.user-avatar.top-2 {
+  border: 4rpx solid #c0c0c0;
+  box-shadow: 0 0 15rpx rgba(192, 192, 192, 0.5);
+}
+
+.second-place-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(192, 192, 192, 0.5);
+  animation: rotate 3s linear infinite;
+  z-index: 1;
+}
+
+/* 第三名样式 */
+.user-avatar.top-3 {
+  border: 4rpx solid #cd7f32;
+  box-shadow: 0 0 15rpx rgba(205, 127, 50, 0.5);
+}
+
+.third-place-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(205, 127, 50, 0.2) 0%, rgba(205, 127, 50, 0) 70%);
+  z-index: 1;
+}
+
+/* 动画效果 */
+@keyframes halo-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes crown-shine {
+  0% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.3);
+  }
+
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* 暗黑模式适配 */
+.dark-mode .user-avatar {
+  border-color: #333;
+}
+
+.dark-mode .user-avatar.top-1 {
+  border-color: #ffd700;
+  box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.4);
+}
+
+.dark-mode .user-avatar.top-2 {
+  border-color: #c0c0c0;
+  box-shadow: 0 0 15rpx rgba(192, 192, 192, 0.3);
+}
+
+.dark-mode .user-avatar.top-3 {
+  border-color: #cd7f32;
+  box-shadow: 0 0 15rpx rgba(205, 127, 50, 0.3);
+}
+
+/* 用户信息 */
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+/* 统计信息布局 */
+.stats-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.questions-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+/* 统计数据样式 */
+.stat-item {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+  font-weight: normal;
+  margin-left: 4rpx;
+}
+
+.score {
+  color: #ff4d4f;
+}
+
+.questions {
+  color: #1aad19;
+}
+
+.points {
+  color: #ff9800;
+}
+
+.quality {
+  color: #1890ff;
+}
+
+.sign-in {
+  color: #722ed1;
+}
+
+.submit-time {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 16rpx;
+}
+
+/* 正确率样式 */
+.accuracy-wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.accuracy-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6rpx;
+}
+
+.accuracy-rate {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.accuracy-level {
+  font-size: 22rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 12rpx;
+  min-width: 56rpx;
+  text-align: center;
+}
+
+/* 正确率颜色等级 */
+.rate-excellent {
+  color: #ff6b6b;
+}
+
+.rate-great {
+  color: #ff922b;
+}
+
+.rate-good {
+  color: #51cf66;
+}
+
+.rate-normal {
+  color: #339af0;
+}
+
+.rate-low {
+  color: #868e96;
+}
+
+/* 排行榜类型按钮 */
+.rank-type-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  padding: 0 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.type-btn {
+  padding: 12rpx 20rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f5f5;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.type-btn.active {
+  background: #1aad19;
+  color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(26, 173, 25, 0.2);
+}
+
+/* 答题质量样式 */
+.quality-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.total-count {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 删除连续答题相关样式 */
+.streak-info,
+.last-sign {
+  display: none;
+}
+
+/* 详情图标 */
+.detail-icon {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+}
+
+/* 空状态提示 */
+.empty-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 0;
+  color: #999;
+  width: 100%;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 排名详情弹窗 */
+.rank-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+.rank-detail-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rank-detail-content {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  position: relative;
+  transform: scale(0.9) translateY(30rpx);
+  transition: all 0.3s ease-out;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.15);
+}
+
+.rank-detail-modal.show .rank-detail-content {
+  transform: scale(1) translateY(0);
+}
+
+.detail-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.detail-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  border: 6rpx solid #eee;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.detail-avatar.top-1 {
+  border-color: #ffd700;
+  box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.3);
+}
+
+.detail-avatar.top-2 {
+  border-color: #c0c0c0;
+  box-shadow: 0 0 25rpx rgba(192, 192, 192, 0.3);
+}
+
+.detail-avatar.top-3 {
+  border-color: #cd7f32;
+  box-shadow: 0 0 25rpx rgba(205, 127, 50, 0.3);
+}
+
+.detail-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.detail-rank {
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f5f5;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+.detail-stats {
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.detail-value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.close-btn {
+  margin-top: 40rpx;
+  text-align: center;
+  padding: 24rpx;
+  background: #f5f5f5;
+  border-radius: 100rpx;
+  color: #666;
+  font-size: 30rpx;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-btn:active {
+  background: #eee;
+  transform: scale(0.98);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .rank-detail-content {
+  background: #2d2d2d;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .detail-name {
+  color: #fff;
+}
+
+.dark-mode .detail-rank {
+  color: #aaa;
+  background: #3d3d3d;
+}
+
+.dark-mode .detail-stats {
+  background: #3d3d3d;
+}
+
+.dark-mode .detail-item {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .detail-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .detail-label {
+  color: #aaa;
+}
+
+.dark-mode .detail-value {
+  color: #fff;
+}
+
+.dark-mode .close-btn {
+  background: #3d3d3d;
+  color: #aaa;
+}
+
+.dark-mode .close-btn:active {
+  background: #4d4d4d;
+}
+
+/* 添加详情数值的动画效果 */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10rpx);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-value {
+  animation: countUp 0.5s ease-out forwards;
+}
+
+/* 为不同类型的数值添加不同的延迟 */
+.detail-item:nth-child(1) .detail-value {
+  animation-delay: 0.1s;
+}
+
+.detail-item:nth-child(2) .detail-value {
+  animation-delay: 0.2s;
+}
+
+.detail-item:nth-child(3) .detail-value {
+  animation-delay: 0.3s;
+}
+
+.detail-item:nth-child(4) .detail-value {
+  animation-delay: 0.4s;
+}
+
+.detail-item:nth-child(5) .detail-value {
+  animation-delay: 0.5s;
+}
+
+.detail-item:nth-child(6) .detail-value {
+  animation-delay: 0.6s;
+}
+
+/* 添加图标样式 */
+.detail-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+
+/* 添加标签样式 */
+.detail-tag {
+  font-size: 22rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 8rpx;
+  margin-left: 12rpx;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* 添加进度条样式 */
+.progress-bar {
+  height: 6rpx;
+  background: #f0f0f0;
+  border-radius: 3rpx;
+  margin-top: 8rpx;
+  overflow: hidden;
+}
+
+.progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #1aad19, #2ecc71);
+  border-radius: 3rpx;
+  transition: width 0.8s ease-out;
+}
+
+/* 暗黑模式进度条 */
+.dark-mode .progress-bar {
+  background: #4d4d4d;
+}
+
+.dark-mode .progress-inner {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+/* 段位样式暗黑模式适配 */
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-name {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 不同段位的暗黑模式样式 */
+.dark-mode .tier-supreme .tier-name {
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(255, 215, 0, 0.3));
+  box-shadow: 0 0 10rpx rgba(138, 43, 226, 0.4);
+}
+
+.dark-mode .tier-king .tier-name {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.3), rgba(255, 215, 0, 0.3));
+}
+
+.dark-mode .tier-master .tier-name {
+  background: linear-gradient(135deg, rgba(114, 46, 209, 0.3), rgba(176, 127, 235, 0.3));
+}
+
+.dark-mode .tier-diamond .tier-name {
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.3), rgba(133, 244, 255, 0.3));
+}
+
+.dark-mode .tier-platinum .tier-name {
+  background: linear-gradient(135deg, rgba(19, 194, 194, 0.3), rgba(168, 255, 255, 0.3));
+}
+
+.dark-mode .tier-gold .tier-name {
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.3), rgba(255, 234, 138, 0.3));
+}
+
+.dark-mode .tier-silver .tier-name {
+  background: linear-gradient(135deg, rgba(140, 140, 140, 0.3), rgba(217, 217, 217, 0.3));
+}
+
+.dark-mode .tier-bronze .tier-name {
+  background: linear-gradient(135deg, rgba(166, 117, 75, 0.3), rgba(213, 176, 146, 0.3));
+}
+
+/* 用户名段位颜色暗黑模式适配 */
+.dark-mode .tier-supreme-name,
+.dark-mode .tier-king-name,
+.dark-mode .tier-master-name,
+.dark-mode .tier-diamond-name,
+.dark-mode .tier-platinum-name,
+.dark-mode .tier-gold-name,
+.dark-mode .tier-silver-name,
+.dark-mode .tier-bronze-name {
+  opacity: 0.9;
+  text-shadow: 0 0 8rpx currentColor;
+}
+
+/* 正确率样式暗黑模式适配 */
+.dark-mode .rate-excellent {
+  color: #ff8787;
+}
+
+.dark-mode .rate-great {
+  color: #ffa94d;
+}
+
+.dark-mode .rate-good {
+  color: #69db7c;
+}
+
+.dark-mode .rate-normal {
+  color: #4dabf7;
+}
+
+.dark-mode .rate-low {
+  color: #adb5bd;
+}
+
+/* 排行榜详情弹窗暗黑模式适配 */
+.dark-mode .rank-detail-modal {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .rank-detail-content {
+  background: #2d2d2d;
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.3);
+}
+
+/* 动画效果暗黑模式适配 */
+@keyframes darkSlideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dark-mode .rank-detail-modal.show .rank-detail-content {
+  animation: darkSlideIn 0.3s ease-out forwards;
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.tier {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+}
+
+.tier-legendary {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.tier-master {
+  color: #722ed1;
+  background: rgba(114, 46, 209, 0.1);
+}
+
+.tier-diamond {
+  color: #1890ff;
+  background: rgba(24, 144, 255, 0.1);
+}
+
+.tier-platinum {
+  color: #13c2c2;
+  background: rgba(19, 194, 194, 0.1);
+}
+
+.tier-gold {
+  color: #faad14;
+  background: rgba(250, 173, 20, 0.1);
+}
+
+.tier-silver {
+  color: #8c8c8c;
+  background: rgba(140, 140, 140, 0.1);
+}
+
+/* 段位样式 */
+.tier-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.tier-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 8rpx;
+}
+
+.tier-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+}
+
+/* 不同段位的颜色样式 */
+.tier-legendary .tier-name {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.tier-master .tier-name {
+  color: #722ed1;
+  background: rgba(114, 46, 209, 0.1);
+}
+
+.tier-diamond .tier-name {
+  color: #1890ff;
+  background: rgba(24, 144, 255, 0.1);
+}
+
+.tier-platinum .tier-name {
+  color: #13c2c2;
+  background: rgba(19, 194, 194, 0.1);
+}
+
+.tier-gold .tier-name {
+  color: #faad14;
+  background: rgba(250, 173, 20, 0.1);
+}
+
+.tier-silver .tier-name {
+  color: #8c8c8c;
+  background: rgba(140, 140, 140, 0.1);
+}
+
+/* 暗黑模式适配 */
+.dark-mode .tier-name {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 不同段位的颜色样式 */
+.tier-king .tier-name {
+  color: #ff4d4f;
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 215, 0, 0.2));
+  border: 1rpx solid rgba(255, 77, 79, 0.3);
+}
+
+.tier-master .tier-name {
+  color: #722ed1;
+  background: linear-gradient(135deg, rgba(114, 46, 209, 0.2), rgba(176, 127, 235, 0.2));
+  border: 1rpx solid rgba(114, 46, 209, 0.3);
+}
+
+.tier-diamond .tier-name {
+  color: #1890ff;
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.2), rgba(133, 244, 255, 0.2));
+  border: 1rpx solid rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum .tier-name {
+  color: #13c2c2;
+  background: linear-gradient(135deg, rgba(19, 194, 194, 0.2), rgba(168, 255, 255, 0.2));
+  border: 1rpx solid rgba(19, 194, 194, 0.3);
+}
+
+.tier-gold .tier-name {
+  color: #faad14;
+  background: linear-gradient(135deg, rgba(250, 173, 20, 0.2), rgba(255, 234, 138, 0.2));
+  border: 1rpx solid rgba(250, 173, 20, 0.3);
+}
+
+.tier-silver .tier-name {
+  color: #8c8c8c;
+  background: linear-gradient(135deg, rgba(140, 140, 140, 0.2), rgba(217, 217, 217, 0.2));
+  border: 1rpx solid rgba(140, 140, 140, 0.3);
+}
+
+.tier-bronze .tier-name {
+  color: #a6754b;
+  background: linear-gradient(135deg, rgba(166, 117, 75, 0.2), rgba(213, 176, 146, 0.2));
+  border: 1rpx solid rgba(166, 117, 75, 0.3);
+}
+
+/* 段位图标样式 */
+.tier-info {
+  display: flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.tier-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 8rpx;
+}
+
+.tier-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .tier-info {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .tier-name {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 不同段位的颜色样式 */
+.tier-supreme .tier-name {
+  color: #8a2be2;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 215, 0, 0.2));
+  border: 2rpx solid rgba(138, 43, 226, 0.5);
+  box-shadow: 0 0 10rpx rgba(138, 43, 226, 0.3);
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.5);
+}
+
+.tier-king .tier-name {
+  color: #ff4d4f;
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 215, 0, 0.2));
+  border: 1rpx solid rgba(255, 77, 79, 0.3);
+}
+
+/* 用户名段位颜色 */
+.tier-supreme-name {
+  color: #8a2be2 !important;
+  text-shadow: 0 0 6rpx rgba(138, 43, 226, 0.3);
+  font-weight: bold;
+}
+
+.tier-king-name {
+  color: #ff4d4f !important;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.3);
+  font-weight: bold;
+}
+
+.tier-master-name {
+  color: #722ed1 !important;
+  text-shadow: 0 0 4rpx rgba(114, 46, 209, 0.3);
+  font-weight: bold;
+}
+
+.tier-diamond-name {
+  color: #1890ff !important;
+  text-shadow: 0 0 4rpx rgba(24, 144, 255, 0.3);
+}
+
+.tier-platinum-name {
+  color: #13c2c2 !important;
+}
+
+.tier-gold-name {
+  color: #faad14 !important;
+}
+
+.tier-silver-name {
+  color: #8c8c8c !important;
+}
+
+.tier-bronze-name {
+  color: #a6754b !important;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .tier-supreme-name,
+.dark-mode .tier-king-name,
+.dark-mode .tier-master-name,
+.dark-mode .tier-diamond-name,
+.dark-mode .tier-platinum-name,
+.dark-mode .tier-gold-name,
+.dark-mode .tier-silver-name,
+.dark-mode .tier-bronze-name {
+  opacity: 0.9;
+  text-shadow: 0 0 8rpx currentColor;
+}
+
+/* 签到信息样式 */
+.sign-in-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.consecutive-days {
+  font-size: 24rpx;
+  color: #666;
+  background: rgba(114, 46, 209, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+.sign-points {
+  font-size: 24rpx;
+  color: #722ed1;
+  background: rgba(114, 46, 209, 0.05);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  margin-left: auto;
+}
+
+/* 暗黑模式签到样式 */
+.dark-mode .consecutive-days,
+.dark-mode .sign-points {
+  color: #aaa;
+  background: rgba(114, 46, 209, 0.2);
+}
+
+.dark-mode .sign-in {
+  color: #9254de;
+}
+
+/* 综合排名样式 */
+.comprehensive-score {
+  display: flex;
+  align-items: baseline;
+  margin-left: auto;
+}
+
+.score-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #722ed1;
+  margin-right: 8rpx;
+  text-shadow: 0 0 6rpx rgba(114, 46, 209, 0.2);
+}
+
+.score-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 综合排名详情样式 */
+.detail-value.comprehensive {
+  color: #722ed1;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .score-value {
+  color: #9254de;
+  text-shadow: 0 0 6rpx rgba(146, 84, 222, 0.3);
+}
+
+.dark-mode .score-label {
+  color: #888;
+}
+
+.dark-mode .detail-value.comprehensive {
+  color: #9254de;
+}
+
+/* 考试榜样式优化 */
+.score-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.score-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+  text-shadow: 0 0 6rpx rgba(255, 77, 79, 0.2);
+}
+
+.score-max {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 4rpx;
+}
+
+.exam-time {
+  font-size: 22rpx;
+  color: #999;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  margin-left: auto;
+}
+
+.exam-rate {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 8rpx;
+}
+
+.rate-progress {
+  flex: 1;
+  height: 6rpx;
+  background: #f0f0f0;
+  border-radius: 3rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.rate-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #95de64, #52c41a);
+  border-radius: 3rpx;
+  transition: width 0.3s ease-out;
+}
+
+.rate-text {
+  font-size: 22rpx;
+  color: #52c41a;
+  min-width: 70rpx;
+  text-align: right;
+}
+
+/* 考试详情弹窗优化 */
+.exam-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+  margin-top: 30rpx;
+}
+
+.exam-stat-item {
+  background: rgba(0, 0, 0, 0.02);
+  padding: 20rpx;
+  border-radius: 12rpx;
+  text-align: center;
+}
+
+.stat-title {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.stat-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-value.score {
+  color: #ff4d4f;
+  font-size: 40rpx;
+}
+
+.stat-value.rate {
+  color: #52c41a;
+}
+
+.stat-value.time {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 暗黑模式适配 */
+.dark-mode .exam-time {
+  background: rgba(255, 255, 255, 0.1);
+  color: #888;
+}
+
+.dark-mode .rate-progress {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .exam-stat-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .stat-title {
+  color: #999;
+}
+
+.dark-mode .stat-value {
+  color: #fff;
+}
+
+.dark-mode .stat-value.time {
+  color: #999;
+}

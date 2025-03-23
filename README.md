@@ -1,6 +1,6 @@
 # 刷题小程序 (shuati) - 计算机知识在线学习平台
 
-![Logo](logo.png)
+![Logo](images/logo.png)
 
 ## 项目概述
 
@@ -114,7 +114,7 @@
 1. 克隆项目到本地:
 
 ```bash
-git clone https://github.com/yourusername/shuati.git
+git clone https://github.com/huangyjie/shuati.git
 cd shuati
 ```
 

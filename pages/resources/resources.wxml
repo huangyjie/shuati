@@ -1,0 +1,64 @@
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 主体内容区域 -->
+  <view class="main-content">
+    <!-- 侧边类型筛选栏 -->
+    <view class="type-sidebar">
+      <view class="type-item {{currentType === item.value ? 'active' : ''}}" wx:for="{{typeOptions}}" wx:key="value" bindtap="onTypeChange" data-index="{{index}}">
+        {{item.label}}
+      </view>
+    </view>
+    <!-- 右侧资源列表区域 -->
+    <view class="content-area">
+      <!-- 资源总数显示 -->
+      <view class="resource-count">
+        <text class="count-text">{{currentType ? currentTypeCount : totalCount}}</text>
+        <text class="count-label">{{currentType ? '个相关资源' : '个资源'}}</text>
+      </view>
+      <!-- 加载中状态 -->
+      <view class="loading-container" wx:if="{{loading && currentPage === 1}}">
+        <view class="loading"></view>
+        <text class="loading-text">加载中...</text>
+      </view>
+      <!-- 资源列表 -->
+      <scroll-view class="resources-list" scroll-y enable-flex bindscrolltolower="onReachBottom" wx:else>
+        <block wx:if="{{resources.length > 0}}">
+          <view class="resource-card" wx:for="{{resources}}" wx:key="_id" bindtap="previewResource" data-link="{{item.link}}" data-title="{{item.title}}">
+            <!-- 资源图标 -->
+            <view class="resource-icon">
+              <image class="icon" src="{{iconBaseUrl}}/{{item.fileType}}.png" mode="aspectFit"></image>
+            </view>
+            <!-- 资源内容 -->
+            <view class="resource-content">
+              <view class="resource-title">{{item.title}}</view>
+              <view class="resource-desc">{{item.description}}</view>
+              <!-- 资源缩略图 -->
+              <image wx:if="{{item.thumbnail}}" class="resource-thumbnail" src="{{item.thumbnail}}" mode="aspectFill"></image>
+              <!-- 资源信息 -->
+              <view class="resource-info">
+                <text class="resource-type">{{item.type}}</text>
+                <text class="resource-date">{{item.createTime}}</text>
+              </view>
+            </view>
+            <!-- 文件类型标签 -->
+            <view class="file-type-tag {{item.fileType}}">
+              {{item.fileType === 'doc' ? 'WORD' : item.fileType.toUpperCase()}}
+            </view>
+          </view>
+          <!-- 加载更多提示 -->
+          <view class="loading-more" wx:if="{{loading && currentPage > 1}}">
+            <view class="loading"></view>
+            <text>加载更多...</text>
+          </view>
+          <view class="no-more" wx:if="{{!hasMore && resources.length > 0}}">
+            <text>没有更多了</text>
+          </view>
+        </block>
+        <!-- 空状态 -->
+        <view class="empty-state" wx:else>
+          <image class="empty-icon" src="{{iconBaseUrl}}/empty.png" mode="aspectFit"></image>
+          <text class="empty-text">暂无资源</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

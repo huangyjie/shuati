@@ -1,0 +1,154 @@
+<view class="logs-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部操作栏 -->
+  <view class="action-bar">
+    <view class="tab-group">
+      <view class="tab {{activeTab === 'updateLogs' ? 'active' : ''}}" 
+            bindtap="switchTab" 
+            data-tab="updateLogs">更新日志</view>
+      <view class="tab {{activeTab === 'nextVersion' ? 'active' : ''}}" 
+            bindtap="switchTab" 
+            data-tab="nextVersion">下一版本</view>
+    </view>
+    <button class="add-btn" bindtap="showAddModal">
+      <text class="add-icon">+</text>
+      <text>{{activeTab === 'updateLogs' ? '添加日志' : '编辑预告'}}</text>
+    </button>
+  </view>
+
+  <!-- 更新日志列表 -->
+  <view class="logs-list" wx:if="{{activeTab === 'updateLogs'}}">
+    <view class="loading-container" wx:if="{{isLoading}}">
+      <view class="loading"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+    <block wx:else>
+      <view class="log-item" wx:for="{{updateLogs}}" wx:key="_id">
+        <view class="log-header">
+          <view class="version-info">
+            <text class="version">v{{item.version}}</text>
+            <text class="date">{{item.date}}</text>
+          </view>
+          <view class="actions">
+            <button class="action-btn edit" bindtap="editLog" data-id="{{item._id}}">编辑</button>
+            <button class="action-btn delete" bindtap="deleteLog" data-id="{{item._id}}">删除</button>
+          </view>
+        </view>
+        <view class="log-content">
+          <view class="category" wx:for="{{item.categoryContent}}" wx:for-item="category" wx:key="title">
+            <text class="category-title">{{category.title}}</text>
+            <view class="category-items">
+              <view class="item" wx:for="{{category.items}}" wx:for-item="detail" wx:key="*this">
+                <text class="dot">•</text>
+                <text class="text">{{detail}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 下一版本预告 -->
+  <view class="next-version" wx:if="{{activeTab === 'nextVersion'}}">
+    <view class="loading-container" wx:if="{{isLoading}}">
+      <view class="loading"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+    <block wx:else>
+      <view class="next-version-content">
+        <view class="version-header">
+          <text class="version">v{{nextVersion.version}}</text>
+          <text class="expected-date">预计{{nextVersion.expectedDate}}发布</text>
+          <view class="actions" wx:if="{{nextVersion}}">
+            <button class="action-btn delete" bindtap="deleteNextVersion">删除</button>
+          </view>
+        </view>
+        <view class="features-list">
+          <view class="feature-item" wx:for="{{nextVersion.features}}" wx:key="*this">
+            <text class="dot">•</text>
+            <text class="text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 添加/编辑日志弹窗 -->
+  <view class="modal" wx:if="{{showModal}}" bindtap="hideModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{isEditing ? '编辑' : '添加'}}{{activeTab === 'updateLogs' ? '更新日志' : '版本预告'}}</text>
+        <text class="close-btn" bindtap="hideModal">×</text>
+      </view>
+      <view class="modal-body">
+        <block wx:if="{{activeTab === 'updateLogs'}}">
+          <view class="form-item">
+            <text class="label">版本号</text>
+            <input class="input" type="text" value="{{formData.version}}" 
+                   bindinput="onInput" data-field="version" 
+                   placeholder="请输入版本号，如: 1.0.0"/>
+          </view>
+          <view class="form-item">
+            <text class="label">发布日期</text>
+            <picker mode="date" value="{{formData.date}}" 
+                    bindchange="onDateChange">
+              <view class="picker">{{formData.date || '请选择日期'}}</view>
+            </picker>
+          </view>
+          <view class="form-item" wx:for="{{formData.categoryContent}}" 
+                wx:key="title" wx:for-index="categoryIndex">
+            <text class="label">{{item.title}}</text>
+            <view class="items-list">
+              <view class="item-input" wx:for="{{item.items}}" 
+                    wx:for-item="detail" wx:for-index="itemIndex" 
+                    wx:key="*this">
+                <input class="input" type="text" value="{{detail}}"
+                       bindinput="onItemInput"
+                       data-category-index="{{categoryIndex}}"
+                       data-item-index="{{itemIndex}}"
+                       placeholder="请输入内容"/>
+                <text class="delete-item" bindtap="deleteItem" 
+                      data-category-index="{{categoryIndex}}"
+                      data-item-index="{{itemIndex}}">×</text>
+              </view>
+              <button class="add-item-btn" bindtap="addItem" 
+                      data-category-index="{{categoryIndex}}">添加项目</button>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="form-item">
+            <text class="label">版本号</text>
+            <input class="input" type="text" value="{{formData.version}}"
+                   bindinput="onInput" data-field="version"
+                   placeholder="请输入版本号，如: 1.1.0"/>
+          </view>
+          <view class="form-item">
+            <text class="label">预计发布日期</text>
+            <input class="input" type="text" value="{{formData.expectedDate}}"
+                   bindinput="onInput" data-field="expectedDate"
+                   placeholder="请输入预计发布日期，如: 2025-03-1之前"/>
+          </view>
+          <view class="form-item">
+            <text class="label">预告功能</text>
+            <view class="features-input">
+              <view class="feature-input" wx:for="{{formData.features}}" 
+                    wx:key="*this">
+                <input class="input" type="text" value="{{item}}"
+                       bindinput="onFeatureInput" data-index="{{index}}"
+                       placeholder="请输入功能描述"/>
+                <text class="delete-feature" bindtap="deleteFeature" 
+                      data-index="{{index}}">×</text>
+              </view>
+              <button class="add-feature-btn" bindtap="addFeature">添加功能</button>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-btn" bindtap="hideModal">取消</button>
+        <button class="confirm-btn" bindtap="saveData">确定</button>
+      </view>
+    </view>
+  </view>
+</view> 

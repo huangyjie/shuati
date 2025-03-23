@@ -1,0 +1,92 @@
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <view class="header">
+    <view class="header-top">
+      <text class="total-count">共90关</text>
+      <button class="rule-btn" bindtap="showRules">
+        <image class="btn-icon" src="{{iconBaseUrl}}/rule.png" mode="aspectFit"></image>
+        <text>规则说明</text>
+      </button>
+    </view>
+    <view class="stats-container">
+      <view class="stats-card">
+        <text class="stats-value">{{userLevel}}</text>
+        <text class="stats-label">当前关卡</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">还差{{90-userLevel}}关</text>
+        <text class="stats-label">距离完成</text>
+      </view>
+      <view class="stats-card">
+        <text class="stats-value">90关</text>
+        <text class="stats-label">总关卡</text>
+      </view>
+    </view>
+    <view class="progress-info">
+      <view class="progress-bar">
+        <view class="progress-inner" style="width: {{(userLevel/90)*100}}%"></view>
+      </view>
+      <view class="progress-percent">{{progressPercent}}%</view>
+    </view>
+  </view>
+
+  <!-- 等级列表 -->
+  <view class="level-list">
+    <block wx:for="{{levels}}" wx:key="title">
+      <view class="level-section">
+        <view class="section-header">
+          <text class="section-title">{{item.title}}</text>
+          <text class="section-desc">{{item.desc}}</text>
+          <text class="section-range">{{item.range}}</text>
+        </view>
+        <view class="level-grid">
+          <block wx:for="{{item.levels}}" wx:key="level" wx:for-item="levelItem">
+            <view class="level-item {{levelItem.level <= userLevel ? 'unlocked' : 'locked'}}"
+                  bindtap="enterLevel" 
+                  data-level="{{levelItem.level}}">
+              <view class="level-number">{{levelItem.level}}</view>
+              <view class="star-row">
+                <image class="star-icon {{levelStars[levelItem.level-1] >= 1 ? 'active' : ''}}" 
+                       src="{{iconBaseUrl}}/star{{levelStars[levelItem.level-1] >= 1 ? '_filled' : ''}}.png" 
+                       mode="aspectFit"></image>
+                <image class="star-icon {{levelStars[levelItem.level-1] >= 2 ? 'active' : ''}}" 
+                       src="{{iconBaseUrl}}/star{{levelStars[levelItem.level-1] >= 2 ? '_filled' : ''}}.png" 
+                       mode="aspectFit"></image>
+                <image class="star-icon {{levelStars[levelItem.level-1] >= 3 ? 'active' : ''}}" 
+                       src="{{iconBaseUrl}}/star{{levelStars[levelItem.level-1] >= 3 ? '_filled' : ''}}.png" 
+                       mode="aspectFit"></image>
+              </view>
+              <view class="lock-icon" wx:if="{{levelItem.level > userLevel}}">
+                <image src="{{iconBaseUrl}}/lock.png" mode="aspectFit"></image>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 规则弹窗 -->
+  <view class="rules-modal {{showRules ? 'show' : ''}}" bindtap="hideRules">
+    <view class="rules-content" catchtap="preventBubble">
+      <view class="rules-title">闯关规则</view>
+      <view class="rules-list">
+        <view class="rule-item">• 初级关卡(1-15关)：每关50题，不限时</view>
+        <view class="rule-item">• 进阶关卡(16-30关)：每关50题，限时40分钟</view>
+        <view class="rule-item">• 提高关卡(31-45关)：每关50题，限时25分钟</view>
+        <view class="rule-item">• 挑战关卡(46-60关)：每关50题，限时20分钟</view>
+        <view class="rule-item">• 精英关卡(61-75关)：每关50题，限时15分钟</view>
+        <view class="rule-item">• 大师关卡(76-90关)：每关50题，限时10分钟</view>
+        <view class="rule-item">• 答题正确率达到以下标准可获得对应星星：</view>
+        <view class="rule-item indent">30%: ⭐</view>
+        <view class="rule-item indent">70%: ⭐⭐</view>
+        <view class="rule-item indent">100%: ⭐⭐⭐</view>
+        <view class="rule-item">• 获得积分规则：</view>
+        <view class="rule-item indent">1-30关: 最高6分</view>
+        <view class="rule-item indent">31-60关: 最高8分</view>
+        <view class="rule-item indent">61-90关: 最高12分</view>
+        <view class="rule-item">• 获得至少1颗星即可解锁下一关</view>
+      </view>
+      <button class="close-btn" bindtap="hideRules">我知道了</button>
+    </view>
+  </view>
+</view> 

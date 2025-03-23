@@ -1,0 +1,51 @@
+<view class="container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 自定义导航栏 -->
+  <view class="custom-nav" style="height: 159rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    <view class="nav-bg"></view>
+    <view class="nav-content">
+      <view class="back-btn" bindtap="backToHome">
+        <image class="back-icon" src="{{iconBaseUrl}}/back.png" mode="aspectFit"></image>
+      </view>
+      <view class="nav-title">万维调考</view>
+    </view>
+  </view>
+
+  <!-- 主要内容区域 -->
+  <view class="content-area" style="position: relative; left: 0rpx; top: -109rpx">
+    <view class="page-header">
+      <view class="header-title">调考试卷</view>
+      <view class="header-subtitle">选择一套试卷开始答题</view>
+    </view>
+
+    <view class="login-tip" wx:if="{{!isLogin}}">
+      <image class="tip-icon" src="{{iconBaseUrl}}/bell.png" mode="aspectFit"></image>
+      <text class="tip-text">请先登录后进行答题</text>
+    </view>
+    
+    <view class="exam-list">
+      <view class="exam-card" wx:for="{{examPapers}}" wx:key="id" bindtap="startExam" data-exam-id="{{item.id}}">
+        <view class="exam-badge">{{index + 1 < 10 ? '0' + (index + 1) : index + 1}}</view>
+        <view class="exam-content" style="width: 562rpx; display: block; box-sizing: border-box">
+          <view class="exam-header">
+            <view class="exam-title">{{item.title}}</view>
+            <view class="question-count">
+              <text class="count-text">{{item.questionCount}}题</text>
+            </view>
+          </view>
+
+          <view class="exam-info">
+            <image class="info-icon" src="{{iconBaseUrl}}/info.png" mode="aspectFit"></image>
+            <text class="info-text">{{item.description}}</text>
+          </view>
+          
+          <view class="card-footer">
+            <view class="start-label">开始答题</view>
+            <view class="card-arrow">
+              <image class="arrow-icon" src="{{iconBaseUrl}}/arrow.png" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,111 @@
+<view class="mock-exam-container {{darkMode ? 'dark-mode' : ''}}">
+  <!-- 顶部进度和设置区 -->
+  <view class="header">
+    <view class="top-buttons">
+      <view class="icon-btn" bindtap="toggleSettings">
+        <text>设置</text>
+      </view>
+    </view>
+    <view class="progress-text">{{currentIndex + 1}}/{{questions.length}}</view>
+  </view>
+
+  <!-- 设置面板 -->
+  <view class="settings-panel {{showSettings ? 'show' : ''}} {{darkMode ? 'dark-mode' : ''}}" 
+        catchtap="toggleSettings">
+    <view class="settings-content" catchtap="preventBubble">
+      <view class="settings-title">设置</view>
+      <view class="setting-item">
+        <text>自动下一题</text>
+        <switch checked="{{autoNext}}" bindchange="toggleAutoNext" color="#1aad19"/>
+      </view>
+      <view class="setting-item">
+        <text>夜间模式</text>
+        <switch checked="{{darkMode}}" bindchange="toggleDarkMode" color="#1aad19"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目内容区 -->
+  <view class="question-content">
+    <text class="question-title">{{currentIndex + 1}}. {{currentQuestion.title}}</text>
+    
+    <!-- 选项列表 -->
+    <view class="options-list">
+      <view class="option-item {{selectedAnswers[currentIndex] === 'A' ? 'selected' : ''}}"
+        bindtap="handleOptionTap" 
+        data-option="A">
+        <text class="option-label">A</text>
+        <text class="option-content">{{currentQuestion.optionA}}</text>
+      </view>
+
+      <view class="option-item {{selectedAnswers[currentIndex] === 'B' ? 'selected' : ''}}"
+        bindtap="handleOptionTap" 
+        data-option="B">
+        <text class="option-label">B</text>
+        <text class="option-content">{{currentQuestion.optionB}}</text>
+      </view>
+
+      <view class="option-item {{selectedAnswers[currentIndex] === 'C' ? 'selected' : ''}}"
+        bindtap="handleOptionTap" 
+        data-option="C">
+        <text class="option-label">C</text>
+        <text class="option-content">{{currentQuestion.optionC}}</text>
+      </view>
+
+      <view class="option-item {{selectedAnswers[currentIndex] === 'D' ? 'selected' : ''}}"
+        bindtap="handleOptionTap" 
+        data-option="D">
+        <text class="option-label">D</text>
+        <text class="option-content">{{currentQuestion.optionD}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮区 -->
+  <view class="button-container">
+    <view class="nav-buttons">
+      <button class="nav-btn prev" bindtap="prevQuestion" disabled="{{currentIndex === 0}}">上一题</button>
+      <button class="nav-btn card" bindtap="toggleAnswerCard">答题卡</button>
+      <button class="nav-btn next" bindtap="nextQuestion" disabled="{{currentIndex === questions.length - 1}}">下一题</button>
+    </view>
+    <button class="submit-btn {{isSubmitting ? 'disabled' : ''}}" bindtap="submitChapter" disabled="{{isSubmitting}}">
+      {{isSubmitting ? '提交中...' : '交卷'}}
+    </button>
+  </view>
+
+  <!-- 答题卡浮层 -->
+  <view class="answer-card {{showAnswerCard ? 'show' : ''}}" catchtap="toggleAnswerCard">
+    <view class="card-content" catchtap="preventBubble">
+      <view class="card-header">
+        <view class="card-title">答题卡</view>
+        <view class="close-btn" bindtap="toggleAnswerCard">×</view>
+      </view>
+      <scroll-view class="card-scroll" scroll-y>
+        <view class="card-list">
+          <view 
+            class="card-item {{selectedAnswers[index] ? 'answered' : ''}} {{currentIndex === index ? 'current' : ''}}"
+            wx:for="{{questions}}"
+            wx:key="index"
+            bindtap="jumpToQuestion"
+            data-index="{{index}}">
+            {{index + 1}}
+          </view>
+        </view>
+      </scroll-view>
+      <view class="card-legend">
+        <view class="legend-item">
+          <view class="legend-dot answered"></view>
+          <text>已答题</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot"></view>
+          <text>未答题</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot current"></view>
+          <text>当前题</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

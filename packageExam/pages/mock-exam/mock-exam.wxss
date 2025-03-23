@@ -1,0 +1,694 @@
+.mock-exam-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部进度和设置区 */
+.header {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+  display: none; /* 隐藏进度条 */
+}
+
+.progress-text {
+  font-size: 28rpx; /* 调大字号 */
+  color: #666;
+  text-align: right;
+  margin: 20rpx 0; /* 调整间距 */
+  font-weight: 500; /* 稍微加粗 */
+}
+
+.settings {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.setting-item text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.timer {
+  font-size: 28rpx;
+  color: #ff4d4f;
+  text-align: right;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+
+/* 题目内容区 */
+.question-content {
+  flex: 1;
+  padding: 30rpx;
+  background: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.question-title {
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.6;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  margin-bottom: 40rpx;
+}
+
+/* 选项列表 */
+.options-list {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.option-item.selected {
+  background: #e6f3ff;
+  border-color: #1aad19;
+}
+
+.option-label {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  background: #fff;
+  border-radius: 24rpx;
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+  border: 2rpx solid #e5e5e5;
+}
+
+.option-content {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 底部按钮区 */
+.button-container {
+  padding: 30rpx;
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.nav-btn {
+  flex: 1;
+  height: 80rpx !important;
+  font-size: 28rpx !important;
+  border-radius: 40rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+.nav-btn.prev {
+  background: #f0f2f5 !important;
+  color: #666 !important;
+}
+
+.nav-btn.next {
+  background: #4a90e2 !important;
+  color: #fff !important;
+}
+
+.nav-btn[disabled] {
+  opacity: 0.5;
+  background: #f5f5f5 !important;
+  color: #999 !important;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 80rpx !important;
+  font-size: 28rpx !important;
+  background: #ff4d4f !important;
+  color: #fff !important;
+  border-radius: 40rpx !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.modal-message {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-btn.cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.modal-btn.confirm {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+/* 夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f !important;
+}
+
+.dark-mode .header,
+.dark-mode .question-content,
+.dark-mode .button-container,
+.dark-mode .modal-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .setting-item text,
+.dark-mode .question-title,
+.dark-mode .option-content {
+  color: #ddd;
+}
+
+.dark-mode .progress-text,
+.dark-mode .option-label {
+  color: #aaa;
+}
+
+.dark-mode .option-item {
+  background: #3d3d3d;
+  border-color: #4d4d4d;
+}
+
+.dark-mode .option-item.selected {
+  background: #1a4a6e !important;
+  border-color: #2196f3 !important;
+}
+
+.dark-mode .nav-btn.prev {
+  background: #3d3d3d !important;
+  color: #ddd !important;
+}
+
+.dark-mode .option-label {
+  background: #2d2d2d;
+  color: #fff;
+  border-color: #4d4d4d;
+}
+
+.dark-mode .modal-title,
+.dark-mode .modal-message {
+  color: #ddd;
+}
+
+.dark-mode .modal-btn.cancel {
+  background: #3d3d3d;
+  color: #ddd;
+}
+
+.dark-mode .question-title {
+  background: #3d3d3d;
+  color: #ffffff;
+  border: 1rpx solid #4d4d4d;
+}
+
+/* 夜间模式下的进度文字 */
+.dark-mode .progress-text {
+  color: #aaa;
+}
+
+/* 添加答题卡相关样式 */
+.answer-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: none;
+}
+
+.answer-card.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  width: 90%;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.card-item {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.card-item.answered {
+  background: #e6f3ff;
+  border-color: #1aad19;
+  color: #1aad19;
+}
+
+.card-item.current {
+  background: #1aad19;
+  border-color: #1aad19;
+  color: #fff;
+}
+
+.card-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.legend-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 4rpx;
+}
+
+.legend-dot.answered {
+  background: #e6f3ff;
+  border-color: #1aad19;
+}
+
+.legend-dot.current {
+  background: #1aad19;
+  border-color: #1aad19;
+}
+
+.legend-item text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 夜间模式样式 */
+.dark-mode .card-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .card-title {
+  color: #fff;
+}
+
+.dark-mode .card-item {
+  border-color: #4d4d4d;
+  color: #aaa;
+}
+
+.dark-mode .legend-item text {
+  color: #aaa;
+}
+
+.dark-mode .legend-dot {
+  border-color: #4d4d4d;
+}
+
+.dark-mode .option-content {
+  color: #fff;
+}
+
+/* 添加设置按钮和面板样式 */
+.top-buttons {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  z-index: 100;
+}
+
+.icon-btn {
+  height: 64rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+}
+
+.icon-btn text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.settings-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: none;
+}
+
+.settings-panel.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+
+.settings-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.setting-item text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 夜间模式样式补充 */
+.dark-mode .icon-btn {
+  background: #3d3d3d;
+}
+
+.dark-mode .icon-btn text {
+  color: #aaa;
+}
+
+.dark-mode .settings-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .settings-title {
+  color: #fff;
+}
+
+.dark-mode .setting-item {
+  border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .setting-item text {
+  color: #fff;
+}
+
+/* 添加夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f !important;
+}
+
+.dark-mode .page-container {
+  background: #1f1f1f;
+}
+
+.dark-mode .card {
+  background: #2d2d2d;
+}
+
+.dark-mode .title {
+  color: #fff;
+}
+
+.dark-mode .text {
+  color: #aaa;
+}
+
+/* 根据具体页面元素添加更多夜间模式样式 */
+
+/* 添加夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f !important;
+}
+
+.dark-mode .page-container {
+  background: #1f1f1f;
+  min-height: 100vh;
+}
+
+/* 确保顶部区域变色 */
+.dark-mode .header,
+.dark-mode .top-section {
+  background: #2d2d2d !important;
+}
+
+.dark-mode .card,
+.dark-mode .section,
+.dark-mode .list-item {
+  background: #2d2d2d !important;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .title,
+.dark-mode .section-title,
+.dark-mode .item-title,
+.dark-mode .header-title {
+  color: #fff !important;
+}
+
+.dark-mode .text,
+.dark-mode .description,
+.dark-mode .item-desc,
+.dark-mode .sub-title {
+  color: #aaa !important;
+}
+
+.dark-mode .divider {
+  background: #3d3d3d !important;
+}
+
+/* 确保页面容器填满整个视口高度 */
+.page-container {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部区域样式 */
+.header,
+.top-section {
+  width: 100%;
+  background: #fff;
+  transition: background-color 0.3s;
+}
+
+/* 内容区域样式 */
+.content-area {
+  flex: 1;
+  background: inherit;
+}
+
+/* 按钮样式适配夜间模式 */
+.dark-mode .btn {
+  background: #3d3d3d !important;
+  color: #fff !important;
+}
+
+.dark-mode .primary-btn {
+  background: #1aad19 !important;
+  color: #fff !important;
+}
+
+/* 确保所有文字颜色在夜间模式下正确显示 */
+.dark-mode .label,
+.dark-mode .value,
+.dark-mode .time {
+  color: #fff !important;
+}
+
+.dark-mode .sub-text,
+.dark-mode .hint {
+  color: #aaa !important;
+}
+
+/* 页面容器 */
+.page-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部区域 */
+.header {
+  width: 100%;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 内容区域 */
+.content-area {
+  flex: 1;
+  padding: 20rpx;
+}
+
+/* 夜间模式样式 */
+.dark-mode {
+  background: #1f1f1f !important;
+}
+
+.dark-mode .header {
+  background: #2d2d2d !important;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .header-title {
+  color: #fff !important;
+}
+
+.dark-mode .header-subtitle {
+  color: #aaa !important;
+}
+
+/* 其他夜间模式样式保持不变 */
+
+.loading-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.dark-mode .loading-container {
+  color: #aaa;
+} 

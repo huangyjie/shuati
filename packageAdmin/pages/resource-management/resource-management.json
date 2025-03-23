@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "资源管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#4A90E2",
+  "backgroundColor": "#f5f7fa",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true
+} 

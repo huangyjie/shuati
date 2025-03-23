@@ -1,0 +1,557 @@
+/* pages/profile/profile.wxss */
+.profile-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #4A90E2 0%, #D4E9FF 30%, #E8F4FF 100%);
+  padding: 24rpx;
+  box-sizing: border-box;
+  padding-top: calc(var(--status-bar-height) + 88px);
+}
+
+/* 暗黑模式下的背景 */
+.dark-mode.profile-container {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1f1f1f 30%, #151515 100%);
+}
+
+/* 自定义导航栏 */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: transparent;
+  padding-top: var(--status-bar-height);
+}
+
+.nav-bar-inner {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24rpx;
+}
+
+.nav-title {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: bold;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 头部样式 */
+.header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 40rpx 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.app-info {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.app-logo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 24rpx;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.app-title {
+  flex: 1;
+}
+
+.app-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.version {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 内容区块通用样式 */
+.section {
+  background: #ffffff;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.title-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+  display: block;
+}
+
+.section-title text:last-child {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 应用描述样式 */
+.description {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 功能特点样式 */
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.feature-item {
+  background: #f8f9fa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:active {
+  transform: scale(0.98);
+}
+
+.feature-header {
+  margin-bottom: 12rpx;
+}
+
+.feature-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.feature-desc {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 更新日志样式 */
+.update-logs {
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.log-item {
+  margin-bottom: 40rpx;
+  padding-bottom: 40rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.log-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.version-tag {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.log-version {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.log-label {
+  font-size: 20rpx;
+  color: #fff;
+  background: #4A90E2;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.log-date {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.log-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.log-category {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.category-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.category-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.log-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+  padding-left: 16rpx;
+}
+
+.log-dot {
+  color: #4A90E2;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.log-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 下一版本预告样式 */
+.next-version {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+
+.version-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.version-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #4A90E2;
+}
+
+.expected-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.next-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.next-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+}
+
+.feature-dot {
+  color: #4A90E2;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.feature-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 友情链接按钮样式 */
+.link-button {
+  background: #f8f9fa;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.link-button:active {
+  transform: scale(0.98);
+  background: #f1f3f5;
+}
+
+.link-button text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.arrow {
+  font-size: 32rpx;
+  color: #999;
+}
+
+/* 免责声明样式 */
+.disclaimer-content {
+  background: #f8f9fa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+}
+
+.disclaimer-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 联系方式样式 */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.contact-item {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.copy-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 意见反馈按钮样式 */
+.feedback-section {
+  padding: 32rpx 24rpx 48rpx;
+}
+
+.feedback-btn {
+  width: 100% !important;
+  height: 88rpx !important;
+  background: linear-gradient(135deg, #4A90E2, #357ABD) !important;
+  border: none !important;
+  border-radius: 44rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  font-size: 32rpx !important;
+  font-weight: bold !important;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.feedback-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+.btn-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 12rpx;
+  display: block;
+}
+
+.btn-text {
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+/* 夜间模式样式 */
+.dark-mode {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dark-mode .header {
+  background: linear-gradient(135deg, #357ABD, #2171c7);
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .section {
+  background: #2d2d2d;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .section-title text:last-child {
+  color: #fff;
+}
+
+.dark-mode .description {
+  color: #bbb;
+}
+
+.dark-mode .feature-item {
+  background: #3d3d3d;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .feature-item:active {
+  transform: scale(0.98);
+  background: #4d4d4d;
+}
+
+.dark-mode .feature-title {
+  color: #4A90E2;
+}
+
+.dark-mode .feature-desc {
+  color: #bbb;
+}
+
+.dark-mode .update-logs {
+  background: #2d2d2d;
+}
+
+.dark-mode .log-item {
+  border-bottom-color: #3d3d3d;
+}
+
+.dark-mode .category-title {
+  color: #fff;
+}
+
+.dark-mode .log-text {
+  color: #bbb;
+}
+
+.dark-mode .log-version {
+  color: #85a5ff;
+}
+
+.dark-mode .log-label {
+  background: #85a5ff;
+}
+
+.dark-mode .next-version {
+  background: #3d3d3d;
+}
+
+.dark-mode .version-header {
+  border-bottom-color: #4d4d4d;
+}
+
+.dark-mode .feature-text {
+  color: #bbb;
+}
+
+.dark-mode .link-button {
+  background: #3d3d3d;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .link-button:active {
+  background: #4d4d4d;
+  transform: scale(0.98);
+}
+
+.dark-mode .link-button text {
+  color: #fff;
+}
+
+.dark-mode .arrow {
+  color: #888;
+}
+
+.dark-mode .disclaimer-content {
+  background: #3d3d3d;
+}
+
+.dark-mode .disclaimer-text {
+  color: #bbb;
+}
+
+.dark-mode .contact-item {
+  color: #fff;
+}
+
+.dark-mode .copy-hint {
+  color: #888;
+}
+
+.dark-mode .feedback-btn {
+  background: linear-gradient(135deg, #357ABD, #2171c7) !important;
+  box-shadow: 0 8rpx 16rpx rgba(33, 113, 199, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.dark-mode .feedback-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.9;
+}
+
+/* 加载状态样式 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx 0;
+}
+
+.loading {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #4A90E2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 暗黑模式下的加载样式 */
+.dark-mode .loading {
+  border-color: #333;
+  border-top-color: #85a5ff;
+}
+
+.dark-mode .loading-text {
+  color: #888;
+}

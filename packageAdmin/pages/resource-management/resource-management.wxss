@@ -1,0 +1,731 @@
+/* 容器 */
+.container {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 24rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.dark-mode {
+  background: #1a1a1a;
+}
+
+/* 顶部区域 */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: inherit;
+  padding-bottom: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 添加按钮 */
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4A90E2;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 26rpx;
+  line-height: 1.5;
+}
+
+.add-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+}
+
+/* 搜索和筛选栏 */
+.search-bar {
+  background: #fff;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.search-input-wrap {
+  flex: 1;
+  min-width: 200rpx;
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 26rpx;
+  padding: 12rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 12rpx;
+  opacity: 0.6;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.search-placeholder {
+  color: #999;
+}
+
+.type-picker {
+  min-width: 160rpx;
+  max-width: 200rpx;
+  flex-shrink: 0;
+}
+
+.picker-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #333;
+  background: #f5f7fa;
+  padding: 12rpx 20rpx;
+  border-radius: 26rpx;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.picker-arrow {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 8rpx;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.picker-view text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8rpx;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12rpx;
+  align-items: center;
+}
+
+.filter-btn {
+  font-size: 24rpx;
+  color: #666;
+  background: none;
+  padding: 10rpx 20rpx;
+  line-height: 1.5;
+  border: 2rpx solid #ddd;
+  border-radius: 26rpx;
+}
+
+/* 资源列表 */
+.resources-list {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.resource-item {
+  margin-bottom: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.resource-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.resource-main {
+  flex: 1;
+  padding-right: 20rpx;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.resource-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.resource-type {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #4A90E2;
+  background: rgba(74, 144, 226, 0.1);
+  padding: 6rpx 20rpx;
+  border-radius: 24rpx;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-type-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.type-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.resource-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.resource-thumbnail {
+  width: 100%;
+  height: 300rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  background: #f5f7fa;
+  object-fit: cover;
+}
+
+.resource-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.resource-time {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.time-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 8rpx;
+  opacity: 0.6;
+}
+
+.resource-actions {
+  display: flex;
+  gap: 6rpx;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 24rpx;
+  line-height: 1;
+  background: #f5f7fa;
+  flex-shrink: 1;
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.btn-icon {
+  width: 22rpx;
+  height: 22rpx;
+  margin-right: 4rpx;
+  flex-shrink: 0;
+}
+
+.action-btn text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80rpx;
+}
+
+.action-btn.view {
+  color: #4A90E2;
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.action-btn.edit {
+  color: #52c41a;
+  background: rgba(82, 196, 26, 0.1);
+}
+
+.action-btn.delete {
+  color: #f5222d;
+  background: rgba(245, 34, 45, 0.1);
+}
+
+/* 加载状态 */
+.loading-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 0;
+}
+
+.loading {
+  width: 48rpx;
+  height: 48rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #4A90E2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin-top: 16rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 24rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.no-more {
+  text-align: center;
+  padding: 24rpx 0;
+  color: #999;
+  font-size: 26rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 0;
+}
+
+.empty-icon {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 32rpx;
+  opacity: 0.8;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 32rpx;
+}
+
+.add-first-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #4A90E2;
+  color: #fff;
+  font-size: 28rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.2);
+}
+
+/* 模态框 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 24rpx;
+  text-align: center;
+  position: relative;
+  border-bottom: 2rpx solid #f5f7fa;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  right: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40rpx;
+  color: #999;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 24rpx;
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.form-item {
+  margin-bottom: 24rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.form-label.required::before {
+  content: '*';
+  color: #f5222d;
+  margin-right: 4rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  display: block;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.form-input:focus {
+  background: #fff;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.1);
+}
+
+.form-picker {
+  width: 100%;
+  height: 88rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.form-picker.active {
+  background: #fff;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.1);
+}
+
+.form-picker text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.form-picker text.placeholder {
+  color: #999;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 200rpx;
+  background: #f5f7fa;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.form-textarea:focus {
+  background: #fff;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.1);
+}
+
+.textarea-counter {
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  margin-top: 8rpx;
+}
+
+.upload-section {
+  /* Removed styles from upload-section */
+}
+
+.file-info {
+  /* Removed styles from file-info */
+}
+
+.progress-bar {
+  /* Removed styles from progress-bar */
+}
+
+.progress-inner {
+  /* Removed styles from progress-inner */
+}
+
+.progress-text {
+  /* Removed styles from progress-text */
+}
+
+.modal-footer {
+  padding: 24rpx;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  border-top: 2rpx solid #f5f7fa;
+}
+
+.modal-btn {
+  flex: 1;
+  font-size: 28rpx;
+  padding: 16rpx 0;
+  border-radius: 32rpx;
+  text-align: center;
+}
+
+.modal-btn.cancel {
+  background: #f5f7fa;
+  color: #666;
+}
+
+.modal-btn.confirm {
+  background: #4A90E2;
+  color: #fff;
+}
+
+/* 按钮点击效果 */
+.btn-hover {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 深色模式样式 */
+.dark-mode .header {
+  background: #1a1a1a;
+}
+
+.dark-mode .search-bar,
+.dark-mode .resource-card,
+.dark-mode .modal-content {
+  background: #2d2d2d;
+}
+
+.dark-mode .search-input-wrap,
+.dark-mode .picker-view,
+.dark-mode .action-btn,
+.dark-mode .form-input,
+.dark-mode .form-textarea,
+.dark-mode .upload-section {
+  background: #1f1f1f;
+}
+
+.dark-mode .search-input,
+.dark-mode .picker-view,
+.dark-mode .resource-title,
+.dark-mode .modal-title,
+.dark-mode .form-label,
+.dark-mode .file-name {
+  color: #fff;
+}
+
+.dark-mode .resource-desc {
+  color: #aaa;
+}
+
+.dark-mode .resource-time text,
+.dark-mode .loading-text,
+.dark-mode .loading-more,
+.dark-mode .no-more,
+.dark-mode .empty-text {
+  color: #777;
+}
+
+.dark-mode .filter-btn {
+  border-color: #1f1f1f;
+  color: #aaa;
+}
+
+.dark-mode .action-btn {
+  background: #1f1f1f;
+}
+
+.dark-mode .action-btn.view {
+  background: rgba(74, 144, 226, 0.15);
+}
+
+.dark-mode .action-btn.edit {
+  background: rgba(82, 196, 26, 0.15);
+}
+
+.dark-mode .action-btn.delete {
+  background: rgba(245, 34, 45, 0.15);
+}
+
+/* 按钮点击效果 */
+.btn-hover {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 深色模式样式 */
+.dark-mode .form-input,
+.dark-mode .form-picker,
+.dark-mode .form-textarea,
+.dark-mode .upload-section {
+  background: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-mode .form-input:focus,
+.dark-mode .form-picker.active,
+.dark-mode .form-textarea:focus,
+.dark-mode .upload-section:active {
+  background: #2d2d2d;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2rpx rgba(74, 144, 226, 0.2);
+}
+
+.dark-mode .form-label {
+  color: #fff;
+}
+
+.dark-mode .form-input,
+.dark-mode .form-picker text,
+.dark-mode .form-textarea {
+  color: #fff;
+}
+
+.dark-mode .form-picker text.placeholder {
+  color: #666;
+}
+
+.dark-mode .file-info {
+  background: #2d2d2d;
+}
+
+.dark-mode .file-name {
+  color: #fff;
+}
+
+.dark-mode .upload-btn {
+  background: #1f1f1f;
+  border-color: #4A90E2;
+}
+
+.dark-mode .upload-btn:active {
+  background: rgba(74, 144, 226, 0.2);
+}
+
+/* 修复输入框在深色模式下的样式 */
+.dark-mode .form-input {
+  background: #1f1f1f;
+  color: #fff;
+}
+
+.dark-mode .form-input:focus {
+  background: #2d2d2d;
+  border-color: #4A90E2;
+}
